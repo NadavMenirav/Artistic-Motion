@@ -120,6 +120,17 @@ public class Line {
         double yIntersection = m1 * xIntersection + b1; //substituing xIntersection in the line segment equation
         return new Point(xIntersection, yIntersection);
     }
+    /**
+     * The function check if this line is the same visualy as another line.
+     * @param other the other line
+     * @return boolean value based on answer
+     */
+    public boolean equals(Line other) {
+        boolean sameOrder = (this.start.equals(other.start()) && this.end.equals(other.end())); //start=start
+        boolean difOrder = (this.start.equals(other.end()) && this.end.equals(other.start())); //start=end
+        return sameOrder || difOrder;
+    }
+
 
 
 
