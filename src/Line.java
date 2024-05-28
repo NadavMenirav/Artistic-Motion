@@ -58,6 +58,33 @@ public class Line {
         return new Point(this.end);
     }
     /**
+     * The function checks if another point is on the line segment.
+     * It does that by checking if it is between the start and end points of the line segment.
+     * @param other the point we check
+     * @return true if it is on the line segment, false otherwise.
+     */
+    public boolean isPointOnLineSegment(Point other) {
+        //Checking if x value of the point is bigger than the leftmost point on the line segment.
+        boolean xBiggerThanMin = (Threshold.isDoubleGreaterEqual(other.getX(),
+                                Math.min(this.start.getX(), this.end.getX())));
+
+        //Checking if x value of the point is smaller than the rightmost point on the line segment.
+        boolean xSmallerThanMax = (Threshold.isDoubleGreaterEqual(Math.max(this.start.getX(), this.end.getX()),
+                                other.getX()));
+
+        //Checking if y value of the point is bigger than the downmost point on the line segment.
+        boolean yBiggerThanMin = (Threshold.isDoubleGreaterEqual(other.getY(),
+                                Math.min(this.start.getY(), this.end.getY())));
+
+
+        //Checking if y value of the point is smaller than the upmost point on the line segment.
+        boolean ySmallerThanMax = (Threshold.isDoubleGreaterEqual(Math.max(this.start.getY(), this.end.getY()),
+                                other.getY()));
+
+        //We shall return true only if they are all true
+        return xBiggerThanMin && xSmallerThanMax && yBiggerThanMin && ySmallerThanMax;
+    }
+    /**
      * This function checks and returns the orientation of the point recieved as a parameter in regards to this line.
      * The orientation of the point means the direction the line has to rotate to in order to "reach" the point.
      * The direction can either be clock wise, counterclock wise, or non.
@@ -67,32 +94,15 @@ public class Line {
      * @param other the other point, we compare it to this line
      * @return 1 if the the line need to be rotated clockwise, -1 if counterclock wise, and 0 if no rotation is needed
      */
-    public int getOrientation(Point other) {
+    public int getPointOrientation(Point other) {
         double value = (this.end.getX() - this.start.getX()) * (other.getY() - this.end.getY())
                         - (this.end.getY() - this.start.getY()) * (other.getX() - this.end.getX());
         if (Threshold.isDoublesEqual(value, 0)) { //Checking if value is 0 using threshold
             return 0; //Means they are collinear
         }
-        return (value > 0) ? 1 : -1; //Do we need to move clockwish or counter clockwise
+        return (value > 0) ? 1 : -1; //Do we need to move clockwise or counterclock wise
     }
     public boolean isIntersecting(Line other) {
-        if (this.equals(other)) { //If they are the same we shall return true
-            return true;
-        }
-        if (this.getSlope() == other.getSlope()) { //Same slope but not the same - parallel
-            return false;
-        }
-        double m1 = this.getSlope(), m2 = other.getSlope(), b1 = this.getConstant(), b2 = other.getConstant();
-        //y = m1x + b1, y = m2x + b2
-        //m1x-m2x = -(b1-b2)
-        double xIntersection = -(b1 - b2) / (m1 - m2); //solving the two equations
-        double maxXValue = Math.max(this.start.getX(), this.end.getX());
-        double minXValue = Math.min(this.start.getX(), this.end.getY());
-        //Is the intersection point on the line segment
-        if (Threshold.isDoubleGreaterEqual(xIntersection, minXValue)
-            && Threshold.isDoubleGreaterEqual(maxXValue, xIntersection)) {
-                return true;
-            }
         return false;
     }
     /**
