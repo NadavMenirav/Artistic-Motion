@@ -1,3 +1,4 @@
+package src;
 //330845678 Nadav Menirav
 /**
  * @author Nadav Meniav
@@ -6,7 +7,7 @@ public class Point {
     private double x;
     private double y;
     /**
-     * constructor of the point.
+     * Constructor of the point class.
      * @param x x value of the point
      * @param y y value of the point
      */
@@ -15,8 +16,16 @@ public class Point {
         this.y = y;
     }
     /**
+     * Constructor of the point class.
+     * @param a the point we want to duplicate
+     */
+    public Point(Point a) {
+        this.x = a.getX();
+        this.y = a.getY();
+    }
+    /**
      * The function calculates the distance between this point and an other point recieved as a parameter.
-     * @param other
+     * @param other another point object
      * @return the distance
      */
     public double distance(Point other) {
@@ -24,14 +33,11 @@ public class Point {
     }
     /**
      * The function checks if this point has the same values as the other point, recieved as a parameter.
-     * @param other
+     * @param other another point object
      * @return boolean value representing if they do in fact have the same values
      */
     public boolean equals(Point other) {
-        if (this.x == other.getX() && this.y == other.getY()) {
-            return true;
-        }
-        return false;
+        return (Threshold.isDoublesEqual(this.x, other.getX()) && Threshold.isDoublesEqual(this.y, other.getY()));
     }
     /**
      * The function returns the x value of this point.
@@ -49,14 +55,14 @@ public class Point {
     }
     /**
      * The function changes the x value of this point.
-     * @param x
+     * @param x x value of this point
      */
     public void setX(double x) {
         this.x = x;
     }
     /**
      * The function changes the y value of this point.
-     * @param y
+     * @param y y value if this point
      */
     public void setY(double y) {
         this.y = y;
