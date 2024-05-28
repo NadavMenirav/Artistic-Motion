@@ -58,24 +58,23 @@ public class Line {
         return new Point(this.end);
     }
     /**
-     * The function returns the slope of this line segment.
-     * @return slope
+     * This function checks and returns the orientation of the point recieved as a parameter in regards to this line.
+     * The orientation of the point means the direction the line has to rotate to in order to "reach" the point.
+     * The direction can either be clock wise, counterclock wise, or non.
+     * Further explanation can be found in the following video:
+     * https://youtu.be/5FkOO1Wwb8w?si=aP7kjNEjkXPdi0Sa
+     * It is self evident that the method below is my own and i did not copy any of it from the above video.
+     * @param other the other point, we compare it to this line
+     * @return 1 if the the line need to be rotated clockwise, -1 if counterclock wise, and 0 if no rotation is needed
      */
-    public double getSlope() {
-        return (this.start.getY() - this.end.getY()) / (this.start.getX() - this.end.getX());
+    public int getOrientation(Point other) {
+        double value = (this.end.getX() - this.start.getX()) * (other.getY() - this.end.getY())
+                        - (this.end.getY() - this.start.getY()) * (other.getX() - this.end.getX());
+        if (Threshold.isDoublesEqual(value, 0)) { //Checking if value is 0 using threshold
+            return 0; //Means they are collinear
+        }
+        return (value > 0) ? 1 : -1; //Do we need to move clockwish or counter clockwise
     }
-    /**
-     * The function returns the constant "b" in a line equation y = mx + b.
-     * @return constant value
-     */
-    public double getConstant() {
-        return (this.start().getY() - this.getSlope() * this.start.getX());
-    }
-    /**
-     * The function checks if two lines are intersecting.
-     * @param other another line
-     * @return boolean value based on the answer
-     */
     public boolean isIntersecting(Line other) {
         if (this.equals(other)) { //If they are the same we shall return true
             return true;
@@ -100,7 +99,7 @@ public class Line {
      * The function checks if the two line segments intersect with this line.
      * @param other1 first line segment
      * @param other2 second line segment
-     * @return boolean value based on answer
+     * @return true if they both intersect with this line, false otherwise
      */
     public boolean isIntersecting(Line other1, Line other2) {
         return (this.isIntersecting(other1) && this.isIntersecting(other2));
@@ -123,22 +122,11 @@ public class Line {
     /**
      * The function check if this line is the same visualy as another line.
      * @param other the other line
-     * @return boolean value based on answer
+     * @return true if they are the same visualy, false otherwise
      */
     public boolean equals(Line other) {
         boolean sameOrder = (this.start.equals(other.start()) && this.end.equals(other.end())); //start=start
         boolean difOrder = (this.start.equals(other.end()) && this.end.equals(other.start())); //start=end
         return sameOrder || difOrder;
     }
-
-
-
-
-
-
-
-
-
-
-
 }
