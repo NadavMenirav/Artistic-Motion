@@ -166,7 +166,9 @@ public class Line {
         if (this.isPerpendicularXAxis()) {
             throw new Error("Not able to calculate slope for lines that are perpendicular to the X axis");
         }
-
+        if (this.isLineAPoint()) {
+            throw new Error("Not able to calculate slope for line segments that are a point");
+        }
         double delX = this.start.getX() - this.end.getX();
         double delY = this.start.getY() - this.end.getY();
         return delY / delX;
@@ -186,6 +188,9 @@ public class Line {
      * @return the y value of line at the given x
      */
     public double getYValueInX(double x) {
+        if (this.isLineAPoint()) {
+            return this.start.getY();
+        }
         return this.getSlope() * x + this.getConstant();
     }
     /**
