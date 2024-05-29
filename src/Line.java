@@ -270,18 +270,30 @@ public class Line {
          */
         if (this.isPerpendicularXAxis()) {
             //we know the intersection is on this line, and this line only has one X value to all of its points.
-            double xValueOfPoint = this.start.getX();
-            return new Point(xValueOfPoint, other.getYValueInX(xValueOfPoint));
+            double xIntersection = this.start.getX();
+            return new Point(xIntersection, other.getYValueInX(xIntersection));
         }
-        if (other.isPerpendicularToMainAxis()) {
-            double xValueOfPoint = other.start().getX();
-            return new Point(xValueOfPoint, this.getYAtX(xValueOfPoint));
+        if (other.isPerpendicularXAxis()) {
+            /*
+             * we know the intersection is on the other line, and the other line only has one X value to
+             *  all of its points.
+             */
+            double xIntersection = other.start().getX();
+            return new Point(xIntersection, this.getYValueInX(xIntersection));
         }
-        // By now we have succesfully dealt with all cases concerning Line Segments that are perpendicular to the main
-        // axis and Line Segments that are collinear
-        // Thus we can find the equations of the infinite Lines on which the Line Segments fall
-        double xValueOfIntersection = -(this.getB() - other.getB()) / (this.getSlope() - other.getSlope());
-        return new Point(xValueOfIntersection, this.getYAtX(xValueOfIntersection));
+        /*
+         * By now we have dealt with all situations in which the one or both of the lines are perpendicular
+         * to the X axis, and cases that the line segments are on the same infinite line as each other.
+         * Now we know that the line segments for sure have only one intersection, and that neither of them
+         * is perpendicular to the X axis, so we will find the intersection point by solving the equations of the lines
+         * equation 1: y = m1x + b1
+         * equation 2: y = m2x + b2
+         * with a little algebra we get
+         * x = - (b1 - b2) / (m1 - m2)
+         */
+        double xVal = -(this.getConstant() - other.getConstant())
+                                        / (this.getSlope() - other.getSlope());
+        return new Point(xVal, this.getYValueInX(xVal));
     }
     /**
      * The function check if this line is the same visualy as another line.
