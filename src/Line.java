@@ -58,8 +58,8 @@ public class Line {
         return new Point(this.end);
     }
     /**
-     * The function checks if another point is on the line segment.
-     * It does that by checking if it is between the start and end points of the line segment.
+     * It is Given that the point recieved as parameter is collinear with this line.
+     * The function checks if the point is on the line segment
      * @param other the point we check
      * @return true if it is on the line segment, false otherwise.
      */
@@ -102,8 +102,37 @@ public class Line {
         }
         return (value > 0) ? 1 : -1; //Do we need to move clockwise or counterclock wise
     }
+    /**
+     * The function checks if two line segments intersect.
+     * It does that by doing the following checks:
+     * 1. If o1 != o2 and o3 != o4, the line segment create an "X" shape which will resuly in an intersection
+     * 2. If one of the orientations are 0, that means that the point represented in this orientation falls
+     *      on the same line the other line segment creates. Then we can check if this point's x value falls
+     *      between the other line segment's min and max X values to ensure there is in fact an intersecion.
+     * @param other the other line we check
+     * @return true if they intersect, false otherwise
+     */
     public boolean isIntersecting(Line other) {
-        return false;
+        int o1 = this.getPointOrientation(other.start());
+        int o2 = this.getPointOrientation(other.end());
+        int o3 = other.getPointOrientation(this.start);
+        int o4 = other.getPointOrientation(this.end);
+
+        //This is where the line segments create an X shape
+        if (o1 != o2 && o2 != o3) {
+            return true;
+        }
+
+        /*
+        Now we know that one of the edge points in on the infinite line of the other line segment,
+        so we need to check if this point falls on the other line segment
+        */
+        return (
+            (o1 == 0 && this.isPointOnLineSegment(other.start()))
+            || (o2 == 0 && this.isPointOnLineSegment(other.end()))
+            || (o3 == 0 && other.isPointOnLineSegment(this.start))
+            || (o4 == 0 && other.isPointOnLineSegment(this.end))
+        );
     }
     /**
      * The function checks if the two line segments intersect with this line.
@@ -120,14 +149,7 @@ public class Line {
      * @return intersection point if intersecting, and null otherwise
      */
     public Point intersectionWith(Line other) {
-        if (!this.isIntersecting(other)) {
-            return null;
-        }
-        //Calculation from isIntersecting
-        double m1 = this.getSlope(), m2 = other.getSlope(), b1 = this.getConstant(), b2 = other.getConstant();
-        double xIntersection = -(b1 - b2) / (m1 - m2);
-        double yIntersection = m1 * xIntersection + b1; //substituing xIntersection in the line segment equation
-        return new Point(xIntersection, yIntersection);
+        
     }
     /**
      * The function check if this line is the same visualy as another line.
