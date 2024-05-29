@@ -144,12 +144,28 @@ public class Line {
         return (this.isIntersecting(other1) && this.isIntersecting(other2));
     }
     /**
-     * The function returns the intersection point of two line segments.
-     * @param other
+     * This function checks using threshold if this line segment is perpendicular to the X axis.
+     * @return true if perpendicular, false otherwise
+     */
+    public boolean isPerpendicularXAxis() {
+        return Threshold.isDoublesEqual(this.start.getX(), this.end.getX());
+    }
+    /**
+     * The function returns the y value of the line at a given x value.
+     * It assumes the line is not perpendicular to X axis and that the given x value is in range of the edge points
+     * @param x the given x value we want to find the y value in
      * @return intersection point if intersecting, and null otherwise
      */
+    public int getYValueInX(int x) {
+        return x;
+    }
+    /**
+     * The function return the intersection point of two line segments, if they intersect.
+     * @param other the other line
+     * @return Intersection point if they intersect, null otherwise
+     */
     public Point intersectionWith(Line other) {
-        
+        return null;
     }
     /**
      * The function check if this line is the same visualy as another line.
