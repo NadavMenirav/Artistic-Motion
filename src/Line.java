@@ -151,6 +151,19 @@ public class Line {
         return Threshold.isDoublesEqual(this.start.getX(), this.end.getX());
     }
     /**
+     * This function calculates the slope of a line segment, if possible. If not, an error will occur.
+     * @return the slope if it has one
+     */
+    public double getSlope() {
+        if (this.isPerpendicularXAxis()) {
+            throw new Error("Not able to calculate slope for lines that are perpendicular to the X axis");
+        }
+
+        double delX = this.start.getX() - this.end.getX();
+        double delY = this.start.getY() - this.end.getY();
+        return delY / delX;
+    }
+    /**
      * The function returns the y value of the line at a given x value.
      * It assumes the line is not perpendicular to X axis and that the given x value is in range of the edge points
      * @param x the given x value we want to find the y value in
