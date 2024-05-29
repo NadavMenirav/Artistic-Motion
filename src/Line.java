@@ -58,7 +58,7 @@ public class Line {
         return new Point(this.end);
     }
     /**
-     * It is Given that the point recieved as parameter is collinear with this line.
+     * It is Given that the point received as parameter is collinear with this line.
      * The function checks if the point is on the line segment
      * @param other the point we check
      * @return true if it is on the line segment, false otherwise.
@@ -72,12 +72,12 @@ public class Line {
         boolean xSmallerThanMax = (Threshold.isDoubleGreaterEqual(Math.max(this.start.getX(), this.end.getX()),
                                 other.getX()));
 
-        //Checking if y value of the point is bigger than the downmost point on the line segment.
+        //Checking if y value of the point is bigger than the lowest point on the line segment.
         boolean yBiggerThanMin = (Threshold.isDoubleGreaterEqual(other.getY(),
                                 Math.min(this.start.getY(), this.end.getY())));
 
 
-        //Checking if y value of the point is smaller than the upmost point on the line segment.
+        //Checking if y value of the point is smaller than the highest point on the line segment.
         boolean ySmallerThanMax = (Threshold.isDoubleGreaterEqual(Math.max(this.start.getY(), this.end.getY()),
                                 other.getY()));
 
@@ -85,14 +85,14 @@ public class Line {
         return xBiggerThanMin && xSmallerThanMax && yBiggerThanMin && ySmallerThanMax;
     }
     /**
-     * This function checks and returns the orientation of the point recieved as a parameter in regards to this line.
+     * This function checks and returns the orientation of the point received as a parameter in regards to this line.
      * The orientation of the point means the direction the line has to rotate to in order to "reach" the point.
-     * The direction can either be clock wise, counterclock wise, or non.
+     * The direction can either be clock wise, counter clock wise, or non.
      * Further explanation can be found in the following video:
      * https://youtu.be/5FkOO1Wwb8w?si=aP7kjNEjkXPdi0Sa
      * It is self evident that the method below is my own and i did not copy any of it from the above video.
      * @param other the other point, we compare it to this line
-     * @return 1 if the the line need to be rotated clockwise, -1 if counterclock wise, and 0 if no rotation is needed
+     * @return 1 if the the line need to be rotated clockwise, -1 if counter clock wise, and 0 if no rotation is needed
      */
     public int getPointOrientation(Point other) {
         double value = (this.end.getX() - this.start.getX()) * (other.getY() - this.end.getY())
@@ -100,15 +100,15 @@ public class Line {
         if (Threshold.isDoublesEqual(value, 0)) { //Checking if value is 0 using threshold
             return 0; //Means they are collinear
         }
-        return (value > 0) ? 1 : -1; //Do we need to move clockwise or counterclock wise
+        return (value > 0) ? 1 : -1; //Do we need to move clockwise or counter clock wise
     }
     /**
      * The function checks if two line segments intersect.
      * It does that by doing the following checks:
-     * 1. If o1 != o2 and o3 != o4, the line segment create an "X" shape which will resuly in an intersection
+     * 1. If o1 != o2 and o3 != o4, the line segment create an "X" shape which will result in an intersection
      * 2. If one of the orientations are 0, that means that the point represented in this orientation falls
      *      on the same line the other line segment creates. Then we can check if this point's x value falls
-     *      between the other line segment's min and max X values to ensure there is in fact an intersecion.
+     *      between the other line segment's min and max X values to ensure there is in fact an intersection.
      * @param other the other line we check
      * @return true if they intersect, false otherwise
      */
@@ -178,7 +178,7 @@ public class Line {
      * @param x the given x value we want to find the y value in
      * @return the y value of line at the given x
      */
-    public double getYValueInX(int x) {
+    public double getYValueInX(double x) {
         return this.getSlope() * x + this.getConstant();
     }
     /**
@@ -189,7 +189,7 @@ public class Line {
      * @param xMid the middle point
      * @return true if they are in different sides, false otherwise
      */
-    public boolean isDirectionsDifferent(double x1, double x2, double xMid) {
+    public boolean isDifferentSides(double x1, double x2, double xMid) {
         return (xMid - x2) * (xMid - x2) < 0;
     }
     /**
@@ -198,7 +198,90 @@ public class Line {
      * @return Intersection point if they intersect, null otherwise
      */
     public Point intersectionWith(Line other) {
-        
+        if (!isIntersecting(other)) {
+            return null;
+        }
+        //The orietation of the points as described in the getPointOrientation method
+        int o1 = this.getPointOrientation(other.start());
+        int o2 = this.getPointOrientation(other.end());
+        /*
+        * We now dealing with cases that the two line segments are on the same line, which is represented in the
+        * fact that the orientations are both equal two 0
+        */
+        if (o1 == 0 && o2 == 0) {
+            /*
+             * The only way the two line segments are only tangent and do not have infinite intersections
+             * is when one of their edge points are equal and and the other edge points are in different sides
+             * of the equal point.
+             */
+            if (this.isPerpendicularXAxis()) {
+                /*
+                 * We now deal with a case that this line is perpendicular to the main axis.
+                 * because the line segments have an intersection point and they lay on the same line, the other line
+                 * must be also perpendicular to the X axis.
+                 * Due to the fact that the are perpendicular to the X axis, we need to check if the other points
+                 * are in different sides using their y values
+                */
+                if (this.start.equals(other.start())) {
+                    return (this.isDifferentSides(this.start.getY(), this.end.getY(), other.end().getY()))
+                        ? new Point(this.start) : null;
+                }
+                if (this.start.equals(other.end())) {
+                    return (this.isDifferentSides(this.start.getY(), this.end.getY(), other.start().getY()))
+                        ? new Point(this.start) : null;
+                }
+                if (this.end.equals(other.start())) {
+                    return (this.isDifferentSides(this.end.getY(), this.start.getY(), other.end().getY()))
+                        ? new Point(this.end) : null;
+                }
+                if (this.end.equals(other.end())) {
+                    return (this.isDifferentSides(this.end.getY(), this.start.getY(), other.start().getY()))
+                        ? new Point(this.end) : null;
+                }
+                return null; //None of the cases applies
+            }
+            /*
+             * Now we know that from the line segments that lie on the same line, neither is perpendicular to
+             * the X axis, so we will use the same comparison as before but now we will use the X values
+             */
+            if (this.start.equals(other.start())) {
+                return (this.isDifferentSides(this.start.getX(), this.end.getX(), other.end().getX()))
+                    ? new Point(this.start) : null;
+            }
+            if (this.start.equals(other.end())) {
+                return (this.isDifferentSides(this.start.getX(), this.end.getX(), other.start().getX()))
+                    ? new Point(this.start) : null;
+            }
+            if (this.end.equals(other.start())) {
+                return (this.isDifferentSides(this.end.getX(), this.start.getX(), other.end().getX()))
+                    ? new Point(this.end) : null;
+            }
+            if (this.end.equals(other.end())) {
+                return (this.isDifferentSides(this.end.getX(), this.start.getX(), other.start().getX()))
+                    ? new Point(this.end) : null;
+            }
+            return null; //None of the cases applies
+        }
+        /*
+         * Now we know that the line segments do not lie on the same line. As a result we can infer that
+         * there is no case here that both of the line segments are perpendicular two the X axis because then they
+         * would be lying on the same line or not intersecting at all, and we covered both cases earlier
+         * We will not deal with the case that only one of the line segment is perpendicular to X axis
+         */
+        if (this.isPerpendicularXAxis()) {
+            //we know the intersection is on this line, and this line only has one X value to all of its points.
+            double xValueOfPoint = this.start.getX();
+            return new Point(xValueOfPoint, other.getYValueInX(xValueOfPoint));
+        }
+        if (other.isPerpendicularToMainAxis()) {
+            double xValueOfPoint = other.start().getX();
+            return new Point(xValueOfPoint, this.getYAtX(xValueOfPoint));
+        }
+        // By now we have succesfully dealt with all cases concerning Line Segments that are perpendicular to the main
+        // axis and Line Segments that are collinear
+        // Thus we can find the equations of the infinite Lines on which the Line Segments fall
+        double xValueOfIntersection = -(this.getB() - other.getB()) / (this.getSlope() - other.getSlope());
+        return new Point(xValueOfIntersection, this.getYAtX(xValueOfIntersection));
     }
     /**
      * The function check if this line is the same visualy as another line.
