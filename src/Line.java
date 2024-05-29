@@ -182,12 +182,23 @@ public class Line {
         return this.getSlope() * x + this.getConstant();
     }
     /**
+     * The function checks if there is situation in which the first point is on the other side of the middle point
+     * than the second point.
+     * @param x1 the first point
+     * @param x2 the second point
+     * @param xMid the middle point
+     * @return true if they are in different sides, false otherwise
+     */
+    public boolean isDirectionsDifferent(double x1, double x2, double xMid) {
+        return (xMid - x2) * (xMid - x2) < 0;
+    }
+    /**
      * The function return the intersection point of two line segments, if they intersect.
      * @param other the other line
      * @return Intersection point if they intersect, null otherwise
      */
     public Point intersectionWith(Line other) {
-        return null;
+        
     }
     /**
      * The function check if this line is the same visualy as another line.
