@@ -296,9 +296,9 @@ public class Line {
         return new Point(xVal, this.getYValueInX(xVal));
     }
     /**
-     * The function check if this line is the same visualy as another line.
+     * The function check if this line is the same visually as another line.
      * @param other the other line
-     * @return true if they are the same visualy, false otherwise
+     * @return true if they are the same visually, false otherwise
      */
     public boolean equals(Line other) {
         boolean sameOrder = (this.start.equals(other.start()) && this.end.equals(other.end())); //start=start

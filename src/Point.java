@@ -34,7 +34,7 @@ public class Point {
     /**
      * The function checks if this point has the same values as the other point, recieved as a parameter.
      * @param other another point object
-     * @return boolean value representing if they do in fact have the same values
+     * @return true if they have the same value, false otherwise
      */
     public boolean equals(Point other) {
         return (Threshold.isDoublesEqual(this.x, other.getX()) && Threshold.isDoublesEqual(this.y, other.getY()));
