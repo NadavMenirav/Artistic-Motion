@@ -189,8 +189,8 @@ public class Line {
      * @param xMid the middle point
      * @return true if they are in different sides, false otherwise
      */
-    public boolean isDifferentSides(double x1, double x2, double xMid) {
-        return (xMid - x2) * (xMid - x2) < 0;
+    public boolean isDifferentSides(double xMid, double x1, double x2) {
+        return (xMid - x1) * (xMid - x2) < 0;
     }
     /**
      * The function return the intersection point of two line segments, if they intersect.
@@ -201,7 +201,7 @@ public class Line {
         if (!isIntersecting(other)) {
             return null;
         }
-        //The orietation of the points as described in the getPointOrientation method
+        //The orientation of the points as described in the getPointOrientation method
         int o1 = this.getPointOrientation(other.start());
         int o2 = this.getPointOrientation(other.end());
         /*
