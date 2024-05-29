@@ -152,6 +152,7 @@ public class Line {
     }
     /**
      * This function calculates the slope of a line segment, if possible. If not, an error will occur.
+     * The slope is calculated by the formula of deltaY / deltaX;
      * @return the slope if it has one
      */
     public double getSlope() {
@@ -162,6 +163,14 @@ public class Line {
         double delX = this.start.getX() - this.end.getX();
         double delY = this.start.getY() - this.end.getY();
         return delY / delX;
+    }
+    /**
+     * the function returns the 'b' in the line equation y = mx + b
+     * if it cannot be calculated due to the line being perpendicular to X axis, an error will occur.
+     * @return the constant b if it has one
+     */
+    public double getConstant() {
+        return this.start().getY() - this.getSlope() * this.start().getX();
     }
     /**
      * The function returns the y value of the line at a given x value.
