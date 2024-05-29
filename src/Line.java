@@ -119,7 +119,7 @@ public class Line {
         int o4 = other.getPointOrientation(this.end);
 
         //This is where the line segments create an X shape
-        if (o1 != o2 && o2 != o3) {
+        if (o1 != o2 && o3 != o4) {
             return true;
         }
 

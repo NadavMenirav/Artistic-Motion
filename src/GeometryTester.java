@@ -82,7 +82,6 @@ public class GeometryTester {
             mistakes = true;
         }
         Point intersectL1L2 = l1.intersectionWith(l2);
-        Point l1Middle = l1.middle();
         if (!l1.middle().equals(intersectL1L2)) {
             System.out.println("Test intersectionWith middle failed.");
             mistakes = true;
