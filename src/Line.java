@@ -176,10 +176,10 @@ public class Line {
      * The function returns the y value of the line at a given x value.
      * It assumes the line is not perpendicular to X axis and that the given x value is in range of the edge points
      * @param x the given x value we want to find the y value in
-     * @return intersection point if intersecting, and null otherwise
+     * @return the y value of line at the given x
      */
-    public int getYValueInX(int x) {
-        return x;
+    public double getYValueInX(int x) {
+        return this.getSlope() * x + this.getConstant();
     }
     /**
      * The function return the intersection point of two line segments, if they intersect.
