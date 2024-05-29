@@ -151,6 +151,13 @@ public class Line {
         return Threshold.isDoublesEqual(this.start.getX(), this.end.getX());
     }
     /**
+     * The function checks if this line is actually a point, its start and end points are equal.
+     * @return true if it is a point, false otherwise
+     */
+    public boolean isLineAPoint() {
+        return (this.start.equals(this.end));
+    }
+    /**
      * This function calculates the slope of a line segment, if possible. If not, an error will occur.
      * The slope is calculated by the formula of deltaY / deltaX;
      * @return the slope if it has one
