@@ -213,6 +213,12 @@ public class Line {
         if (!isIntersecting(other)) {
             return null;
         }
+        if (this.isLineAPoint()) {
+            return this.start;
+        }
+        if (other.isLineAPoint()) {
+            return other.start();
+        }
         //The orientation of the points as described in the getPointOrientation method
         int o1 = this.getPointOrientation(other.start());
         int o2 = this.getPointOrientation(other.end());
