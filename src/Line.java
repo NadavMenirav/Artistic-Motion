@@ -214,10 +214,10 @@ public class Line {
             return null;
         }
         if (this.isLineAPoint()) {
-            return this.start;
+            return new Point(this.start);
         }
         if (other.isLineAPoint()) {
-            return other.start();
+            return new Point(other.start());
         }
         //The orientation of the points as described in the getPointOrientation method
         int o1 = this.getPointOrientation(other.start());
