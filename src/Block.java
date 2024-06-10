@@ -22,7 +22,7 @@ public class Block implements Collidable {
      */
     public boolean isHittingPointHorizontally(Point collisionPoint) {
         /*
-         * We know that if the point is hitting horizontally, its x value should be equals to one of the vertexes
+         * We know that if the object is hitting horizontally, its x value should be equals to one of the vertexes
          * and the y value should be between the top and bottom edges
          */
         boolean isYInRange =
@@ -48,6 +48,41 @@ public class Block implements Collidable {
                 && isYInRange;
 
         return hittingLeftEdge || hittingRightEdge;
+    }
+
+    /**
+     * The function checks whether the hitting Point is vertical.
+     * @param collisionPoint The collision point we check
+     * @return true if the collision point is vertical, false otherwise
+     */
+    public boolean isHittingPointVertically(Point collisionPoint) {
+        /*
+         * We know that if the object is hitting vertically, its y value should be equals to one of the vertexes
+         * and the x value should be between the left and right edges
+         */
+
+        boolean isXInRange =
+                Threshold.isDoubleGreaterEqual(
+                        this.shape.getUpperLeft().getX() + this.shape.getWidth(),
+                        collisionPoint.getX()
+                )
+                && Threshold.isDoubleGreaterEqual(
+                        collisionPoint.getX(),
+                        this.shape.getUpperLeft().getX()
+                );
+
+        boolean hittingTopEdge =
+                Threshold.isDoubleGreaterEqual(collisionPoint.getY(), this.shape.getUpperLeft().getY())
+                && isXInRange;
+
+        boolean hittingBottomEdge =
+                Threshold.isDoubleGreaterEqual(
+                        this.shape.getUpperLeft().getY() + this.shape.getHeight(),
+                        collisionPoint.getY()
+                )
+                && isXInRange;
+
+        return hittingTopEdge || hittingBottomEdge;
     }
 
     /**
