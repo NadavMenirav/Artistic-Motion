@@ -5,7 +5,15 @@
  */
 public class Block implements Collidable {
     //Fields of the Block class
-    private Rectangle shape;
+    private final Rectangle shape;
+
+    /**
+     * Constructor of the block class.
+     * @param shape The shape of the block
+     */
+    public Block(Rectangle shape) {
+        this.shape = new Rectangle(shape);
+    }
 
     /**
      * Getter of the shape field.
@@ -93,6 +101,15 @@ public class Block implements Collidable {
      * @return The new Velocity that needs to be applied on the hitting object
      */
     public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
+        Velocity newVelocity = new Velocity(currentVelocity);
+        if (isHittingPointHorizontally(collisionPoint)) {
+            newVelocity.setDx(-currentVelocity.getDx());
+        }
 
+        if (isHittingPointVertically(collisionPoint)) {
+            newVelocity.setDy(-currentVelocity.getDy());
+        }
+
+        return newVelocity;
     }
 }
