@@ -1,5 +1,8 @@
 //Nadav Menirav 330845678
 
+import biuoop.DrawSurface;
+import java.awt.Color;
+
 /**
  * Block class.
  */
@@ -111,5 +114,19 @@ public class Block implements Collidable {
         }
 
         return newVelocity;
+    }
+
+    /**
+     * This method draws this block on the provided DrawSurface.
+     * @param surface The drawSurface we draw the ball on
+     */
+    public void drawOn(DrawSurface surface) {
+        surface.setColor(Color.BLACK);
+        surface.fillRectangle(
+                (int) this.shape.getUpperLeft().getX(),
+                (int) this.shape.getUpperLeft().getY(),
+                (int) this.shape.getWidth(),
+                (int) this.shape.getHeight()
+        );
     }
 }

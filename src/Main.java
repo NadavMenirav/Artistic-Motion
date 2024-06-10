@@ -1,3 +1,7 @@
+import biuoop.GUI;
+import biuoop.DrawSurface;
+import java.util.Random;
+import java.awt.Color;
 /**
  * .
  */
@@ -7,15 +11,14 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        Point myPoint = new Point(0.0, 0.0);
-        Point myPoint2 = new Point(1.0, 1.0);
-        Line line = new Line(myPoint, myPoint2);
-        Point myPoint3 = new Point(-0.5, -0.5);
-        Point myPoint4 = new Point(0.5, 0.5);
-        Point myPoint5 = new Point(1.5, 1.5);
+        GUI gui = new GUI("Test", 300, 300);
+        DrawSurface d = gui.getDrawSurface();
+        GameEnvironment ge = new GameEnvironment();
+        Rectangle rectangle = new Rectangle(new Point(20, 20), 30, 40);
+        Block block = new Block(rectangle);
+        Rectangle rectangle2 = new Rectangle(new Point(30, 30), 20, 40);
+        Block block2 = new Block(rectangle2);
+        d.
 
-        System.out.println(line.getPointOrientation(myPoint3));
-        System.out.println(line.getPointOrientation(myPoint4));
-        System.out.println(line.getPointOrientation(myPoint5));
     }
 }
