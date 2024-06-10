@@ -85,4 +85,17 @@ public class Velocity {
             p.getY() + this.dy
         );
     }
+
+    /**
+     * Slightly tweaks coordinates of the point, so it will reach very closely to the point it was supposed to hit.
+     * It is used when we want to bring the ball to almost reach the collision point
+     * @param p A point to which we must apply the effect
+     * @return A new Point with the tweaked values
+     */
+    public Point almostApplyToPoint(Point p) {
+        return new Point(
+                p.getX() + 0.9 * this.dx,
+                p.getY() + 0.9 * this.dy
+        );
+    }
 }
