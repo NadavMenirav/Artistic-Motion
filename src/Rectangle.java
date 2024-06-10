@@ -25,7 +25,7 @@ public class Rectangle {
     /**
      * The function returns a list of the intersection points of a line with this rectangle.
      * @param line The line we intersect with this rectangle
-     * @return List of intersection point if intersecting, null otherwise
+     * @return List of intersection point if intersecting finite times, null otherwise
      */
     public List<Point> intersectionPoints(Line line) {
         List<Point> list = new ArrayList<>();
@@ -36,6 +36,16 @@ public class Rectangle {
         Line bottomEdge = new Line(bottomLeft, bottomRight);
         Line leftEdge = new Line(this.upperLeft, bottomLeft);
         Line rightEdge = new Line(upperRight, bottomRight);
+
+        //If they have infinite intersection points, we shall return null
+        if (
+                line.isCoincident(topEdge)
+                || line.isCoincident(bottomEdge)
+                || line.isCoincident(leftEdge)
+                || line.isCoincident(rightEdge)
+        ) {
+            return null;
+        }
 
         //Adding the points
         if (line.intersectionWith(topEdge) != null) {
