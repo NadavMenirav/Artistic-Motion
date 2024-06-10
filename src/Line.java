@@ -327,7 +327,7 @@ public class Line {
     /**
      * The function returns the closest-to-start intersection point with the rectangle.
      * @param rect The rectangle we find intersection with
-     * @return closest-to-start intersection point if there is any, null otherwise
+     * @return closest-to-start intersection point if there is a positive finite amount of them, null otherwise
      */
     public Point closestIntersectionToStartOfLine(Rectangle rect) {
         boolean isFirstClosestToStart;
@@ -347,5 +347,15 @@ public class Line {
         secondIntersection = intersectionPoints.get(1);
         isFirstClosestToStart = firstIntersection.distance(this.start) <= secondIntersection.distance(this.start);
         return isFirstClosestToStart ? new Point(firstIntersection) : new Point(secondIntersection);
+    }
+
+    /**
+     * The function checks if two lines have infinite collision points.
+     * @param other the other line
+     * @return true if they have infinite collisions, false otherwise
+     */
+    public boolean isCoincident(Line other) {
+        //We can check if they have infinite collision points if they intersect, but the intersectionWith returns null
+        return other.isIntersecting(this) && other.intersectionWith(this) == null;
     }
 }
