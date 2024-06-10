@@ -23,6 +23,14 @@ public class Rectangle {
     }
 
     /**
+     * Duplicates a rectangle.
+     * @param rectangle The rectangle to be duplicated
+     */
+    public Rectangle(Rectangle rectangle) {
+        this(rectangle.upperLeft, rectangle.width, rectangle.height);
+    }
+
+    /**
      * The function returns a list of the intersection points of a line with this rectangle.
      * @param line The line we intersect with this rectangle
      * @return List of intersection point if intersecting finite times, null otherwise
