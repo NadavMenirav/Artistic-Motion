@@ -47,12 +47,12 @@ public class Block implements Collidable {
                 );
 
         boolean hittingLeftEdge =
-                Threshold.isDoubleGreaterEqual(collisionPoint.getX(), this.shape.getUpperLeft().getX())
+                Threshold.isDoublesEqual(collisionPoint.getX(), this.shape.getUpperLeft().getX())
                 && isYInRange;
 
 
         boolean hittingRightEdge =
-                Threshold.isDoubleGreaterEqual(
+                Threshold.isDoublesEqual(
                         this.shape.getUpperLeft().getX() + this.shape.getWidth(),
                         collisionPoint.getX()
                 )
@@ -83,11 +83,11 @@ public class Block implements Collidable {
                 );
 
         boolean hittingTopEdge =
-                Threshold.isDoubleGreaterEqual(collisionPoint.getY(), this.shape.getUpperLeft().getY())
+                Threshold.isDoublesEqual(collisionPoint.getY(), this.shape.getUpperLeft().getY())
                 && isXInRange;
 
         boolean hittingBottomEdge =
-                Threshold.isDoubleGreaterEqual(
+                Threshold.isDoublesEqual(
                         this.shape.getUpperLeft().getY() + this.shape.getHeight(),
                         collisionPoint.getY()
                 )
@@ -113,7 +113,7 @@ public class Block implements Collidable {
             newVelocity.setDy(-currentVelocity.getDy());
         }
 
-        return newVelocity;
+        return new Velocity(newVelocity);
     }
 
     /**

@@ -98,16 +98,14 @@ public class Ball {
     public void moveOneStep() {
         Line trajectory = new Line(this.center, this.velocity.applyToPoint(this.center));
         CollisionInfo collisionInfo = gameEnvironment.getClosestCollision(trajectory);
-        Collidable collisionObject;
-        Point collisionPoint;
 
         if (collisionInfo == null) {
             this.center = this.velocity.applyToPoint(this.center);
             return;
         }
         this.center = this.velocity.almostApplyToPoint(this.center);
-        collisionObject = collisionInfo.collisionObject();
-        collisionPoint = collisionInfo.collisionPoint();
+        Collidable collisionObject = collisionInfo.collisionObject();
+        Point collisionPoint = collisionInfo.collisionPoint();
         this.velocity = collisionObject.hit(collisionPoint, this.velocity);
     }
     /**
@@ -117,6 +115,15 @@ public class Ball {
     public void setVelocity(Velocity v) {
         this.velocity = new Velocity(v);
     }
+
+    /**
+     * This method adds a collidable to this' gameEnvironment.
+     * @param c The collidable we add
+     */
+    public void addCollidable(Collidable c) {
+        this.gameEnvironment.addCollidable(c);
+    }
+
     /**
      * draws the ball on DrawSurface.
      * @param surface surface where we draw the ball

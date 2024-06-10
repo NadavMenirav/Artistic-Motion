@@ -36,7 +36,7 @@ public class GameEnvironment {
         CollisionInfo collisionInfo, finalCollisionInfo = null;
 
         for (Collidable collidable : this.collidables) {
-            collisionPoint = trajectory.closestIntersectionToStartOfLine((Rectangle) collidable);
+            collisionPoint = trajectory.closestIntersectionToStartOfLine(collidable.getCollisionRectangle());
             if (collisionPoint != null) {
                 collisionInfo = new CollisionInfo(collisionPoint, collidable);
                 collisionInfos.add(collisionInfo);
