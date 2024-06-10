@@ -1,10 +1,12 @@
+//Nadav Menirav 330845678
+import java.util.List;
 /**
  * Line class.
  */
 public class Line {
     //Fields of the Line class
-    private Point start;
-    private Point  end;
+    private final Point start;
+    private final Point  end;
     /**
      * Constructor of the Line class.
      * @param start starting point of the line segment
@@ -83,14 +85,14 @@ public class Line {
         return xBiggerThanMin && xSmallerThanMax && yBiggerThanMin && ySmallerThanMax;
     }
     /**
-     * This function checks and returns the orientation of the point received as a parameter in regards to this line.
+     * This function checks and returns the orientation of the point received as a parameter in regard to this line.
      * The orientation of the point means the direction the line has to rotate to in order to "reach" the point.
      * The direction can either be clock wise, counter clock wise, or non.
      * Further explanation can be found in the following video:
      * https://youtu.be/5FkOO1Wwb8w?si=aP7kjNEjkXPdi0Sa
-     * It is self evident that the method below is my own and i did not copy any of it from the above video.
+     * It is self-evident that the method below is my own and I did not copy any of it from the above video.
      * @param other the other point, we compare it to this line
-     * @return 1 if the the line need to be rotated clockwise, -1 if counter clock wise, and 0 if no rotation is needed
+     * @return 1 if the line need to be rotated clockwise, -1 if counter clock wise, and 0 if no rotation is needed
      */
     public int getPointOrientation(Point other) {
         double value = (this.end.getX() - this.start.getX()) * (other.getY() - this.end.getY())
@@ -221,21 +223,21 @@ public class Line {
         int o1 = this.getPointOrientation(other.start());
         int o2 = this.getPointOrientation(other.end());
         /*
-        * We now dealing with cases that the two line segments are on the same line, which is represented in the
+        * We are now dealing with cases that the two line segments are on the same line, which is represented in the
         * fact that the orientations are both equal two 0
         */
         if (o1 == 0 && o2 == 0) {
             /*
              * The only way the two line segments are only tangent and do not have infinite intersections
-             * is when one of their edge points are equal and and the other edge points are in different sides
+             * is when one of their edge points are equal and the other edge points are in different sides
              * of the equal point.
              */
             if (this.isPerpendicularXAxis()) {
                 /*
                  * We now deal with a case that this line is perpendicular to the main axis.
-                 * because the line segments have an intersection point and they lay on the same line, the other line
+                 * because the line segments have an intersection point, and they lay on the same line, the other line
                  * must be also perpendicular to the X axis.
-                 * Due to the fact that the are perpendicular to the X axis, we need to check if the other points
+                 * Due to the fact that they are perpendicular to the X axis, we need to check if the other points
                  * are in different sides using their y values
                 */
                 if (this.start.equals(other.start())) {
@@ -320,5 +322,30 @@ public class Line {
         boolean sameOrder = (this.start.equals(other.start()) && this.end.equals(other.end())); //start=start
         boolean difOrder = (this.start.equals(other.end()) && this.end.equals(other.start())); //start=end
         return sameOrder || difOrder;
+    }
+
+    /**
+     * The function returns the closest-to-start intersection point with the rectangle.
+     * @param rect The rectangle we find intersection with
+     * @return closest-to-start intersection point if there is any, null otherwise
+     */
+    public Point closestIntersectionToStartOfLine(Rectangle rect) {
+        boolean isFirstClosestToStart;
+        Point firstIntersection, secondIntersection;
+        List<Point> intersectionPoints = rect.intersectionPoints(this);
+
+        //Due to geometrical considerations, a line can only intersect with a rectangle in 2 Points max.
+        if (intersectionPoints == null) {
+            return null;
+        }
+        firstIntersection = intersectionPoints.get(0);
+        if (intersectionPoints.size() == 1) {
+            return new Point(firstIntersection);
+        }
+
+        //Now we know there are two intersection points/.
+        secondIntersection = intersectionPoints.get(1);
+        isFirstClosestToStart = firstIntersection.distance(this.start) <= secondIntersection.distance(this.start);
+        return isFirstClosestToStart ? new Point(firstIntersection) : new Point(secondIntersection);
     }
 }
