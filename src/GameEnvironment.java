@@ -6,7 +6,7 @@ import java.util.ArrayList;
  */
 public class GameEnvironment {
     //Fields of the GameEnvironment class
-    private ArrayList<Collidable> collidables;
+    private final ArrayList<Collidable> collidables;
 
     /**
      * Constructor of the GameEnvironment class.
@@ -21,5 +21,34 @@ public class GameEnvironment {
      */
     public void addCollidable(Collidable c) {
         this.collidables.add(c); //Encapsulation?
+    }
+
+    /**
+     * This function finds the closest collision between the object moving on the trajectory and the Collidables
+     * in this environment.
+     * @param trajectory The trajectory of the moving object
+     * @return CollisionInfo of the closest collision if there is any, null otherwise
+     */
+    public CollisionInfo getClosestCollision(Line trajectory) {
+        List<CollisionInfo> collisionInfos = new ArrayList<>();
+        Point collisionPoint;
+        double minLength = Double.MAX_VALUE;
+        CollisionInfo collisionInfo, finalCollisionInfo = null;
+
+        for (Collidable collidable : this.collidables) {
+            collisionPoint = trajectory.closestIntersectionToStartOfLine((Rectangle) collidable);
+            if (collisionPoint != null) {
+                collisionInfo = new CollisionInfo(collisionPoint, collidable);
+                collisionInfos.add(collisionInfo);
+            }
+        }
+
+        for (CollisionInfo collisionInfo2 : collisionInfos) {
+            collisionPoint = collisionInfo2.collisionPoint();
+            if (collisionPoint.distance(trajectory.start()) < minLength) {
+                finalCollisionInfo = collisionInfo2;
+            }
+        }
+        return finalCollisionInfo;
     }
 }

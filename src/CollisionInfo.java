@@ -1,4 +1,8 @@
 //Nadav Menirav 330845678
+
+/**
+ * CollisionInfo class.
+ */
 public class CollisionInfo {
     //Fields of the CollisionInfo class
     private Point collisionPoint;
