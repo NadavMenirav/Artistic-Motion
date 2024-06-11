@@ -4,7 +4,7 @@ import biuoop.DrawSurface;
 /**
  * Ball class.
  */
-public class Ball {
+public class Ball implements Sprite{
     private Point center;
     private int radius;
     private Color color;
@@ -160,5 +160,12 @@ public class Ball {
      */
     public void setRadius(int radius) {
         this.radius = radius;
+    }
+
+    /**
+     * This timePassed method calls the moveOneStep.
+     */
+    public void timePassed() {
+        this.moveOneStep();
     }
 }
