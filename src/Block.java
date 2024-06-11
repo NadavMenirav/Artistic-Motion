@@ -137,4 +137,13 @@ public class Block implements Collidable, Sprite {
     public void timePassed() {
         return;
     }
+
+    /**
+     * This method will add this Block to the given Game.
+     * @param g The game we add this Block to
+     */
+    public void addToGame(Game g) {
+        g.addSprite(this);
+        g.addCollidable(this);
+    }
 }

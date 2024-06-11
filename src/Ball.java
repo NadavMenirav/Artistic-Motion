@@ -168,4 +168,12 @@ public class Ball implements Sprite{
     public void timePassed() {
         this.moveOneStep();
     }
+
+    /**
+     * This method adds the Ball to the given Game.
+     * @param g The game we add the Ball to
+     */
+    public void addToGame(Game g) {
+        g.addSprite(this);
+    }
 }
