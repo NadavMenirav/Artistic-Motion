@@ -6,7 +6,7 @@ import java.awt.Color;
 /**
  * Block class.
  */
-public class Block implements Collidable {
+public class Block implements Collidable, Sprite {
     //Fields of the Block class
     private final Rectangle shape;
 
@@ -128,5 +128,13 @@ public class Block implements Collidable {
                 (int) this.shape.getWidth(),
                 (int) this.shape.getHeight()
         );
+    }
+
+    /**
+     * This function notifies the Block that a certain period of tim has passed.
+     * For now, it does not do anything
+     */
+    public void timePassed() {
+        return;
     }
 }
