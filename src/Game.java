@@ -2,6 +2,10 @@
 
 import biuoop.GUI;
 
+import biuoop.DrawSurface;
+
+import biuoop.Sleeper;
+
 import java.awt.Color;
 
 /**
@@ -38,6 +42,9 @@ public class Game {
         sprites.addSprite(s);
     }
 
+    /**
+     * This method initializes the game: creates new blocks and a ball, and adds them to this game.
+     */
     public void initialize() {
         Ball ball = new Ball(new Point(500, 100), 30, Color.BLACK);
         ball.setVelocity(1, 3);
@@ -64,6 +71,29 @@ public class Game {
         block6.addToGame(this);
         block7.addToGame(this);
         ball.addToGame(this);
+    }
+
+    /**
+     * This method runs the game -- starts the animation loop.
+     */
+    public void run() {
+        final int framesPerSecond = 60;
+        final int millisecondsPerFrame = 1000 / framesPerSecond;
+        Sleeper sleeper = new Sleeper();
+        while (true) {
+            long startTime = System.currentTimeMillis(); //Timing
+
+            DrawSurface d = gui.getDrawSurface();
+            this.sprites.drawAllOn(d);
+            this.sprites.notifyAllTimePassed();
+
+            //Timing
+            long usedTime = System.currentTimeMillis() - startTime;
+            long milliSecondLeftToSleep = millisecondsPerFrame - usedTime;
+            if (milliSecondLeftToSleep > 0) {
+                sleeper.sleepFor(milliSecondLeftToSleep);
+            }
+        }
     }
 
 
