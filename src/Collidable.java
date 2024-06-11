@@ -32,4 +32,13 @@ public interface Collidable {
      * @return true if the collision point is vertical, false otherwise
      */
     boolean isHittingPointVertically(Point collisionPoint);
+
+    /**
+     * This method will add the Collidable to the given Game.
+     * @param g The game we add the Collidable to
+     */
+    default void addToGame(Game g) {
+        g.addCollidable(this);
+        g.addSprite((Sprite) this);
+    }
 }

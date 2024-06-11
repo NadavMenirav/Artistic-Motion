@@ -17,4 +17,12 @@ public interface Sprite {
      * so he will be able to do its necessary changes.
      */
     void timePassed();
+
+    /**
+     * This method adds the Sprite to the given Game.
+     * @param g The game we add the Sprite to
+     */
+    default void addToGame(Game g) {
+        g.addSprite(this);
+    }
 }
