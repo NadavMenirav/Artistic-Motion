@@ -85,6 +85,7 @@ public class Game {
 
             DrawSurface d = gui.getDrawSurface();
             this.sprites.drawAllOn(d);
+            gui.show(d);
             this.sprites.notifyAllTimePassed();
 
             //Timing
