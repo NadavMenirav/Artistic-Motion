@@ -104,5 +104,61 @@ public class Rectangle {
         return new Point(this.upperLeft);
     }
 
+    /**
+     * Returns the upper right point of the rectangle.
+     * @return the upper right point
+     */
+    public Point getUpperRight() {
+        return new Point(this.upperLeft.getX() + this.width, this.upperLeft.getY());
+    }
+
+    /**
+     * Returns the bottom left point of the rectangle.
+     * @return the bottom left point
+     */
+    public Point getBottomLeft() {
+        return new Point(this.upperLeft.getX(), this.upperLeft.getY() + this.height);
+    }
+
+    /**
+     * Returns the bottom right point of the rectangle.
+     * @return the bottom right point
+     */
+    public Point getBottomRight() {
+        return new Point(this.upperLeft.getX() + this.width, this.upperLeft.getY() + this.height);
+    }
+
+    /**
+     * Returns the top edge of this Rectangle.
+     * @return Top edge
+     */
+    public Line getTopEdge() {
+        return new Line(this.upperLeft, this.getUpperRight());
+    }
+
+    /**
+     * Returns the bottom edge of this Rectangle.
+     * @return bottom edge
+     */
+    public Line getBottomEdge() {
+        return new Line(this.getBottomLeft(), this.getBottomRight());
+    }
+
+    /**
+     * Returns the left edge of this Rectangle.
+     * @return Left edge
+     */
+    public Line getLeftEdge() {
+        return new Line(this.upperLeft, this.getBottomLeft());
+    }
+
+    /**
+     * Returns the Right edge of this Rectangle.
+     * @return Right edge
+     */
+    public Line getRightEdge() {
+        return new Line(this.getUpperRight(), this.getBottomRight());
+    }
+
 
 }
