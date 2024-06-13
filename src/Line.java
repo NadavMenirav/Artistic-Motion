@@ -327,7 +327,7 @@ public class Line {
     /**
      * The function returns the closest-to-start intersection point with the rectangle.
      * @param rect The rectangle we find intersection with
-     * @return closest-to-start intersection point if there is a positive finite amount of them, null otherwise
+     * @return closest-to-start intersection point if there is one, null otherwise
      */
     public Point closestIntersectionToStartOfLine(Rectangle rect) {
         boolean isFirstClosestToStart;

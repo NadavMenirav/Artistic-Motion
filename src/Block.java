@@ -1,7 +1,7 @@
 //Nadav Menirav 330845678
+import java.awt.Color;
 
 import biuoop.DrawSurface;
-import java.awt.Color;
 
 /**
  * Block class.

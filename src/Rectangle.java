@@ -17,7 +17,7 @@ public class Rectangle {
      * @param height The height of the rectangle
      */
     public Rectangle(Point upperLeft, double width, double height) {
-        this.upperLeft = upperLeft;
+        this.upperLeft = new Point(upperLeft);
         this.width = width;
         this.height = height;
     }
@@ -27,7 +27,7 @@ public class Rectangle {
      * @param rectangle The rectangle to be duplicated
      */
     public Rectangle(Rectangle rectangle) {
-        this(rectangle.upperLeft, rectangle.width, rectangle.height);
+        this(rectangle.getUpperLeft(), rectangle.getWidth(), rectangle.getHeight());
     }
 
     /**
