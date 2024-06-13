@@ -57,5 +57,10 @@ public class Main {
             gui.show(d);
             sleeper.sleepFor(50); // wait for 50 milliseconds.
         }
+=======
+        Game game = new Game();
+        game.initialize();
+        game.run();
+>>>>>>> 753bfdbf5bc2e6a428d657fd8c624f62d9198535
     }
 }

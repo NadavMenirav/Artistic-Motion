@@ -46,15 +46,19 @@ public class Block implements Collidable, Sprite {
                         this.shape.getUpperLeft().getY()
                 );
 
-        return Threshold.isDoubleGreaterEqual(
-                collisionPoint.getX(),
-                this.shape.getUpperLeft().getX()
-        )
-                && Threshold.isDoubleGreaterEqual(
-                    this.shape.getUpperLeft().getX() + this.shape.getWidth(),
-                    collisionPoint.getX()
+        boolean hittingLeftEdge =
+                Threshold.isDoublesEqual(collisionPoint.getX(), this.shape.getUpperLeft().getX())
+                && isYInRange;
+
+
+        boolean hittingRightEdge =
+                Threshold.isDoublesEqual(
+                        this.shape.getUpperLeft().getX() + this.shape.getWidth(),
+                        collisionPoint.getX()
                 )
                 && isYInRange;
+
+        return hittingLeftEdge || hittingRightEdge;
     }
 
     /**
@@ -77,15 +81,19 @@ public class Block implements Collidable, Sprite {
                         collisionPoint.getX(),
                         this.shape.getUpperLeft().getX()
                 );
-        return Threshold.isDoubleGreaterEqual(
-                collisionPoint.getY(),
-                this.shape.getUpperLeft().getY()
-        )
-                && Threshold.isDoubleGreaterEqual(
-                this.shape.getUpperLeft().getY() + this.shape.getHeight(),
-                collisionPoint.getY()
-        )
+
+        boolean hittingTopEdge =
+                Threshold.isDoublesEqual(collisionPoint.getY(), this.shape.getUpperLeft().getY())
                 && isXInRange;
+
+        boolean hittingBottomEdge =
+                Threshold.isDoublesEqual(
+                        this.shape.getUpperLeft().getY() + this.shape.getHeight(),
+                        collisionPoint.getY()
+                )
+                && isXInRange;
+
+        return hittingTopEdge || hittingBottomEdge;
     }
 
     /**

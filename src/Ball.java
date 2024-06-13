@@ -4,7 +4,7 @@ import biuoop.DrawSurface;
 /**
  * Ball class.
  */
-public class Ball implements Sprite{
+public class Ball implements Sprite {
     private Point center;
     private int radius;
     private Color color;
@@ -49,7 +49,7 @@ public class Ball implements Sprite{
         this((int) x, (int) y, r, color);
     }
     /**
-     * Constructs a Point then a Ball utilising it.
+     * Constructs a Point then a Ball utilizing it.
      * Calls the Point based constructor
      * @param x the X value of the Point
      * @param y the Y value of the Point
@@ -189,5 +189,13 @@ public class Ball implements Sprite{
      */
     public void addToGame(Game g) {
         g.addSprite(this);
+    }
+
+    /**
+     * Change the GameEnvironment of this Ball.
+     * @param ge The new GameEnvironment.
+     */
+    public void setGameEnvironment(GameEnvironment ge) {
+        this.gameEnvironment = ge; //Encapsulation?
     }
 }
