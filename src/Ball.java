@@ -24,20 +24,6 @@ public class Ball implements Sprite {
         this.velocity = new Velocity();
         this.gameEnvironment = new GameEnvironment();
     }
-
-    /**
-     * Constructor.
-     * @param center The center of the ball
-     * @param r The radius of the ball
-     * @param gameEnvironment The gameEnvironment of the ball
-     */
-    public Ball(Point center, int r, GameEnvironment gameEnvironment) {
-        this.center = new Point(center);
-        this.radius = r;
-        this.gameEnvironment = gameEnvironment; //Encapsulation??
-        this.velocity = new Velocity();
-        this.color = Color.BLACK;
-    }
     /**
      * Constructor.
      * @param x x value of center
@@ -72,9 +58,9 @@ public class Ball implements Sprite {
             x = rand.nextInt(201);
             y = rand.nextInt(201);
             boolean edgeCollision = (Threshold.isDoubleGreaterEqual(this.radius, x)
-                && Threshold.isDoubleGreaterEqual(this.radius, y)
-                && Threshold.isDoubleGreaterEqual(x, 195 - this.radius)
-                && Threshold.isDoubleGreaterEqual(y, 195 - this.radius)
+                    && Threshold.isDoubleGreaterEqual(this.radius, y)
+                    && Threshold.isDoubleGreaterEqual(x, 195 - this.radius)
+                    && Threshold.isDoubleGreaterEqual(y, 195 - this.radius)
             );
             if (!edgeCollision) {
                 this.center = new Point(x, y);
@@ -176,9 +162,7 @@ public class Ball implements Sprite {
         this.radius = radius;
     }
 
-    /**
-     * This timePassed method calls the moveOneStep.
-     */
+    @Override
     public void timePassed() {
         this.moveOneStep();
     }

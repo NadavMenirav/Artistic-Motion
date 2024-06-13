@@ -53,9 +53,9 @@ public class Rectangle {
         //If they have infinite intersection points, we shall return null
         if (
                 line.isCoincident(topEdge)
-                || line.isCoincident(bottomEdge)
-                || line.isCoincident(leftEdge)
-                || line.isCoincident(rightEdge)
+                        || line.isCoincident(bottomEdge)
+                        || line.isCoincident(leftEdge)
+                        || line.isCoincident(rightEdge)
         ) {
             return null;
         }

@@ -1,7 +1,7 @@
 //Nadav Menirav 330845678
+import java.awt.Color;
 
 import biuoop.DrawSurface;
-import java.awt.Color;
 
 /**
  * Block class.
@@ -18,19 +18,12 @@ public class Block implements Collidable, Sprite {
         this.shape = new Rectangle(shape);
     }
 
-    /**
-     * Getter of the shape field.
-     * @return A copy of the shape field
-     */
+    @Override
     public Rectangle getCollisionRectangle() {
         return new Rectangle(shape);
     }
 
-    /**
-     * The function checks whether the hitting Point is horizontal.
-     * @param collisionPoint The collision point we check
-     * @return true if the collision point is horizontal, false otherwise
-     */
+    @Override
     public boolean isHittingPointHorizontally(Point collisionPoint) {
         /*
          * We know that if the object is hitting horizontally, its x value should be equals to one of the vertexes
@@ -38,34 +31,30 @@ public class Block implements Collidable, Sprite {
          */
         boolean isYInRange =
                 Threshold.isDoubleGreaterEqual(
-                        this.shape.getUpperLeft().getY() + this.shape.getHeight(),
+                        this.shape.getBottomLeft().getY(),
                         collisionPoint.getY()
                 )
-                && Threshold.isDoubleGreaterEqual(
+                        && Threshold.isDoubleGreaterEqual(
                         collisionPoint.getY(),
                         this.shape.getUpperLeft().getY()
                 );
 
         boolean hittingLeftEdge =
                 Threshold.isDoublesEqual(collisionPoint.getX(), this.shape.getUpperLeft().getX())
-                && isYInRange;
+                        && isYInRange;
 
 
         boolean hittingRightEdge =
                 Threshold.isDoublesEqual(
-                        this.shape.getUpperLeft().getX() + this.shape.getWidth(),
+                        this.shape.getUpperRight().getX(),
                         collisionPoint.getX()
                 )
-                && isYInRange;
+                        && isYInRange;
 
         return hittingLeftEdge || hittingRightEdge;
     }
 
-    /**
-     * The function checks whether the hitting Point is vertical.
-     * @param collisionPoint The collision point we check
-     * @return true if the collision point is vertical, false otherwise
-     */
+    @Override
     public boolean isHittingPointVertically(Point collisionPoint) {
         /*
          * We know that if the object is hitting vertically, its y value should be equals to one of the vertexes
@@ -74,24 +63,24 @@ public class Block implements Collidable, Sprite {
 
         boolean isXInRange =
                 Threshold.isDoubleGreaterEqual(
-                        this.shape.getUpperLeft().getX() + this.shape.getWidth(),
+                        this.shape.getUpperRight().getX(),
                         collisionPoint.getX()
                 )
-                && Threshold.isDoubleGreaterEqual(
+                        && Threshold.isDoubleGreaterEqual(
                         collisionPoint.getX(),
                         this.shape.getUpperLeft().getX()
                 );
 
         boolean hittingTopEdge =
                 Threshold.isDoublesEqual(collisionPoint.getY(), this.shape.getUpperLeft().getY())
-                && isXInRange;
+                        && isXInRange;
 
         boolean hittingBottomEdge =
                 Threshold.isDoublesEqual(
-                        this.shape.getUpperLeft().getY() + this.shape.getHeight(),
+                        this.shape.getBottomLeft().getY(),
                         collisionPoint.getY()
                 )
-                && isXInRange;
+                        && isXInRange;
 
         return hittingTopEdge || hittingBottomEdge;
     }

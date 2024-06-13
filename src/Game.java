@@ -46,13 +46,8 @@ public class Game {
      * This method initializes the game: creates new blocks and a ball, and adds them to this game.
      */
     public void initialize() {
-<<<<<<< HEAD
-        Ball ball = new Ball(new Point(500, 100), 30, this.environment);
-        ball.setVelocity(1, 0);
-=======
         Ball ball = new Ball(new Point(500, 100), 30, Color.BLACK);
         ball.setVelocity(1, 1);
->>>>>>> 753bfdbf5bc2e6a428d657fd8c624f62d9198535
         ball.addToGame(this);
         Rectangle rectangle = new Rectangle(new Point(0, 0), 800, 50);
         Rectangle rectangle2 = new Rectangle(new Point(0, 550), 800, 50);
@@ -75,11 +70,8 @@ public class Game {
         block5.addToGame(this);
         block6.addToGame(this);
         block7.addToGame(this);
-<<<<<<< HEAD
-=======
         ball.addToGame(this);
         ball.setGameEnvironment(environment);
->>>>>>> 753bfdbf5bc2e6a428d657fd8c624f62d9198535
     }
 
     /**
