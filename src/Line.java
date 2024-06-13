@@ -333,9 +333,53 @@ public class Line {
         boolean isFirstClosestToStart;
         Point firstIntersection, secondIntersection;
         List<Point> intersectionPoints = rect.intersectionPoints(this);
-
-        //Due to geometrical considerations, a line can only intersect with a rectangle in 2 Points max.
+        /*
+         * Due to geometrical considerations, a line can only intersect with a rectangle in 2 Points max.
+         * If there are infinite intersections, we still want to return the closest one to the start of the line so in
+         * order to do that we will check (if intersectionPoint returns null) if the line is coincident with one of
+         * the edges of the rectangle. If it is, there are 3 cases: we return the starting point, or one of the
+         * vertexes of the edge of the rectangle, based on where the starting point of the line is located.
+         */
         if (intersectionPoints.isEmpty()) {
+            if (this.isCoincident(rect.getLeftEdge())) {
+                if (Threshold.isDoubleGreaterEqual(this.start.getY(), rect.getBottomLeft().getY())) {
+                    return rect.getBottomLeft();
+                }
+                if (Threshold.isDoubleGreaterEqual(rect.getUpperLeft().getY(), this.start.getY())) {
+                    return rect.getUpperLeft();
+                }
+                return new Point(this.start);
+            }
+
+            if (this.isCoincident(rect.getRightEdge())) {
+                if (Threshold.isDoubleGreaterEqual(this.start.getY(), rect.getBottomRight().getY())) {
+                    return rect.getBottomRight();
+                }
+                if (Threshold.isDoubleGreaterEqual(rect.getUpperRight().getY(), this.start.getY())) {
+                    return rect.getUpperRight();
+                }
+                return new Point(this.start);
+            }
+
+            if (this.isCoincident(rect.getTopEdge())) {
+                if (Threshold.isDoubleGreaterEqual(this.start.getX(), rect.getUpperRight().getX())) {
+                    return rect.getUpperRight();
+                }
+                if (Threshold.isDoubleGreaterEqual(rect.getUpperLeft().getX(), this.start.getX())) {
+                    return rect.getUpperLeft();
+                }
+                return new Point(this.start);
+            }
+
+            if (this.isCoincident(rect.getBottomEdge())) {
+                if (Threshold.isDoubleGreaterEqual(this.start.getX(), rect.getBottomRight().getX())) {
+                    return rect.getBottomRight();
+                }
+                if (Threshold.isDoubleGreaterEqual(rect.getBottomLeft().getX(), this.start.getX())) {
+                    return rect.getBottomLeft();
+                }
+                    return new Point(this.start);
+            }
             return null;
         }
         firstIntersection = intersectionPoints.get(0);
@@ -343,9 +387,11 @@ public class Line {
             return new Point(firstIntersection);
         }
 
-        //Now we know there are two intersection points/.
+        //Now we know there are two intersection points
         secondIntersection = intersectionPoints.get(1);
-        isFirstClosestToStart = firstIntersection.distance(this.start) <= secondIntersection.distance(this.start);
+        isFirstClosestToStart = Threshold.isDoubleGreaterEqual(
+            secondIntersection.distance(this.start),
+            firstIntersection.distance(this.start));
         return isFirstClosestToStart ? new Point(firstIntersection) : new Point(secondIntersection);
     }
 
