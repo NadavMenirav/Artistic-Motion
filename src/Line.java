@@ -335,9 +335,13 @@ public class Line {
         List<Point> intersectionPoints = rect.intersectionPoints(this);
 
         //Due to geometrical considerations, a line can only intersect with a rectangle in 2 Points max.
+        if (intersectionPoints == null) {
+            return null;
+        }
         if (intersectionPoints.isEmpty()) {
             return null;
         }
+
         firstIntersection = intersectionPoints.get(0);
         if (intersectionPoints.size() == 1) {
             return new Point(firstIntersection);

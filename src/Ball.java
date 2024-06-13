@@ -24,6 +24,20 @@ public class Ball implements Sprite{
         this.velocity = new Velocity();
         this.gameEnvironment = new GameEnvironment();
     }
+
+    /**
+     * Constructor.
+     * @param center The center of the ball
+     * @param r The radius of the ball
+     * @param gameEnvironment The gameEnvironment of the ball
+     */
+    public Ball(Point center, int r, GameEnvironment gameEnvironment) {
+        this.center = new Point(center);
+        this.radius = r;
+        this.gameEnvironment = gameEnvironment; //Encapsulation??
+        this.velocity = new Velocity();
+        this.color = Color.BLACK;
+    }
     /**
      * Constructor.
      * @param x x value of center

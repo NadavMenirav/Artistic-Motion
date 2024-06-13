@@ -94,8 +94,8 @@ public class Velocity {
      */
     public Point almostApplyToPoint(Point p) {
         return new Point(
-                p.getX() + 0.9 * this.dx,
-                p.getY() + 0.9 * this.dy
+                p.getX() + 0.5 * this.dx,
+                p.getY() + 0.5 * this.dy
         );
     }
 }
