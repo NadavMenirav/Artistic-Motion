@@ -176,4 +176,12 @@ public class Ball implements Sprite {
     public void addToGame(Game g) {
         g.addSprite(this);
     }
+
+    /**
+     * Change the GameEnvironment of this Ball.
+     * @param ge The new GameEnvironment.
+     */
+    public void setGameEnvironment(GameEnvironment ge) {
+        this.gameEnvironment = ge; //Encapsulation?
+    }
 }

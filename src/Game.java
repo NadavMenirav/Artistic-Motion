@@ -47,7 +47,7 @@ public class Game {
      */
     public void initialize() {
         Ball ball = new Ball(new Point(500, 100), 30, Color.BLACK);
-        ball.setVelocity(1, 3);
+        ball.setVelocity(1, 1);
         ball.addToGame(this);
         Rectangle rectangle = new Rectangle(new Point(0, 0), 800, 50);
         Rectangle rectangle2 = new Rectangle(new Point(0, 550), 800, 50);
@@ -71,6 +71,7 @@ public class Game {
         block6.addToGame(this);
         block7.addToGame(this);
         ball.addToGame(this);
+        ball.setGameEnvironment(environment);
     }
 
     /**

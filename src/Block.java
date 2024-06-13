@@ -18,19 +18,12 @@ public class Block implements Collidable, Sprite {
         this.shape = new Rectangle(shape);
     }
 
-    /**
-     * Getter of the shape field.
-     * @return A copy of the shape field
-     */
+    @Override
     public Rectangle getCollisionRectangle() {
         return new Rectangle(shape);
     }
 
-    /**
-     * The function checks whether the hitting Point is horizontal.
-     * @param collisionPoint The collision point we check
-     * @return true if the collision point is horizontal, false otherwise
-     */
+    @Override
     public boolean isHittingPointHorizontally(Point collisionPoint) {
         /*
          * We know that if the object is hitting horizontally, its x value should be equals to one of the vertexes
@@ -38,7 +31,7 @@ public class Block implements Collidable, Sprite {
          */
         boolean isYInRange =
                 Threshold.isDoubleGreaterEqual(
-                        this.shape.getUpperLeft().getY() + this.shape.getHeight(),
+                        this.shape.getBottomLeft().getY(),
                         collisionPoint.getY()
                 )
                 && Threshold.isDoubleGreaterEqual(
@@ -53,7 +46,7 @@ public class Block implements Collidable, Sprite {
 
         boolean hittingRightEdge =
                 Threshold.isDoublesEqual(
-                        this.shape.getUpperLeft().getX() + this.shape.getWidth(),
+                        this.shape.getUpperRight().getX(),
                         collisionPoint.getX()
                 )
                 && isYInRange;
@@ -61,11 +54,7 @@ public class Block implements Collidable, Sprite {
         return hittingLeftEdge || hittingRightEdge;
     }
 
-    /**
-     * The function checks whether the hitting Point is vertical.
-     * @param collisionPoint The collision point we check
-     * @return true if the collision point is vertical, false otherwise
-     */
+    @Override
     public boolean isHittingPointVertically(Point collisionPoint) {
         /*
          * We know that if the object is hitting vertically, its y value should be equals to one of the vertexes
@@ -74,7 +63,7 @@ public class Block implements Collidable, Sprite {
 
         boolean isXInRange =
                 Threshold.isDoubleGreaterEqual(
-                        this.shape.getUpperLeft().getX() + this.shape.getWidth(),
+                        this.shape.getUpperRight().getX(),
                         collisionPoint.getX()
                 )
                 && Threshold.isDoubleGreaterEqual(
@@ -88,7 +77,7 @@ public class Block implements Collidable, Sprite {
 
         boolean hittingBottomEdge =
                 Threshold.isDoublesEqual(
-                        this.shape.getUpperLeft().getY() + this.shape.getHeight(),
+                        this.shape.getBottomLeft().getY(),
                         collisionPoint.getY()
                 )
                 && isXInRange;
