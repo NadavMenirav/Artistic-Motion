@@ -153,5 +153,13 @@ public class Rectangle {
         return new Line(this.getUpperRight(), this.getBottomRight());
     }
 
+    /**
+     * Change the upperLeft field x value.
+     * @param x The new X value of the upperLeft field
+     */
+    public void setUpperLeftXValue(double x) {
+        this.upperLeft.setX(x);
+    }
+
 
 }

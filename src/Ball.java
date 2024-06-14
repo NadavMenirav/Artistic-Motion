@@ -175,6 +175,7 @@ public class Ball implements Sprite {
      */
     public void addToGame(Game g) {
         g.addSprite(this);
+        this.gameEnvironment = g.getEnvironment();
     }
 
     /**

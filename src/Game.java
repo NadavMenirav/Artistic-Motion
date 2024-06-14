@@ -27,6 +27,22 @@ public class Game {
     }
 
     /**
+     * Getter of the environment field.
+     * @return The GameEnvironment of this Game
+     */
+    public GameEnvironment getEnvironment() {
+        return environment;
+    }
+
+    /**
+     * Getter of the gui field.
+     * @return The GUI of this Game
+     */
+    public GUI getGui() {
+        return gui;
+    }
+
+    /**
      * This method adds a Collidable to the GameEnvironment.
      * @param c The Collidable we add
      */
@@ -71,12 +87,9 @@ public class Game {
         block6.addToGame(this);
         block7.addToGame(this);
         ball.addToGame(this);
-        ball.setGameEnvironment(environment);
     }
 
     /**
-     *
-     *
      * This method runs the game -- starts the animation loop.
      */
     public void run() {
