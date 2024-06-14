@@ -35,6 +35,9 @@ public class Point {
      * @return true if they have the same value, false otherwise
      */
     public boolean equals(Point other) {
+        if (other == null) {
+            return false;
+        }
         return (Threshold.isDoublesEqual(this.x, other.getX()) && Threshold.isDoublesEqual(this.y, other.getY()));
     }
     /**
