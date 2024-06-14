@@ -340,49 +340,17 @@ public class Line {
          * the edges of the rectangle. If it is, there are 3 cases: we return the starting point, or one of the
          * vertexes of the edge of the rectangle, based on where the starting point of the line is located.
          */
-        if (intersectionPoints.isEmpty()) {
-            if (this.isCoincident(rect.getLeftEdge())) {
-                if (Threshold.isDoubleGreaterEqual(this.start.getY(), rect.getBottomLeft().getY())) {
-                    return rect.getBottomLeft();
-                }
-                if (Threshold.isDoubleGreaterEqual(rect.getUpperLeft().getY(), this.start.getY())) {
-                    return rect.getUpperLeft();
-                }
-                return new Point(this.start);
-            }
-
-            if (this.isCoincident(rect.getRightEdge())) {
-                if (Threshold.isDoubleGreaterEqual(this.start.getY(), rect.getBottomRight().getY())) {
-                    return rect.getBottomRight();
-                }
-                if (Threshold.isDoubleGreaterEqual(rect.getUpperRight().getY(), this.start.getY())) {
-                    return rect.getUpperRight();
-                }
-                return new Point(this.start);
-            }
-
-            if (this.isCoincident(rect.getTopEdge())) {
-                if (Threshold.isDoubleGreaterEqual(this.start.getX(), rect.getUpperRight().getX())) {
-                    return rect.getUpperRight();
-                }
-                if (Threshold.isDoubleGreaterEqual(rect.getUpperLeft().getX(), this.start.getX())) {
-                    return rect.getUpperLeft();
-                }
-                return new Point(this.start);
-            }
-
-            if (this.isCoincident(rect.getBottomEdge())) {
-                if (Threshold.isDoubleGreaterEqual(this.start.getX(), rect.getBottomRight().getX())) {
-                    return rect.getBottomRight();
-                }
-                if (Threshold.isDoubleGreaterEqual(rect.getBottomLeft().getX(), this.start.getX())) {
-                    return rect.getBottomLeft();
-                }
-                return new Point(this.start);
-            }
+        if (intersectionPoints == null) {
             return null;
         }
+        if (intersectionPoints.isEmpty()) {
+            return null;
+        }
+
         firstIntersection = intersectionPoints.get(0);
+        if (firstIntersection == null) {
+            System.out.println("how the fuck is it null");
+        }
         if (intersectionPoints.size() == 1) {
             return new Point(firstIntersection);
         }

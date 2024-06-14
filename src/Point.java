@@ -22,7 +22,7 @@ public class Point {
         this.y = a.getY();
     }
     /**
-     * The function calculates the distance between this point and an other point recieved as a parameter.
+     * The function calculates the distance between this point and another point received as a parameter.
      * @param other another point object
      * @return the distance
      */
@@ -30,7 +30,7 @@ public class Point {
         return Math.sqrt(Math.pow(this.x - other.getX(), 2) + Math.pow(this.y - other.getY(), 2));
     }
     /**
-     * The function checks if this point has the same values as the other point, recieved as a parameter.
+     * The function checks if this point has the same values as the other point, received as a parameter.
      * @param other another point object
      * @return true if they have the same value, false otherwise
      */

@@ -85,13 +85,7 @@ public class Block implements Collidable, Sprite {
         return hittingTopEdge || hittingBottomEdge;
     }
 
-    /**
-     * The function will be used whenever an object hits this block.
-     * It will do the necessary changes and will return the new velocity of the hitting object
-     * @param collisionPoint The collision point between the hitting object and the collidable one
-     * @param currentVelocity The current velocity of the hitting object
-     * @return The new Velocity that needs to be applied on the hitting object
-     */
+    @Override
     public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
         Velocity newVelocity = new Velocity(currentVelocity);
         if (isHittingPointHorizontally(collisionPoint)) {
@@ -101,14 +95,10 @@ public class Block implements Collidable, Sprite {
         if (isHittingPointVertically(collisionPoint)) {
             newVelocity.setDy(-currentVelocity.getDy());
         }
-
         return new Velocity(newVelocity);
     }
 
-    /**
-     * This method draws this block on the provided DrawSurface.
-     * @param surface The drawSurface we draw the ball on
-     */
+    @Override
     public void drawOn(DrawSurface surface) {
         surface.setColor(Color.BLACK);
         surface.fillRectangle(
@@ -119,10 +109,7 @@ public class Block implements Collidable, Sprite {
         );
     }
 
-    /**
-     * This function notifies the Block that a certain period of tim has passed.
-     * For now, it does not do anything
-     */
+    @Override
     public void timePassed() {
         return;
     }

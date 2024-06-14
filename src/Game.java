@@ -46,13 +46,13 @@ public class Game {
      * This method initializes the game: creates new blocks and a ball, and adds them to this game.
      */
     public void initialize() {
-        Ball ball = new Ball(new Point(500, 100), 30, Color.BLACK);
-        ball.setVelocity(1, 1);
+        Ball ball = new Ball(new Point(500, 100), 10, Color.BLACK);
+        ball.setVelocity(25, 40);
         ball.addToGame(this);
-        Rectangle rectangle = new Rectangle(new Point(0, 0), 800, 50);
-        Rectangle rectangle2 = new Rectangle(new Point(0, 550), 800, 50);
-        Rectangle rectangle3 = new Rectangle(new Point(0, 0), 50, 600);
-        Rectangle rectangle4 = new Rectangle(new Point(750, 0), 50, 600);
+        Rectangle rectangle = new Rectangle(new Point(0, -50), 800, 50);
+        Rectangle rectangle2 = new Rectangle(new Point(0, 600), 800, 50);
+        Rectangle rectangle3 = new Rectangle(new Point(-50, 0), 50, 600);
+        Rectangle rectangle4 = new Rectangle(new Point(800, 0), 50, 600);
         Rectangle rectangle5 = new Rectangle(new Point(100, 100), 200, 150);
         Rectangle rectangle6 = new Rectangle(new Point(350, 200), 200, 150);
         Rectangle rectangle7 = new Rectangle(new Point(600, 300), 150, 200);
@@ -75,6 +75,8 @@ public class Game {
     }
 
     /**
+     *
+     *
      * This method runs the game -- starts the animation loop.
      */
     public void run() {

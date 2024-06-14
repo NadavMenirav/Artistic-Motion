@@ -53,7 +53,7 @@ public class Ball implements Sprite {
     public Ball(int r, Color color) {
         Random rand = new Random();
         boolean flag = false;
-        double x = 0, y = 0;
+        double x, y;
         while (!flag) {
             x = rand.nextInt(201);
             y = rand.nextInt(201);
@@ -96,6 +96,7 @@ public class Ball implements Sprite {
      * moves the center Point one step.
      */
     public void moveOneStep() {
+        final double changeParam = 0.9;
         Line trajectory = new Line(this.center, this.velocity.applyToPoint(this.center));
         CollisionInfo collisionInfo = gameEnvironment.getClosestCollision(trajectory);
 
@@ -103,9 +104,10 @@ public class Ball implements Sprite {
             this.center = this.velocity.applyToPoint(this.center);
             return;
         }
-        this.center = this.velocity.almostApplyToPoint(this.center);
         Collidable collisionObject = collisionInfo.collisionObject();
         Point collisionPoint = collisionInfo.collisionPoint();
+        this.center = this.velocity.moveCloseToIntersection(this.center, collisionPoint, changeParam);
+
         this.velocity = collisionObject.hit(collisionPoint, this.velocity);
     }
     /**
@@ -117,7 +119,7 @@ public class Ball implements Sprite {
     }
 
     /**
-     * This method adds a collidable to this' gameEnvironment.
+     * This method adds a collidable to this object's gameEnvironment.
      * @param c The collidable we add
      */
     public void addCollidable(Collidable c) {

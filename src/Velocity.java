@@ -1,5 +1,6 @@
+//Nadav Menirav 330845678
 /**
- * Velocity class
+ * Velocity class.
  */
 public class Velocity {
     private double dx;
@@ -90,12 +91,13 @@ public class Velocity {
      * Slightly tweaks coordinates of the point, so it will reach very closely to the point it was supposed to hit.
      * It is used when we want to bring the ball to almost reach the collision point
      * @param p A point to which we must apply the effect
+     * @param intersection The intersection Point
+     * @param changeParam How close we want to move the Point to the intersection Point
      * @return A new Point with the tweaked values
      */
-    public Point almostApplyToPoint(Point p) {
-        return new Point(
-                p.getX() + 0.5 * this.dx,
-                p.getY() + 0.5 * this.dy
-        );
+    public Point moveCloseToIntersection(Point p, Point intersection, double changeParam) {
+        double newX = p.getX() + (intersection.getX() - p.getX()) * changeParam;
+        double newY = p.getY() + (intersection.getY() - p.getY()) * changeParam;
+        return new Point(newX, newY);
     }
 }
