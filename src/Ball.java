@@ -13,9 +13,10 @@ public class Ball implements Sprite {
 
     /**
      * Constructor.
+     *
      * @param center center of ball
-     * @param r radius of ball
-     * @param color color of ball
+     * @param r      radius of ball
+     * @param color  color of ball
      */
     public Ball(Point center, int r, Color color) {
         this.center = new Point(center);
@@ -24,30 +25,36 @@ public class Ball implements Sprite {
         this.velocity = new Velocity();
         this.gameEnvironment = new GameEnvironment();
     }
+
     /**
      * Constructor.
-     * @param x x value of center
-     * @param y y value of center
-     * @param r radius value of ball
+     *
+     * @param x     x value of center
+     * @param y     y value of center
+     * @param r     radius value of ball
      * @param color color of ball
      */
     public Ball(double x, double y, int r, Color color) {
         this((int) x, (int) y, r, color);
     }
+
     /**
      * Constructs a Point then a Ball utilizing it.
      * Calls the Point based constructor
-     * @param x the X value of the Point
-     * @param y the Y value of the Point
-     * @param r the radius value of the Ball
+     *
+     * @param x     the X value of the Point
+     * @param y     the Y value of the Point
+     * @param r     the radius value of the Ball
      * @param color the color of the Ball
      */
     public Ball(int x, int y, int r, Color color) {
         this(new Point(x, y), r, color);
     }
+
     /**
      * random constructor.
-     * @param r radius of ball
+     *
+     * @param r     radius of ball
      * @param color color of ball
      */
     public Ball(int r, Color color) {
@@ -71,27 +78,34 @@ public class Ball implements Sprite {
         this.color = color;
         this.velocity = new Velocity();
     }
+
     /**
      * returns x value of ball center.
+     *
      * @return x value of ball center
      */
     public int getX() {
         return (int) this.center.getX();
     }
+
     /**
      * returns y value of ball center.
+     *
      * @return y value of ball center
      */
     public int getY() {
         return (int) this.center.getY();
     }
+
     /**
      * returns radius of ball.
+     *
      * @return radius of ball
      */
     public int getSize() {
         return this.radius;
     }
+
     /**
      * moves the center Point one step.
      */
@@ -110,8 +124,10 @@ public class Ball implements Sprite {
 
         this.velocity = collisionObject.hit(collisionPoint, this.velocity);
     }
+
     /**
      * changes Velocity of ball.
+     *
      * @param v new velocity of ball
      */
     public void setVelocity(Velocity v) {
@@ -120,6 +136,7 @@ public class Ball implements Sprite {
 
     /**
      * This method adds a collidable to this object's gameEnvironment.
+     *
      * @param c The collidable we add
      */
     public void addCollidable(Collidable c) {
@@ -128,36 +145,45 @@ public class Ball implements Sprite {
 
     /**
      * draws the ball on DrawSurface.
+     *
      * @param surface surface where we draw the ball
      */
     public void drawOn(DrawSurface surface) {
         surface.setColor(this.color);
         surface.fillCircle(this.getX(), this.getY(), this.radius);
     }
+
     /**
      * Changes the Velocity of the Ball.
+     *
      * @param dx the new dx value of the Velocity
      * @param dy the new dy value of the Velocity
      */
     public void setVelocity(double dx, double dy) {
         this.velocity = new Velocity(dx, dy);
     }
+
     /**
      * Sets the center of the Ball.
+     *
      * @param newCenter the new center for the Ball
      */
     public void setCenter(Point newCenter) {
         this.center = new Point(newCenter);
     }
+
     /**
      * Sets the color of the Ball.
+     *
      * @param color new radius of the Ball
      */
     public void setColor(Color color) {
         this.color = color;
     }
+
     /**
      * Sets the radius of the Ball.
+     *
      * @param radius new radius of the Ball
      */
     public void setRadius(int radius) {
@@ -171,18 +197,11 @@ public class Ball implements Sprite {
 
     /**
      * This method adds the Ball to the given Game.
+     *
      * @param g The game we add the Ball to
      */
     public void addToGame(Game g) {
         g.addSprite(this);
         this.gameEnvironment = g.getEnvironment();
-    }
-
-    /**
-     * Change the GameEnvironment of this Ball.
-     * @param ge The new GameEnvironment.
-     */
-    public void setGameEnvironment(GameEnvironment ge) {
-        this.gameEnvironment = ge; //Encapsulation?
     }
 }

@@ -16,7 +16,7 @@ public class Paddle implements Sprite, Collidable {
      * Constructor of the Paddle class.
      */
     public Paddle() {
-        this.shape = new Rectangle(new Point(350, 550), 100, 50);
+        this.shape = new Rectangle(new Point(350, 575), 125, 25);
     }
 
     /**

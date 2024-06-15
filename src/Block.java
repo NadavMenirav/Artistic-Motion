@@ -9,13 +9,25 @@ import biuoop.DrawSurface;
 public class Block implements Collidable, Sprite {
     //Fields of the Block class
     private final Rectangle shape;
+    private final Color color;
 
     /**
-     * Constructor of the block class.
+     * Constructor of the Block class.
      * @param shape The shape of the block
      */
     public Block(Rectangle shape) {
         this.shape = new Rectangle(shape);
+        this.color = Color.BLACK;
+    }
+
+    /**
+     * Constructor of the Block class.
+     * @param shape The shape of the block
+     * @param color The color of the block
+     */
+    public Block(Rectangle shape, Color color) {
+        this.shape = new Rectangle(shape);
+        this.color = color;
     }
 
     @Override
@@ -108,7 +120,7 @@ public class Block implements Collidable, Sprite {
 
     @Override
     public void drawOn(DrawSurface surface) {
-        surface.setColor(Color.BLACK);
+        surface.setColor(this.color);
         surface.fillRectangle(
                 (int) this.shape.getUpperLeft().getX(),
                 (int) this.shape.getUpperLeft().getY(),

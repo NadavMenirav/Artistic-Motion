@@ -47,6 +47,7 @@ public class GameEnvironment {
             collisionPoint = collisionInfo2.collisionPoint();
             if (collisionPoint.distance(trajectory.start()) < minLength) {
                 finalCollisionInfo = collisionInfo2;
+                minLength = collisionPoint.distance(trajectory.start());
             }
         }
         return finalCollisionInfo;
