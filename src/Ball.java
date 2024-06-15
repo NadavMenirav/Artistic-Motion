@@ -115,6 +115,11 @@ public class Ball implements Sprite {
         Line trajectory = new Line(this.center, this.velocity.applyToPoint(this.center));
         CollisionInfo collisionInfo = gameEnvironment.getClosestCollision(trajectory);
 
+        if (this.isBallInPaddle()) {
+            this.getOutOfPaddle();
+            return;
+        }
+
         if (collisionInfo == null) {
             this.center = this.velocity.applyToPoint(this.center);
             return;
@@ -211,9 +216,15 @@ public class Ball implements Sprite {
      * This method is used to get this Ball out of its Paddle.
      */
     public void getOutOfPaddle() {
-        if ()
+        final int desiredDistanceFromTopEdge = 1;
+        this.center.setY(this.paddle.getCollisionRectangle().getUpperLeft().getY() - desiredDistanceFromTopEdge);
+
     }
 
+    /**
+     * This method checks whether this Ball is in its related Paddle.
+     * @return True if this Ball is in its Paddle, false otherwise
+     */
     public boolean isBallInPaddle() {
         final double lowestYValueOfPaddle = this.paddle.getCollisionRectangle().getUpperLeft().getY();
         final double highestYValueOfPaddle = this.paddle.getCollisionRectangle().getBottomLeft().getY();

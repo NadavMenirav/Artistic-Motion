@@ -75,9 +75,9 @@ public class Game {
         firstBall.setVelocity(2, 3);
         Ball secondBall = new Ball(new Point(600, 400), 8, Color.WHITE);
         secondBall.setVelocity(2, 3);
-        Paddle paddle = new Paddle(Color.YELLOW);
-        this.paddle = paddle;
-        paddle.addToGame(this);
+        Paddle pad = new Paddle(Color.YELLOW);
+        this.paddle = pad;
+        pad.addToGame(this);
         firstBall.addToGame(this);
         secondBall.addToGame(this);
 
