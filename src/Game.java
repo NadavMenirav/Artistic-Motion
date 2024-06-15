@@ -16,6 +16,7 @@ public class Game {
     private final SpriteCollection sprites;
     private final GameEnvironment environment;
     private final GUI gui;
+    private Paddle paddle;
 
     /**
      * Empty constructor of the Game class.
@@ -43,6 +44,14 @@ public class Game {
     }
 
     /**
+     * Getter of the paddle field.
+     * @return The Paddle of this game
+     */
+    public Paddle getPaddle() {
+        return paddle;
+    }
+
+    /**
      * This method adds a Collidable to the GameEnvironment.
      * @param c The Collidable we add
      */
@@ -67,6 +76,7 @@ public class Game {
         Ball secondBall = new Ball(new Point(600, 400), 8, Color.WHITE);
         secondBall.setVelocity(2, 3);
         Paddle paddle = new Paddle(Color.YELLOW);
+        this.paddle = paddle;
         paddle.addToGame(this);
         firstBall.addToGame(this);
         secondBall.addToGame(this);

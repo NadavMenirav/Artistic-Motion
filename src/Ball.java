@@ -10,6 +10,7 @@ public class Ball implements Sprite {
     private Color color;
     private Velocity velocity;
     private GameEnvironment gameEnvironment;
+    private Paddle paddle;
 
     /**
      * Constructor.
@@ -203,5 +204,6 @@ public class Ball implements Sprite {
     public void addToGame(Game g) {
         g.addSprite(this);
         this.gameEnvironment = g.getEnvironment();
+        this.paddle = g.getPaddle();
     }
 }

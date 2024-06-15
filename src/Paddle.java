@@ -2,6 +2,7 @@
 import java.awt.Color;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
+import java.util.List;
 
 
 /**
@@ -9,9 +10,10 @@ import biuoop.KeyboardSensor;
  */
 public class Paddle implements Sprite, Collidable {
     //Fields of the Paddle class
-    private final Rectangle shape = new Rectangle(new Point(350, 575), 125, 25);;
+    private final Rectangle shape = new Rectangle(new Point(350, 575), 125, 25);
     private biuoop.KeyboardSensor keyboard;
     private final Color color;
+    private List<Ball> ballList;
 
     /**
      * Constructor of the Paddle class.
