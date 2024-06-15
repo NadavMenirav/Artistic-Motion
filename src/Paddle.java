@@ -11,7 +11,7 @@ public class Paddle implements Sprite, Collidable {
     //Fields of the Paddle class
     private final Rectangle shape = new Rectangle(new Point(350, 575), 125, 25);;
     private biuoop.KeyboardSensor keyboard;
-    private Color color;
+    private final Color color;
 
     /**
      * Constructor of the Paddle class.
@@ -62,8 +62,15 @@ public class Paddle implements Sprite, Collidable {
 
     @Override
     public void drawOn(DrawSurface d) {
-        d.setColor(Color.BLACK);
+        d.setColor(this.color);
         d.fillRectangle(
+                (int) this.shape.getUpperLeft().getX(),
+                (int) this.shape.getUpperLeft().getY(),
+                (int) this.shape.getWidth(),
+                (int) this.shape.getHeight()
+        );
+        d.setColor(Color.BLACK);
+        d.drawRectangle(
                 (int) this.shape.getUpperLeft().getX(),
                 (int) this.shape.getUpperLeft().getY(),
                 (int) this.shape.getWidth(),

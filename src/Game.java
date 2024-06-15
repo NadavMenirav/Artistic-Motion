@@ -62,11 +62,11 @@ public class Game {
      * This method initializes the game: creates new blocks, a ball and a paddle, and adds them to this game.
      */
     public void initialize() {
-        Ball firstBall = new Ball(new Point(500, 100), 8, Color.WHITE);
+        Ball firstBall = new Ball(new Point(500, 400), 8, Color.WHITE);
         firstBall.setVelocity(2, 3);
-        Ball secondBall = new Ball(new Point(600, 100), 8, Color.WHITE);
+        Ball secondBall = new Ball(new Point(600, 400), 8, Color.WHITE);
         secondBall.setVelocity(2, 3);
-        Paddle paddle = new Paddle();
+        Paddle paddle = new Paddle(Color.YELLOW);
         paddle.addToGame(this);
         firstBall.addToGame(this);
         secondBall.addToGame(this);
