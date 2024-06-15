@@ -64,7 +64,7 @@ public class Paddle implements Sprite, Collidable {
         );
         // zone 1 -- 300 deg, and for every increase in region number, angle increases in 30 deg
         final int startingAngle = 300;
-        final int requiredAngle;
+        final int desiredAngle;
         int region;
         Block block = new Block(this.shape);
         Velocity newVelocity = new Velocity(currentVelocity);
@@ -73,8 +73,8 @@ public class Paddle implements Sprite, Collidable {
             return newVelocity;
         }
         region = getRegionOfCollision(collisionPoint);
-        requiredAngle = startingAngle + (region - 1) * 30;
-        newVelocity = Velocity.fromAngleAndSpeed(requiredAngle, currentSpeed);
+        desiredAngle = startingAngle + (region - 1) * 30;
+        newVelocity = Velocity.fromAngleAndSpeed(desiredAngle, currentSpeed);
         return newVelocity;
     }
 
@@ -100,6 +100,15 @@ public class Paddle implements Sprite, Collidable {
             return 4;
         }
         return 5;
+    }
+
+    /**
+     * This method adds this Paddle to the game.
+     * @param g The desired Game
+     */
+    public void addToGame(Game g) {
+        g.addSprite(this);
+        g.addCollidable(this);
     }
 
 }
