@@ -206,4 +206,26 @@ public class Ball implements Sprite {
         this.gameEnvironment = g.getEnvironment();
         this.paddle = g.getPaddle();
     }
+
+    /**
+     * This method is used to get this Ball out of its Paddle.
+     */
+    public void getOutOfPaddle() {
+        if ()
+    }
+
+    public boolean isBallInPaddle() {
+        final double lowestYValueOfPaddle = this.paddle.getCollisionRectangle().getUpperLeft().getY();
+        final double highestYValueOfPaddle = this.paddle.getCollisionRectangle().getBottomLeft().getY();
+        final double lowestXValueOfPaddle = this.paddle.getCollisionRectangle().getUpperLeft().getX();
+        final double highestXValueOfPaddle = this.paddle.getCollisionRectangle().getUpperRight().getX();
+        final double xBall = this.center.getX();
+        final double yBall = this.center.getY();
+        boolean isYInPaddle = Threshold.isDoubleGreaterEqual(yBall, lowestYValueOfPaddle)
+                            && Threshold.isDoubleGreaterEqual(highestYValueOfPaddle, yBall);
+        boolean isXInPaddle = Threshold.isDoubleGreaterEqual(xBall, lowestXValueOfPaddle)
+                            && Threshold.isDoubleGreaterEqual(highestXValueOfPaddle, xBall);
+
+        return isYInPaddle && isXInPaddle;
+    }
 }
