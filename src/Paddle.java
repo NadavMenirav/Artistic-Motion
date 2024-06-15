@@ -1,9 +1,7 @@
 //Nadav Menirav 330845678
 import java.awt.Color;
 import biuoop.DrawSurface;
-import biuoop.GUI;
 import biuoop.KeyboardSensor;
-import org.jetbrains.annotations.NotNull;
 
 
 /**
@@ -11,21 +9,34 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Paddle implements Sprite, Collidable {
     //Fields of the Paddle class
-    private final Rectangle shape = new Rectangle(new Point(250, 750), 100, 50);
+    private final Rectangle shape;
     private biuoop.KeyboardSensor keyboard;
+
+    /**
+     * Constructor of the Paddle class.
+     */
+    public Paddle() {
+        this.shape = new Rectangle(new Point(350, 550), 100, 50);
+    }
 
     /**
      * Slightly moves the paddle to the left.
      */
     public void moveLeft() {
-        shape.setUpperLeftXValue(shape.getUpperLeft().getX() - 1);
+        if (this.shape.getUpperRight().getX() < 0) {
+            this.shape.setUpperLeftXValue(800);
+        }
+        shape.setUpperLeftXValue(shape.getUpperLeft().getX() - 8);
     }
 
     /**
      * Slightly moves the paddle to the right.
      */
     public void moveRight() {
-        shape.setUpperLeftXValue(shape.getUpperLeft().getX() + 1);
+        if (this.shape.getUpperLeft().getX() > 800) {
+            this.shape.setUpperLeftXValue(-this.shape.getWidth());
+        }
+        shape.setUpperLeftXValue(shape.getUpperLeft().getX() + 8);
     }
 
     //Sprite methods
@@ -63,7 +74,7 @@ public class Paddle implements Sprite, Collidable {
                 Math.pow(currentVelocity.getDx(), 2) + Math.pow(currentVelocity.getDy(), 2)
         );
         // zone 1 -- 300 deg, and for every increase in region number, angle increases in 30 deg
-        final int startingAngle = 300;
+        final int startingAngle = 60;
         final int desiredAngle;
         int region;
         Block block = new Block(this.shape);
@@ -73,7 +84,7 @@ public class Paddle implements Sprite, Collidable {
             return newVelocity;
         }
         region = getRegionOfCollision(collisionPoint);
-        desiredAngle = startingAngle + (region - 1) * 30;
+        desiredAngle = startingAngle - (region - 1) * 30;
         newVelocity = Velocity.fromAngleAndSpeed(desiredAngle, currentSpeed);
         return newVelocity;
     }

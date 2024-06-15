@@ -160,6 +160,4 @@ public class Rectangle {
     public void setUpperLeftXValue(double x) {
         this.upperLeft.setX(x);
     }
-
-
 }
