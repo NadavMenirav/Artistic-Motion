@@ -3,7 +3,7 @@ import java.awt.Color;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
-
+import org.jetbrains.annotations.NotNull;
 
 
 /**
@@ -59,6 +59,47 @@ public class Paddle implements Sprite, Collidable {
 
     @Override
     public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
-
+        final double currentSpeed = Math.sqrt(
+                Math.pow(currentVelocity.getDx(), 2) + Math.pow(currentVelocity.getDy(), 2)
+        );
+        // zone 1 -- 300 deg, and for every increase in region number, angle increases in 30 deg
+        final int startingAngle = 300;
+        final int requiredAngle;
+        int region;
+        Block block = new Block(this.shape);
+        Velocity newVelocity = new Velocity(currentVelocity);
+        if (block.isHittingPointHorizontally(collisionPoint)) {
+            newVelocity.setDx(-currentVelocity.getDx());
+            return newVelocity;
+        }
+        region = getRegionOfCollision(collisionPoint);
+        requiredAngle = startingAngle + (region - 1) * 30;
+        newVelocity = Velocity.fromAngleAndSpeed(requiredAngle, currentSpeed);
+        return newVelocity;
     }
+
+    /**
+     * This method calculates wha region was the collision on.
+     * @param collisionPoint The collision Point
+     * @return The region the collision was occurred
+     */
+    public int getRegionOfCollision(Point collisionPoint) {
+        final double upperLeftXValue = this.shape.getUpperLeft().getX();
+        final double width = this.shape.getWidth();
+        final double lengthOfRegion = 0.2 * width;
+        if (collisionPoint.getX() < upperLeftXValue + lengthOfRegion) {
+            return 1;
+        }
+        if (collisionPoint.getX() < upperLeftXValue  + 2 * lengthOfRegion) {
+            return 2;
+        }
+        if (collisionPoint.getX() < upperLeftXValue + 3 * lengthOfRegion) {
+            return 3;
+        }
+        if (collisionPoint.getX() < upperLeftXValue + 4 * lengthOfRegion) {
+            return 4;
+        }
+        return 5;
+    }
+
 }
