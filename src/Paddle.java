@@ -9,14 +9,23 @@ import biuoop.KeyboardSensor;
  */
 public class Paddle implements Sprite, Collidable {
     //Fields of the Paddle class
-    private final Rectangle shape;
+    private final Rectangle shape = new Rectangle(new Point(350, 575), 125, 25);;
     private biuoop.KeyboardSensor keyboard;
+    private Color color;
 
     /**
      * Constructor of the Paddle class.
      */
     public Paddle() {
-        this.shape = new Rectangle(new Point(350, 575), 125, 25);
+        this.color = Color.BLACK;
+    }
+
+    /**
+     * Constructor of the Paddle class.
+     * @param color The color of the Paddle
+     */
+    public Paddle(Color color) {
+        this.color = new Color(color.getRGB());
     }
 
     /**

@@ -73,9 +73,6 @@ public class Game {
 
         //Add all the blocks to the game
         this.addAllBlocks();
-
-
-
     }
 
     /**
