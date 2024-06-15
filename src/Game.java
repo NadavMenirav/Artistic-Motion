@@ -68,18 +68,20 @@ public class Game {
         secondBall.setVelocity(2, 3);
         Paddle paddle = new Paddle();
         paddle.addToGame(this);
+        firstBall.addToGame(this);
+        secondBall.addToGame(this);
 
-        //The blocks on the edges of the screen
-        this.addEdgesBlocks();
+        //Add all the blocks to the game
+        this.addAllBlocks();
 
 
 
     }
 
     /**
-     * Adds The blocks on the edges of the screen to this game.
+     * Adds all the blocks to the game.
      */
-    public void addEdgesBlocks() {
+    public void addAllBlocks() {
         Rectangle rectangle = new Rectangle(new Point(0, -50), 800, 50);
         Rectangle rectangle2 = new Rectangle(new Point(0, 600), 800, 50);
         Rectangle rectangle3 = new Rectangle(new Point(-50, 0), 50, 600);
@@ -95,23 +97,24 @@ public class Game {
         block3.addToGame(this);
         block4.addToGame(this);
 
-        addRowBlocks(12, 80);
-        addRowBlocks(11, 105);
-        addRowBlocks(10, 130);
-        addRowBlocks(9, 155);
-        addRowBlocks(8, 180);
-        addRowBlocks(7, 205);
+        addRowBlocks(12, 80, Color.GRAY);
+        addRowBlocks(11, 110, Color.RED);
+        addRowBlocks(10, 140, Color.YELLOW);
+        addRowBlocks(9, 170, Color.BLUE);
+        addRowBlocks(8, 200, Color.PINK);
+        addRowBlocks(7, 230, Color.GREEN);
     }
 
     /**
      * This method adds to the game a row of blocks to this Game.
      * @param numberOfBlocks The number of blocks we want to add
      * @param yValueOfBlocks The y value of all the blocks we want to add
+     * @param color The Color of the row blocks
      */
-    public void addRowBlocks(int numberOfBlocks, double yValueOfBlocks) {
+    public void addRowBlocks(int numberOfBlocks, double yValueOfBlocks, Color color) {
         for (int i = 0; i < numberOfBlocks; i++) {
-            Rectangle rectangle = new Rectangle(new Point(750 - 50 * i, yValueOfBlocks), 50, 25);
-            Block block = new Block(rectangle);
+            Rectangle rectangle = new Rectangle(new Point(740 - 60 * i, yValueOfBlocks), 60, 30);
+            Block block = new Block(rectangle, color);
             block.addToGame(this);
         }
     }
@@ -127,6 +130,8 @@ public class Game {
             long startTime = System.currentTimeMillis(); //Timing
 
             DrawSurface d = gui.getDrawSurface();
+            d.setColor(new Color(1, 1, 122));
+            d.fillRectangle(0, 0, 800, 600);
             this.sprites.drawAllOn(d);
             gui.show(d);
             this.sprites.notifyAllTimePassed();

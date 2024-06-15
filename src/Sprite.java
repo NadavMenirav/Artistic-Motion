@@ -13,7 +13,7 @@ public interface Sprite {
     void drawOn(DrawSurface d);
 
     /**
-     * This function notifies the spite that a certain period of time has passed,
+     * This function notifies the sprite that a certain period of time has passed,
      * so he will be able to do its necessary changes.
      */
     void timePassed();

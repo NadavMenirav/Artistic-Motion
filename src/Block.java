@@ -27,7 +27,7 @@ public class Block implements Collidable, Sprite {
      */
     public Block(Rectangle shape, Color color) {
         this.shape = new Rectangle(shape);
-        this.color = color;
+        this.color = new Color(color.getRGB());
     }
 
     @Override
@@ -122,6 +122,13 @@ public class Block implements Collidable, Sprite {
     public void drawOn(DrawSurface surface) {
         surface.setColor(this.color);
         surface.fillRectangle(
+                (int) this.shape.getUpperLeft().getX(),
+                (int) this.shape.getUpperLeft().getY(),
+                (int) this.shape.getWidth(),
+                (int) this.shape.getHeight()
+        );
+        surface.setColor(Color.BLACK);
+        surface.drawRectangle(
                 (int) this.shape.getUpperLeft().getX(),
                 (int) this.shape.getUpperLeft().getY(),
                 (int) this.shape.getWidth(),
