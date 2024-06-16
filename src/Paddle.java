@@ -11,7 +11,7 @@ public class Paddle implements Sprite, Collidable {
     //Fields of the Paddle class
 
     //we want the paddle to have a specific starting Point.
-    private final Rectangle shape = new Rectangle(new Point(350, 575), 125, 25);
+    private final Rectangle shape = new Rectangle(new Point(350, 550), 125, 25);
     private biuoop.KeyboardSensor keyboard;
     private final Color color;
 
@@ -37,8 +37,9 @@ public class Paddle implements Sprite, Collidable {
     public void moveLeft() {
         //Circular fashion
         final int changeValue = 8;
-        if (Threshold.isDoubleGreaterEqual(changeValue, this.shape.getUpperRight().getX())) {
-            this.shape.setUpperLeftXValue(800);
+        final int lengthOfBorders = 25;
+        if (Threshold.isDoubleGreaterEqual(changeValue + lengthOfBorders, this.shape.getUpperRight().getX())) {
+            this.shape.setUpperLeftXValue(800 - lengthOfBorders);
         }
         shape.setUpperLeftXValue(shape.getUpperLeft().getX() - changeValue);
     }
@@ -49,8 +50,9 @@ public class Paddle implements Sprite, Collidable {
     public void moveRight() {
         //Circular fashion
         final int changeValue = 8;
-        if (Threshold.isDoubleGreaterEqual(this.shape.getUpperLeft().getX(), 800 - changeValue)) {
-            this.shape.setUpperLeftXValue(-this.shape.getWidth());
+        final int lengthOfBorders = 25;
+        if (Threshold.isDoubleGreaterEqual(this.shape.getUpperLeft().getX(), 800 - changeValue - lengthOfBorders)) {
+            this.shape.setUpperLeftXValue(-this.shape.getWidth() + lengthOfBorders);
         }
         shape.setUpperLeftXValue(shape.getUpperLeft().getX() + changeValue);
     }

@@ -69,40 +69,48 @@ public class Game {
      */
     public void initialize() {
         //Create the two balls
-        Ball firstBall = new Ball(new Point(500, 400), 8, Color.WHITE);
-        firstBall.setVelocity(2, 3);
-        Ball secondBall = new Ball(new Point(600, 400), 8, Color.WHITE);
+        Ball firstBall = new Ball(new Point(700, 500), 6, Color.WHITE);
+        firstBall.setVelocity(3, 2);
+        Ball secondBall = new Ball(new Point(600, 400), 6, Color.WHITE);
         secondBall.setVelocity(2, 3);
 
         //Create the Paddle
         Paddle pad = new Paddle(Color.YELLOW);
         this.paddle = pad;
 
-        //Add them to the game
+        //Add the background block
+        this.addBackgroundBlock();
+        //Add paddle and balls
         pad.addToGame(this);
         firstBall.addToGame(this);
         secondBall.addToGame(this);
-
-        //Add all the blocks to the game
+        //Add rest of blocks
         this.addAllBlocks();
     }
 
     /**
-     * Adds all the blocks to the game.
+     * Adds the background Block to this game.
+     */
+    public void addBackgroundBlock() {
+        Rectangle rectangle = new Rectangle(new Point(25, 25), 750, 550);
+        Block block = new Block(rectangle, new Color(1, 1, 122));
+        block.addToGame(this);
+    }
+
+    /**
+     * Adds all the blocks to this game.
      */
     public void addAllBlocks() {
-        /*I did the edge blocks outside the frame, and that only one of their edges is touching the screen edge,
-         * It looks way better that way in my opinion
-         */
-        Rectangle rectangle = new Rectangle(new Point(0, -50), 800, 50);
-        Rectangle rectangle2 = new Rectangle(new Point(0, 600), 800, 50);
-        Rectangle rectangle3 = new Rectangle(new Point(-50, 0), 50, 600);
-        Rectangle rectangle4 = new Rectangle(new Point(800, 0), 50, 600);
+        //Add edge blocks and the background block
+        Rectangle rectangle = new Rectangle(new Point(0, 0), 800, 25);
+        Rectangle rectangle2 = new Rectangle(new Point(0, 575), 800, 25);
+        Rectangle rectangle3 = new Rectangle(new Point(0, 0), 25, 600);
+        Rectangle rectangle4 = new Rectangle(new Point(775, 0), 25, 800);
 
-        Block block = new Block(rectangle);
-        Block block2 = new Block(rectangle2);
-        Block block3 = new Block(rectangle3);
-        Block block4 = new Block(rectangle4);
+        Block block = new Block(rectangle, Color.GRAY);
+        Block block2 = new Block(rectangle2, Color.GRAY);
+        Block block3 = new Block(rectangle3, Color.GRAY);
+        Block block4 = new Block(rectangle4, Color.GRAY);
 
         block.addToGame(this);
         block2.addToGame(this);
@@ -129,7 +137,7 @@ public class Game {
          * width in each iteration
          */
         for (int i = 0; i < numberOfBlocks; i++) {
-            Rectangle rectangle = new Rectangle(new Point(740 - 60 * i, yValueOfBlocks), 60, 30);
+            Rectangle rectangle = new Rectangle(new Point(725 - 50 * i, yValueOfBlocks), 50, 30);
             Block block = new Block(rectangle, color);
             block.addToGame(this);
         }
@@ -148,10 +156,6 @@ public class Game {
             long startTime = System.currentTimeMillis(); //Timing
 
             DrawSurface d = gui.getDrawSurface();
-            //We want the background to be navy.
-            d.setColor(new Color(1, 1, 122));
-            d.fillRectangle(0, 0, 800, 600);
-
             //Now we draw the Sprites
             this.sprites.drawAllOn(d);
             gui.show(d);
