@@ -36,10 +36,11 @@ public class Paddle implements Sprite, Collidable {
      */
     public void moveLeft() {
         //Circular fashion
-        if (this.shape.getUpperRight().getX() < 0) {
+        final int changeValue = 8;
+        if (Threshold.isDoubleGreaterEqual(changeValue, this.shape.getUpperRight().getX())) {
             this.shape.setUpperLeftXValue(800);
         }
-        shape.setUpperLeftXValue(shape.getUpperLeft().getX() - 8);
+        shape.setUpperLeftXValue(shape.getUpperLeft().getX() - changeValue);
     }
 
     /**
@@ -47,10 +48,11 @@ public class Paddle implements Sprite, Collidable {
      */
     public void moveRight() {
         //Circular fashion
-        if (this.shape.getUpperLeft().getX() > 800) {
+        final int changeValue = 8;
+        if (Threshold.isDoubleGreaterEqual(this.shape.getUpperLeft().getX(), 800 - changeValue)) {
             this.shape.setUpperLeftXValue(-this.shape.getWidth());
         }
-        shape.setUpperLeftXValue(shape.getUpperLeft().getX() + 8);
+        shape.setUpperLeftXValue(shape.getUpperLeft().getX() + changeValue);
     }
 
     //Sprite methods
