@@ -91,7 +91,9 @@ public class Game {
      * Adds all the blocks to the game.
      */
     public void addAllBlocks() {
-        //The blocks on the edges
+        /*I did the edge blocks outside the frame, and that only one of their edges is touching the screen edge,
+         * It looks way better that way in my opinion
+         */
         Rectangle rectangle = new Rectangle(new Point(0, -50), 800, 50);
         Rectangle rectangle2 = new Rectangle(new Point(0, 600), 800, 50);
         Rectangle rectangle3 = new Rectangle(new Point(-50, 0), 50, 600);
