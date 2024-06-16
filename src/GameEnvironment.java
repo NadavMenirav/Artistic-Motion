@@ -1,6 +1,8 @@
 //Nadav Menirav 330845678
+
 import java.util.List;
 import java.util.ArrayList;
+
 /**
  * GameEnvironment class.
  */
@@ -20,7 +22,7 @@ public class GameEnvironment {
      * @param c The collidable we add
      */
     public void addCollidable(Collidable c) {
-        this.collidables.add(c); //Encapsulation?
+        this.collidables.add(c);
     }
 
     /**
@@ -30,11 +32,12 @@ public class GameEnvironment {
      * @return CollisionInfo of the closest collision if there is any, null otherwise
      */
     public CollisionInfo getClosestCollision(Line trajectory) {
+        double minLength = Double.MAX_VALUE;
         List<CollisionInfo> collisionInfos = new ArrayList<>();
         Point collisionPoint;
-        double minLength = Double.MAX_VALUE;
         CollisionInfo collisionInfo, finalCollisionInfo = null;
 
+        //This loop adds all the collisionInfos to the array.
         for (Collidable collidable : this.collidables) {
             collisionPoint = trajectory.closestIntersectionToStartOfLine(collidable.getCollisionRectangle());
             if (collisionPoint != null) {
@@ -43,6 +46,7 @@ public class GameEnvironment {
             }
         }
 
+        //Finding the closest collision
         for (CollisionInfo collisionInfo2 : collisionInfos) {
             collisionPoint = collisionInfo2.collisionPoint();
             if (collisionPoint.distance(trajectory.start()) < minLength) {

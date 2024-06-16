@@ -1,6 +1,6 @@
 //Nadav Menirav 330845678
-import java.awt.Color;
 
+import java.awt.Color;
 import biuoop.DrawSurface;
 
 /**
@@ -16,6 +16,7 @@ public class Block implements Collidable, Sprite {
      * @param shape The shape of the block
      */
     public Block(Rectangle shape) {
+        //If no color was provided, the block will be black
         this.shape = new Rectangle(shape);
         this.color = Color.BLACK;
     }
@@ -38,12 +39,12 @@ public class Block implements Collidable, Sprite {
     /**
      * The function checks whether the hitting Point is horizontal.
      * @param collisionPoint The collision point we check
-     * @return true if the collision point is horizontal, false otherwise
+     * @return True if the collision point is horizontal, false otherwise
      */
     public boolean isHittingPointHorizontally(Point collisionPoint) {
         /*
          * We know that if the object is hitting horizontally, its x value should be equals to one of the vertexes
-         * and the y value should be between the top and bottom edges
+         * and the y value should be equal to the top or bottom edges
          */
         boolean isYInRange =
                 Threshold.isDoubleGreaterEqual(
@@ -78,7 +79,7 @@ public class Block implements Collidable, Sprite {
     public boolean isHittingPointVertically(Point collisionPoint) {
         /*
          * We know that if the object is hitting vertically, its y value should be equals to one of the vertexes
-         * and the x value should be between the left and right edges
+         * and the x value should be equal to the left or right edges
          */
 
         boolean isXInRange =
@@ -107,6 +108,10 @@ public class Block implements Collidable, Sprite {
 
     @Override
     public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
+        /*
+         * If the collision point was on the top or bottom edges, we will change the dy value of the velocity,
+         * and if it was on the right or left edges, we will change the dx
+         */
         Velocity newVelocity = new Velocity(currentVelocity);
         if (isHittingPointHorizontally(collisionPoint)) {
             newVelocity.setDx(-currentVelocity.getDx());
@@ -120,6 +125,7 @@ public class Block implements Collidable, Sprite {
 
     @Override
     public void drawOn(DrawSurface surface) {
+        //We want to fill the rectangle with its color, and give it a black outline
         surface.setColor(this.color);
         surface.fillRectangle(
                 (int) this.shape.getUpperLeft().getX(),
@@ -138,7 +144,6 @@ public class Block implements Collidable, Sprite {
 
     @Override
     public void timePassed() {
-        return;
     }
 
     /**

@@ -1,6 +1,8 @@
 //Nadav Menirav 330845678
+
 import java.util.List;
 import java.util.ArrayList;
+
 /**
  * Rectangle class.
  */
@@ -61,11 +63,13 @@ public class Rectangle {
             list.add(p2);
         }
         if (p3 != null) {
+            //We need to check if the point already exists
             if (!p3.equals(p1) && !p3.equals(p2)) {
                 list.add(p3);
             }
         }
         if (p4 != null) {
+            //We need to check if the point already exists
             if (!p4.equals(p1) && !p4.equals(p2)) {
                 list.add(p4);
             }

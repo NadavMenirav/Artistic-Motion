@@ -5,8 +5,8 @@
  */
 public class CollisionInfo {
     //Fields of the CollisionInfo class
-    private Point collisionPoint;
-    private Collidable collisionObject;
+    private final Point collisionPoint;
+    private final Collidable collisionObject;
 
     /**
      * Constructor of the CollisionInfo class.
@@ -15,7 +15,7 @@ public class CollisionInfo {
      */
     public CollisionInfo(Point collisionPoint, Collidable collisionObject) {
         this.collisionPoint = new Point(collisionPoint);
-        this.collisionObject = collisionObject; //Encapsulation?
+        this.collisionObject = collisionObject;
     }
 
     /**

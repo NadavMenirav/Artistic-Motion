@@ -26,6 +26,7 @@ public class BallsTest1 {
     }
     /**
      * Bafoonery.
+     * @param args Command Line Arguments
      */
     public static void main(String[] args) {
         drawAnimation(new Point(100, 100), 10, 15);

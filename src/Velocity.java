@@ -1,4 +1,5 @@
 //Nadav Menirav 330845678
+
 /**
  * Velocity class.
  */
@@ -8,47 +9,62 @@ public class Velocity {
 
     /**
      * Constructor of the Velocity class.
-     * @param dx delta of x
-     * @param dy delta of y
+     * @param dx Delta of x
+     * @param dy Delta of y
      */
     public Velocity(double dx, double dy) {
         this.dx = dx;
         this.dy = dy;
     }
-    /**
-     * Returns the Velocity object's dy value.
-     * @return the Velocity object's dy value
-     */
-    public double getDy() {
-        return this.dy;
-    }
-    /**
-     * Returns the Velocity object's dx value.
-     * @return the Velocity object's dx value
-     */
-    public double getDx() {
-        return this.dx;
-    }
-    /**
-     * Sets the dy value of the Velocity.
-     * @param dy the new value
-     */
-    public void setDy(double dy) {
-        this.dy = dy;
-    }
+
     /**
      * Empty constructor of Velocity class.
      */
     public Velocity() {
         this(0, 0);
     }
+
+    /**
+     * Copy constructor of Velocity.
+     * @param velocity The Velocity object to be copied
+     */
+    public Velocity(Velocity velocity) {
+        this(velocity.getDx(), velocity.getDy());
+    }
+
+    /**
+     * Returns the Velocity object's dy value.
+     * @return The Velocity object's dy value
+     */
+    public double getDy() {
+        return this.dy;
+    }
+
+    /**
+     * Returns the Velocity object's dx value.
+     * @return The Velocity object's dx value
+     */
+    public double getDx() {
+        return this.dx;
+    }
+
+    /**
+     * Sets the dy value of the Velocity.
+     * @param dy The new value
+     */
+    public void setDy(double dy) {
+        this.dy = dy;
+    }
+
     /**
      * Sets the dx value of the Velocity.
-     * @param dx the new value
+     * @param dx The new value
      */
+
     public void setDx(double dx) {
         this.dx = dx;
     }
+
     /**
      * Creates a new Velocity object from angle and speed.
      * @param angle the angle of the Velocity instance
@@ -68,17 +84,11 @@ public class Velocity {
         double dy = -speed * Math.sin(angleInRadians);
         return new Velocity(dx, dy);
     }
-    /**
-     * Copy constructor of Velocity.
-     * @param velocity the Velocity object to be copied
-     */
-    public Velocity(Velocity velocity) {
-        this(velocity.getDx(), velocity.getDy());
-    }
+
     /**
      * Slightly tweaks coordinates of the Point.
-     * @param p a Point to which we must apply the effect
-     * @return a new Point with the tweaked values
+     * @param p A Point to which we must apply the effect
+     * @return A new Point with the tweaked values
      */
     public Point applyToPoint(Point p) {
         return new Point(

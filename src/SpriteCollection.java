@@ -1,7 +1,6 @@
 //Nadav Menirav 330845678
 
 import biuoop.DrawSurface;
-
 import java.util.ArrayList;
 
 /**

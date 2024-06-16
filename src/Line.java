@@ -1,5 +1,7 @@
 //Nadav Menirav 330845678
+
 import java.util.List;
+
 /**
  * Line class.
  */
@@ -7,15 +9,17 @@ public class Line {
     //Fields of the Line class
     private final Point start;
     private final Point  end;
+
     /**
      * Constructor of the Line class.
-     * @param start starting point of the line segment
-     * @param end ending point of the line segment
+     * @param start Starting point of the line segment
+     * @param end Ending point of the line segment
      */
     public Line(Point start, Point end) {
         this.start = new Point(start);
         this.end = new Point(end);
     }
+
     /**
      * Constructor of the Line class.
      * @param x1 The x value of the starting point
@@ -27,22 +31,25 @@ public class Line {
         this.start = new Point(x1, y1);
         this.end = new Point(x2, y2);
     }
+
     /**
      * The function returns the length of this line segment.
-     * @return length of line segment
+     * @return Length of line segment
      */
     public double length() {
         return start.distance(end);
     }
+
     /**
      * The function returns the middle point of this line segment.
-     * @return middle point
+     * @return Middle point
      */
     public Point middle() {
         double midX = (this.start.getX() + this.end.getX()) / 2;
         double midY = (this.start.getY() + this.end.getY()) / 2;
         return new Point(midX, midY);
     }
+
     /**
      * The function returns the starting point of this line segment.
      * @return starting point
@@ -50,13 +57,15 @@ public class Line {
     public Point start() {
         return new Point(this.start);
     }
+
     /**
      * The function return the ending point of this line segment.
-     * @return ending point
+     * @return Ending point
      */
     public Point end() {
         return new Point(this.end);
     }
+
     /**
      * It is Given that the point received as parameter is collinear with this line.
      * The function checks if the point is on the line segment
@@ -84,6 +93,7 @@ public class Line {
         //We shall return true only if they are all true
         return xBiggerThanMin && xSmallerThanMax && yBiggerThanMin && ySmallerThanMax;
     }
+
     /**
      * This function checks and returns the orientation of the point received as a parameter in regard to this line.
      * The orientation of the point means the direction the line has to rotate to in order to "reach" the point.
@@ -102,6 +112,7 @@ public class Line {
         }
         return (value > 0) ? 1 : -1; //Do we need to move clockwise or counter clock wise
     }
+
     /**
      * The function checks if two line segments intersect.
      * It does that by doing the following checks:
@@ -134,6 +145,7 @@ public class Line {
                         || (o4 == 0 && other.isPointOnLineSegment(this.end))
         );
     }
+
     /**
      * The function checks if the two line segments intersect with this line.
      * @param other1 first line segment
@@ -143,6 +155,7 @@ public class Line {
     public boolean isIntersecting(Line other1, Line other2) {
         return (this.isIntersecting(other1) && this.isIntersecting(other2));
     }
+
     /**
      * This function checks using threshold if this line segment is perpendicular to the X axis.
      * @return true if perpendicular, false otherwise
@@ -150,6 +163,7 @@ public class Line {
     public boolean isPerpendicularXAxis() {
         return Threshold.isDoublesEqual(this.start.getX(), this.end.getX());
     }
+
     /**
      * The function checks if this line is actually a point, its start and end points are equal.
      * @return true if it is a point, false otherwise
@@ -157,6 +171,7 @@ public class Line {
     public boolean isLineAPoint() {
         return (this.start.equals(this.end));
     }
+
     /**
      * This function calculates the slope of a line segment, if possible. If not, an error will occur.
      * The slope is calculated by the formula of deltaY / deltaX;
@@ -173,6 +188,7 @@ public class Line {
         double delY = this.start.getY() - this.end.getY();
         return delY / delX;
     }
+
     /**
      * the function returns the 'b' in the line equation y = mx + b
      * if it cannot be calculated due to the line being perpendicular to X axis, an error will occur.
@@ -181,6 +197,7 @@ public class Line {
     public double getConstant() {
         return this.start().getY() - this.getSlope() * this.start().getX();
     }
+
     /**
      * The function returns the y value of the line at a given x value.
      * It assumes the line is not perpendicular to X axis and that the given x value is in range of the edge points
@@ -193,6 +210,7 @@ public class Line {
         }
         return this.getSlope() * x + this.getConstant();
     }
+
     /**
      * The function checks if there is situation in which the first point is on the other side of the middle point
      * than the second point.
@@ -204,6 +222,7 @@ public class Line {
     public boolean isDifferentSides(double xMid, double x1, double x2) {
         return (xMid - x1) * (xMid - x2) < 0;
     }
+
     /**
      * The function return the intersection point of two line segments, if they intersect.
      * @param other the other line
@@ -313,6 +332,7 @@ public class Line {
                 / (this.getSlope() - other.getSlope());
         return new Point(xVal, this.getYValueInX(xVal));
     }
+
     /**
      * The function check if this line is the same visually as another line.
      * @param other the other line
@@ -348,9 +368,7 @@ public class Line {
         }
 
         firstIntersection = intersectionPoints.get(0);
-        if (firstIntersection == null) {
-            System.out.println("how the fuck is it null");
-        }
+
         if (intersectionPoints.size() == 1) {
             return new Point(firstIntersection);
         }

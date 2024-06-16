@@ -1,24 +1,25 @@
 //Nadav Menirav 330845678
+
 import java.awt.Color;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
-import java.util.List;
-
 
 /**
  * Paddle class.
  */
 public class Paddle implements Sprite, Collidable {
     //Fields of the Paddle class
+
+    //we want the paddle to have a specific starting Point.
     private final Rectangle shape = new Rectangle(new Point(350, 575), 125, 25);
     private biuoop.KeyboardSensor keyboard;
     private final Color color;
-    private List<Ball> ballList;
 
     /**
      * Constructor of the Paddle class.
      */
     public Paddle() {
+        //If no color was assigned, this Paddle will be black
         this.color = Color.BLACK;
     }
 
@@ -34,6 +35,7 @@ public class Paddle implements Sprite, Collidable {
      * Slightly moves the paddle to the left.
      */
     public void moveLeft() {
+        //Circular fashion
         if (this.shape.getUpperRight().getX() < 0) {
             this.shape.setUpperLeftXValue(800);
         }
@@ -44,6 +46,7 @@ public class Paddle implements Sprite, Collidable {
      * Slightly moves the paddle to the right.
      */
     public void moveRight() {
+        //Circular fashion
         if (this.shape.getUpperLeft().getX() > 800) {
             this.shape.setUpperLeftXValue(-this.shape.getWidth());
         }
@@ -53,6 +56,7 @@ public class Paddle implements Sprite, Collidable {
     //Sprite methods
     @Override
     public void timePassed() {
+        //Move this Paddle according to the key pressed
         if (keyboard.isPressed(KeyboardSensor.LEFT_KEY)) {
             this.moveLeft();
         }
@@ -64,6 +68,7 @@ public class Paddle implements Sprite, Collidable {
 
     @Override
     public void drawOn(DrawSurface d) {
+        //We want to fill this paddle with its assigned color, and give it a black outline
         d.setColor(this.color);
         d.fillRectangle(
                 (int) this.shape.getUpperLeft().getX(),
@@ -88,19 +93,24 @@ public class Paddle implements Sprite, Collidable {
 
     @Override
     public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
+        //Fun paddle part, we need to change the velocity based on the collision region
         final double currentSpeed = Math.sqrt(
                 Math.pow(currentVelocity.getDx(), 2) + Math.pow(currentVelocity.getDy(), 2)
-        );
-        // zone 1 -- 300 deg, and for every increase in region number, angle increases in 30 deg
+        ); //Using pythagoras to calculate the speed
+
+        // zone 1 -- 60 deg (to the positive), and for every increase in region number, angle increases in 30 deg
         final int startingAngle = 60;
         final int desiredAngle;
-        int region;
-        Block block = new Block(this.shape);
-        Velocity newVelocity = new Velocity(currentVelocity);
+        final int region;
+        final Block block = new Block(this.shape);
+        Velocity newVelocity;
+
+        //If the collision point is horizontally, the collision is no different from the block collision.
         if (block.isHittingPointHorizontally(collisionPoint)) {
-            newVelocity.setDx(-currentVelocity.getDx());
-            return newVelocity;
+            return block.hit(collisionPoint, currentVelocity);
         }
+
+        //We know now that the collision is vertical and the new Velocity will be determined by the fun paddle part
         region = getRegionOfCollision(collisionPoint);
         desiredAngle = startingAngle - (region - 1) * 30;
         newVelocity = Velocity.fromAngleAndSpeed(desiredAngle, currentSpeed);
@@ -115,7 +125,7 @@ public class Paddle implements Sprite, Collidable {
     public int getRegionOfCollision(Point collisionPoint) {
         final double upperLeftXValue = this.shape.getUpperLeft().getX();
         final double width = this.shape.getWidth();
-        final double lengthOfRegion = 0.2 * width;
+        final double lengthOfRegion = 0.2 * width; //We know that a region is a fifth of the Paddle
         if (collisionPoint.getX() < upperLeftXValue + lengthOfRegion) {
             return 1;
         }

@@ -1,11 +1,8 @@
 //Nadav Menirav 330845678
 
 import biuoop.GUI;
-
 import biuoop.DrawSurface;
-
 import biuoop.Sleeper;
-
 import java.awt.Color;
 
 /**
@@ -24,7 +21,7 @@ public class Game {
     public Game() {
         sprites = new SpriteCollection();
         environment = new GameEnvironment();
-        gui = new GUI("Nice", 800, 600);
+        gui = new GUI("Arkanoid", 800, 600);
     }
 
     /**
@@ -71,12 +68,17 @@ public class Game {
      * This method initializes the game: creates new blocks, a ball and a paddle, and adds them to this game.
      */
     public void initialize() {
+        //Create the two balls
         Ball firstBall = new Ball(new Point(500, 400), 8, Color.WHITE);
         firstBall.setVelocity(2, 3);
         Ball secondBall = new Ball(new Point(600, 400), 8, Color.WHITE);
         secondBall.setVelocity(2, 3);
+
+        //Create the Paddle
         Paddle pad = new Paddle(Color.YELLOW);
         this.paddle = pad;
+
+        //Add them to the game
         pad.addToGame(this);
         firstBall.addToGame(this);
         secondBall.addToGame(this);
@@ -89,6 +91,7 @@ public class Game {
      * Adds all the blocks to the game.
      */
     public void addAllBlocks() {
+        //The blocks on the edges
         Rectangle rectangle = new Rectangle(new Point(0, -50), 800, 50);
         Rectangle rectangle2 = new Rectangle(new Point(0, 600), 800, 50);
         Rectangle rectangle3 = new Rectangle(new Point(-50, 0), 50, 600);
@@ -104,6 +107,7 @@ public class Game {
         block3.addToGame(this);
         block4.addToGame(this);
 
+        //We want to add the color blocks on the rows
         addRowBlocks(12, 80, Color.GRAY);
         addRowBlocks(11, 110, Color.RED);
         addRowBlocks(10, 140, Color.YELLOW);
@@ -119,6 +123,9 @@ public class Game {
      * @param color The Color of the row blocks
      */
     public void addRowBlocks(int numberOfBlocks, double yValueOfBlocks, Color color) {
+        /*The loop create a certain amount of the blocks, it does so by moving the x value to the left the value of the
+         * width in each iteration
+         */
         for (int i = 0; i < numberOfBlocks; i++) {
             Rectangle rectangle = new Rectangle(new Point(740 - 60 * i, yValueOfBlocks), 60, 30);
             Block block = new Block(rectangle, color);
@@ -133,12 +140,17 @@ public class Game {
         final int framesPerSecond = 60;
         final int millisecondsPerFrame = 1000 / framesPerSecond;
         Sleeper sleeper = new Sleeper();
+
+        //This loop runs the game
         while (true) {
             long startTime = System.currentTimeMillis(); //Timing
 
             DrawSurface d = gui.getDrawSurface();
+            //We want the background to be navy.
             d.setColor(new Color(1, 1, 122));
             d.fillRectangle(0, 0, 800, 600);
+
+            //Now we draw the Sprites
             this.sprites.drawAllOn(d);
             gui.show(d);
             this.sprites.notifyAllTimePassed();
