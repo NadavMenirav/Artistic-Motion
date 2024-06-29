@@ -49,4 +49,10 @@ public interface Expression {
      * @return The new Expression
      */
     Expression nandify();
+
+    /**
+     * Converts all the operations to the logical Nor operation.
+     * @return The new Expression
+     */
+    Expression norify();
 }
