@@ -1,53 +1,28 @@
 //Nadav Menirav 330845678
 
-import java.util.Map;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 /**
  * And class.
  */
-public class And implements Expression {
-    private final Expression firstExpression;
-    private final Expression secondExpression;
-
+public class And extends BinaryExpression {
     /**
      * Constructor.
      * @param firstExpression First Expression
      * @param secondExpression Second Expression
      */
     public And(Expression firstExpression, Expression secondExpression) {
-        this.firstExpression = firstExpression;
-        this.secondExpression = secondExpression;
+        super(firstExpression, secondExpression, "&");
     }
 
     @Override
-    public Boolean evaluate(Map<String, Boolean> assignment) throws Exception {
-        return this.firstExpression.evaluate(assignment) && this.secondExpression.evaluate(assignment);
-    }
-
-    @Override
-    public Boolean evaluate() throws Exception {
-        return this.firstExpression.evaluate() && this.secondExpression.evaluate();
-    }
-
-    @Override
-    public List<String> getVariables() {
-        Set<String> mySet = new LinkedHashSet<>(this.firstExpression.getVariables());
-        mySet.addAll(this.secondExpression.getVariables());
-
-        return new ArrayList<String>(mySet);
-    }
-
-    @Override
-    public String toString() {
-        return this.firstExpression.toString() + "&" + this.secondExpression.toString();
+    public Boolean operate(Boolean first, Boolean second) {
+        return first && second;
     }
 
     @Override
     public Expression assign(String var, Expression expression) {
-        return new And(this.firstExpression.assign(var, expression), this.secondExpression.assign(var, expression));
+        return new And(
+            this.getFirstExpression().assign(var, expression),
+             this.getSecondExpression().assign(var, expression)
+        );
     }
 }

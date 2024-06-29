@@ -18,10 +18,28 @@ public abstract class BinaryExpression implements Expression {
      * Constructor.
      * @param firstExpression The first Expression
      * @param secondExpression The second Expression
+     * @param expressionSymbol The symbol of the operation
      */
-    public BinaryExpression(Expression firstExpression, Expression secondExpression) {
+    public BinaryExpression(Expression firstExpression, Expression secondExpression, String expressionSymbol) {
         this.firstExpression = firstExpression;
         this.secondExpression = secondExpression;
+        this.expressionSymbol = new String(expressionSymbol);
+    }
+
+    /**
+     * Getter of the firstExpression field.
+     * @return The first Expression
+     */
+    public Expression getFirstExpression() {
+        return this.firstExpression;
+    }
+
+    /**
+     * Getter of the secondExpression field.
+     * @return The second Expression
+     */
+    public Expression getSecondExpression() {
+        return this.secondExpression;
     }
 
     /**
