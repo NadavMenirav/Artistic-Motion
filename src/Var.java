@@ -9,16 +9,13 @@ import java.util.List;
  */
 public final class Var implements Expression {
     private final String name;
-    private final Expression expression;
 
     /**
      * Constructor.
      * @param name
-     * @param expression
      */
-    public Var(String name, Expression expression) {
+    public Var(String name) {
         this.name = new String(name);
-        this.expression = expression;
     }
 
     /**
@@ -26,7 +23,7 @@ public final class Var implements Expression {
      * @param var
      */
     public Var(Var var) {
-        this(var.getName(), var.getExpression());
+        this(var.getName());
     }
 
     /**
@@ -37,30 +34,17 @@ public final class Var implements Expression {
         return new String(name);
     }
 
-    /**
-     * Getter of the Expression field.
-     * @return the Expression of this Var.
-     */
-    public Expression getExpression() {
-        return expression;
-    }
-
     @Override
     public Boolean evaluate(Map<String, Boolean> assignment) throws Exception {
-        final Boolean newValue = this.expression.evaluate();
-        for (Map.Entry<String, Boolean> entry : assignment.entrySet()) {
-            final String key = entry.getKey();
-            if (!this.name.equals(key)) {
-                continue;
-            }
-            entry.setValue(newValue);
+        if (assignment.containsKey(this.name)) {
+            return assignment.get(this.name);
         }
-        return newValue;
+        throw new Exception("Var " + this.toString() + " is not assigned");
     }
 
     @Override
     public Boolean evaluate() throws Exception {
-        return this.expression.evaluate();
+        throw new Exception("Var " + this.toString() + " is not assigned");
     }
 
     @Override
