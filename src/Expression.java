@@ -58,7 +58,7 @@ public interface Expression {
 
     /**
      * Simplifies this Expression.
-     * @return Simplified expression.
+     * @return Simplified expression
      */
     Expression simplify();
 }
