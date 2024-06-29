@@ -70,7 +70,7 @@ public abstract class BinaryExpression implements Expression {
 
     @Override
     public String toString() {
-        return this.firstExpression.toString() + this.expressionSymbol + this.secondExpression;
+        return "(" + this.firstExpression.toString() + this.expressionSymbol + this.secondExpression + ")";
     }
 
     @Override
