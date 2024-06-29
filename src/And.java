@@ -30,4 +30,9 @@ public class And extends BinaryExpression {
     public Expression nandify() {
         return new Not(new Nand(this.getFirstExpression().nandify(), this.getSecondExpression().nandify())).nandify();
     }
+
+    @Override
+    public Expression norify() {
+        return this.nandify().norify();
+    }
 }
