@@ -31,4 +31,14 @@ public final class Not implements Expression {
     public List<String> getVariables() {
         return this.expression.getVariables();
     }
+
+    @Override
+    public String toString() {
+        return "~" + this.expression.toString();
+    }
+
+    @Override
+    public Expression assign(String var, Expression expression) {
+        return new Not(this.expression.assign(var, expression));
+    }
 }
