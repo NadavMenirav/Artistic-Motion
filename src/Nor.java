@@ -25,4 +25,14 @@ public class Nor extends BinaryExpression {
              this.getSecondExpression().assign(var, expression)
         );
     }
+
+    @Override
+    public Expression nandify() {
+        return new Not(
+            new Or(
+                this.getFirstExpression().nandify(),
+                this.getSecondExpression().nandify()
+            ).nandify()
+        ).nandify();
+    }
 }
