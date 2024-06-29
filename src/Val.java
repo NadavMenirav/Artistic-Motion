@@ -34,7 +34,7 @@ public final class Val implements Expression {
 
     @Override
     public String toString() {
-        return value.toString();
+        return this.value ? "T" : "F";
     }
 
     @Override
