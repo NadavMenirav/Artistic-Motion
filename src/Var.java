@@ -67,6 +67,7 @@ public final class Var implements Expression {
     public List<String> getVariables() {
         List<String> variables = new ArrayList<String>();
         variables.add(new String(name));
+        return variables;
     }
 
     @Override
