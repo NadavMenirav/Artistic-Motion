@@ -67,4 +67,8 @@ public final class Var implements Expression {
         return new Var(this);
     }
 
+    @Override
+    public Expression nandify() {
+        return new Var(this.name);
+    }
 }
