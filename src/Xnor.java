@@ -35,4 +35,9 @@ public class Xnor extends BinaryExpression {
             ).nandify()
         ).nandify();
     }
+
+    @Override
+    public Expression norify() {
+        return this.nandify().norify();
+    }
 }
