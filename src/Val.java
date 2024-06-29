@@ -18,12 +18,12 @@ public class Val implements Expression {
     }
 
     @Override
-    public Boolean evaluate(Map<String, Boolean> assignment) {
+    public Boolean evaluate(Map<String, Boolean> assignment) throws Exception {
         return value;
     }
 
     @Override
-    public Boolean evaluate() {
+    public Boolean evaluate() throws Exception {
         return value;
     }
 
