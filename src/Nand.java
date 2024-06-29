@@ -25,4 +25,12 @@ public class Nand extends BinaryExpression {
              this.getSecondExpression().assign(var, expression)
         );
     }
+
+    @Override
+    public Expression nandify() {
+        return new Nand(
+            this.getFirstExpression().nandify(),
+             this.getSecondExpression().nandify()
+        );
+    }
 }
