@@ -1,5 +1,7 @@
 //Nadav Menirav 330845678
+
 import java.util.List;
+
 /**
  * Line class.
  */
@@ -7,15 +9,17 @@ public class Line {
     //Fields of the Line class
     private final Point start;
     private final Point  end;
+
     /**
      * Constructor of the Line class.
-     * @param start starting point of the line segment
-     * @param end ending point of the line segment
+     * @param start Starting point of the line segment
+     * @param end Ending point of the line segment
      */
     public Line(Point start, Point end) {
         this.start = new Point(start);
         this.end = new Point(end);
     }
+
     /**
      * Constructor of the Line class.
      * @param x1 The x value of the starting point
@@ -27,22 +31,25 @@ public class Line {
         this.start = new Point(x1, y1);
         this.end = new Point(x2, y2);
     }
+
     /**
      * The function returns the length of this line segment.
-     * @return length of line segment
+     * @return Length of line segment
      */
     public double length() {
         return start.distance(end);
     }
+
     /**
      * The function returns the middle point of this line segment.
-     * @return middle point
+     * @return Middle point
      */
     public Point middle() {
         double midX = (this.start.getX() + this.end.getX()) / 2;
         double midY = (this.start.getY() + this.end.getY()) / 2;
         return new Point(midX, midY);
     }
+
     /**
      * The function returns the starting point of this line segment.
      * @return starting point
@@ -50,13 +57,15 @@ public class Line {
     public Point start() {
         return new Point(this.start);
     }
+
     /**
      * The function return the ending point of this line segment.
-     * @return ending point
+     * @return Ending point
      */
     public Point end() {
         return new Point(this.end);
     }
+
     /**
      * It is Given that the point received as parameter is collinear with this line.
      * The function checks if the point is on the line segment
@@ -66,24 +75,25 @@ public class Line {
     public boolean isPointOnLineSegment(Point other) {
         //Checking if x value of the point is bigger than the leftmost point on the line segment.
         boolean xBiggerThanMin = (Threshold.isDoubleGreaterEqual(other.getX(),
-                                Math.min(this.start.getX(), this.end.getX())));
+                Math.min(this.start.getX(), this.end.getX())));
 
         //Checking if x value of the point is smaller than the rightmost point on the line segment.
         boolean xSmallerThanMax = (Threshold.isDoubleGreaterEqual(Math.max(this.start.getX(), this.end.getX()),
-                                other.getX()));
+                other.getX()));
 
         //Checking if y value of the point is bigger than the lowest point on the line segment.
         boolean yBiggerThanMin = (Threshold.isDoubleGreaterEqual(other.getY(),
-                                Math.min(this.start.getY(), this.end.getY())));
+                Math.min(this.start.getY(), this.end.getY())));
 
 
         //Checking if y value of the point is smaller than the highest point on the line segment.
         boolean ySmallerThanMax = (Threshold.isDoubleGreaterEqual(Math.max(this.start.getY(), this.end.getY()),
-                                other.getY()));
+                other.getY()));
 
         //We shall return true only if they are all true
         return xBiggerThanMin && xSmallerThanMax && yBiggerThanMin && ySmallerThanMax;
     }
+
     /**
      * This function checks and returns the orientation of the point received as a parameter in regard to this line.
      * The orientation of the point means the direction the line has to rotate to in order to "reach" the point.
@@ -96,12 +106,13 @@ public class Line {
      */
     public int getPointOrientation(Point other) {
         double value = (this.end.getX() - this.start.getX()) * (other.getY() - this.end.getY())
-                        - (this.end.getY() - this.start.getY()) * (other.getX() - this.end.getX());
+                - (this.end.getY() - this.start.getY()) * (other.getX() - this.end.getX());
         if (Threshold.isDoublesEqual(value, 0)) { //Checking if value is 0 using threshold
             return 0; //Means they are collinear
         }
         return (value > 0) ? 1 : -1; //Do we need to move clockwise or counter clock wise
     }
+
     /**
      * The function checks if two line segments intersect.
      * It does that by doing the following checks:
@@ -128,12 +139,13 @@ public class Line {
         so we need to check if this point falls on the other line segment
         */
         return (
-            (o1 == 0 && this.isPointOnLineSegment(other.start()))
-            || (o2 == 0 && this.isPointOnLineSegment(other.end()))
-            || (o3 == 0 && other.isPointOnLineSegment(this.start))
-            || (o4 == 0 && other.isPointOnLineSegment(this.end))
+                (o1 == 0 && this.isPointOnLineSegment(other.start()))
+                        || (o2 == 0 && this.isPointOnLineSegment(other.end()))
+                        || (o3 == 0 && other.isPointOnLineSegment(this.start))
+                        || (o4 == 0 && other.isPointOnLineSegment(this.end))
         );
     }
+
     /**
      * The function checks if the two line segments intersect with this line.
      * @param other1 first line segment
@@ -143,6 +155,7 @@ public class Line {
     public boolean isIntersecting(Line other1, Line other2) {
         return (this.isIntersecting(other1) && this.isIntersecting(other2));
     }
+
     /**
      * This function checks using threshold if this line segment is perpendicular to the X axis.
      * @return true if perpendicular, false otherwise
@@ -150,6 +163,7 @@ public class Line {
     public boolean isPerpendicularXAxis() {
         return Threshold.isDoublesEqual(this.start.getX(), this.end.getX());
     }
+
     /**
      * The function checks if this line is actually a point, its start and end points are equal.
      * @return true if it is a point, false otherwise
@@ -157,6 +171,7 @@ public class Line {
     public boolean isLineAPoint() {
         return (this.start.equals(this.end));
     }
+
     /**
      * This function calculates the slope of a line segment, if possible. If not, an error will occur.
      * The slope is calculated by the formula of deltaY / deltaX;
@@ -173,6 +188,7 @@ public class Line {
         double delY = this.start.getY() - this.end.getY();
         return delY / delX;
     }
+
     /**
      * the function returns the 'b' in the line equation y = mx + b
      * if it cannot be calculated due to the line being perpendicular to X axis, an error will occur.
@@ -181,6 +197,7 @@ public class Line {
     public double getConstant() {
         return this.start().getY() - this.getSlope() * this.start().getX();
     }
+
     /**
      * The function returns the y value of the line at a given x value.
      * It assumes the line is not perpendicular to X axis and that the given x value is in range of the edge points
@@ -193,6 +210,7 @@ public class Line {
         }
         return this.getSlope() * x + this.getConstant();
     }
+
     /**
      * The function checks if there is situation in which the first point is on the other side of the middle point
      * than the second point.
@@ -204,6 +222,7 @@ public class Line {
     public boolean isDifferentSides(double xMid, double x1, double x2) {
         return (xMid - x1) * (xMid - x2) < 0;
     }
+
     /**
      * The function return the intersection point of two line segments, if they intersect.
      * @param other the other line
@@ -223,9 +242,9 @@ public class Line {
         int o1 = this.getPointOrientation(other.start());
         int o2 = this.getPointOrientation(other.end());
         /*
-        * We are now dealing with cases that the two line segments are on the same line, which is represented in the
-        * fact that the orientations are both equal two 0
-        */
+         * We are now dealing with cases that the two line segments are on the same line, which is represented in the
+         * fact that the orientations are both equal two 0
+         */
         if (o1 == 0 && o2 == 0) {
             /*
              * The only way the two line segments are only tangent and do not have infinite intersections
@@ -239,22 +258,22 @@ public class Line {
                  * must be also perpendicular to the X axis.
                  * Due to the fact that they are perpendicular to the X axis, we need to check if the other points
                  * are in different sides using their y values
-                */
+                 */
                 if (this.start.equals(other.start())) {
                     return (this.isDifferentSides(this.start.getY(), this.end.getY(), other.end().getY()))
-                        ? new Point(this.start) : null;
+                            ? new Point(this.start) : null;
                 }
                 if (this.start.equals(other.end())) {
                     return (this.isDifferentSides(this.start.getY(), this.end.getY(), other.start().getY()))
-                        ? new Point(this.start) : null;
+                            ? new Point(this.start) : null;
                 }
                 if (this.end.equals(other.start())) {
                     return (this.isDifferentSides(this.end.getY(), this.start.getY(), other.end().getY()))
-                        ? new Point(this.end) : null;
+                            ? new Point(this.end) : null;
                 }
                 if (this.end.equals(other.end())) {
                     return (this.isDifferentSides(this.end.getY(), this.start.getY(), other.start().getY()))
-                        ? new Point(this.end) : null;
+                            ? new Point(this.end) : null;
                 }
                 return null; //None of the cases applies
             }
@@ -264,19 +283,19 @@ public class Line {
              */
             if (this.start.equals(other.start())) {
                 return (this.isDifferentSides(this.start.getX(), this.end.getX(), other.end().getX()))
-                    ? new Point(this.start) : null;
+                        ? new Point(this.start) : null;
             }
             if (this.start.equals(other.end())) {
                 return (this.isDifferentSides(this.start.getX(), this.end.getX(), other.start().getX()))
-                    ? new Point(this.start) : null;
+                        ? new Point(this.start) : null;
             }
             if (this.end.equals(other.start())) {
                 return (this.isDifferentSides(this.end.getX(), this.start.getX(), other.end().getX()))
-                    ? new Point(this.end) : null;
+                        ? new Point(this.end) : null;
             }
             if (this.end.equals(other.end())) {
                 return (this.isDifferentSides(this.end.getX(), this.start.getX(), other.start().getX()))
-                    ? new Point(this.end) : null;
+                        ? new Point(this.end) : null;
             }
             return null; //None of the cases applies
         }
@@ -310,9 +329,10 @@ public class Line {
          * x = - (b1 - b2) / (m1 - m2)
          */
         double xVal = -(this.getConstant() - other.getConstant())
-                                        / (this.getSlope() - other.getSlope());
+                / (this.getSlope() - other.getSlope());
         return new Point(xVal, this.getYValueInX(xVal));
     }
+
     /**
      * The function check if this line is the same visually as another line.
      * @param other the other line
@@ -340,49 +360,15 @@ public class Line {
          * the edges of the rectangle. If it is, there are 3 cases: we return the starting point, or one of the
          * vertexes of the edge of the rectangle, based on where the starting point of the line is located.
          */
-        if (intersectionPoints.isEmpty()) {
-            if (this.isCoincident(rect.getLeftEdge())) {
-                if (Threshold.isDoubleGreaterEqual(this.start.getY(), rect.getBottomLeft().getY())) {
-                    return rect.getBottomLeft();
-                }
-                if (Threshold.isDoubleGreaterEqual(rect.getUpperLeft().getY(), this.start.getY())) {
-                    return rect.getUpperLeft();
-                }
-                return new Point(this.start);
-            }
-
-            if (this.isCoincident(rect.getRightEdge())) {
-                if (Threshold.isDoubleGreaterEqual(this.start.getY(), rect.getBottomRight().getY())) {
-                    return rect.getBottomRight();
-                }
-                if (Threshold.isDoubleGreaterEqual(rect.getUpperRight().getY(), this.start.getY())) {
-                    return rect.getUpperRight();
-                }
-                return new Point(this.start);
-            }
-
-            if (this.isCoincident(rect.getTopEdge())) {
-                if (Threshold.isDoubleGreaterEqual(this.start.getX(), rect.getUpperRight().getX())) {
-                    return rect.getUpperRight();
-                }
-                if (Threshold.isDoubleGreaterEqual(rect.getUpperLeft().getX(), this.start.getX())) {
-                    return rect.getUpperLeft();
-                }
-                return new Point(this.start);
-            }
-
-            if (this.isCoincident(rect.getBottomEdge())) {
-                if (Threshold.isDoubleGreaterEqual(this.start.getX(), rect.getBottomRight().getX())) {
-                    return rect.getBottomRight();
-                }
-                if (Threshold.isDoubleGreaterEqual(rect.getBottomLeft().getX(), this.start.getX())) {
-                    return rect.getBottomLeft();
-                }
-                    return new Point(this.start);
-            }
+        if (intersectionPoints == null) {
             return null;
         }
+        if (intersectionPoints.isEmpty()) {
+            return null;
+        }
+
         firstIntersection = intersectionPoints.get(0);
+
         if (intersectionPoints.size() == 1) {
             return new Point(firstIntersection);
         }
@@ -390,8 +376,8 @@ public class Line {
         //Now we know there are two intersection points
         secondIntersection = intersectionPoints.get(1);
         isFirstClosestToStart = Threshold.isDoubleGreaterEqual(
-            secondIntersection.distance(this.start),
-            firstIntersection.distance(this.start));
+                secondIntersection.distance(this.start),
+                firstIntersection.distance(this.start));
         return isFirstClosestToStart ? new Point(firstIntersection) : new Point(secondIntersection);
     }
 

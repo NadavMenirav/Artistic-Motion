@@ -1,6 +1,6 @@
 //Nadav Menirav 330845678
-import java.awt.Color;
 
+import java.awt.Color;
 import biuoop.DrawSurface;
 
 /**
@@ -9,13 +9,26 @@ import biuoop.DrawSurface;
 public class Block implements Collidable, Sprite {
     //Fields of the Block class
     private final Rectangle shape;
+    private final Color color;
 
     /**
-     * Constructor of the block class.
+     * Constructor of the Block class.
      * @param shape The shape of the block
      */
     public Block(Rectangle shape) {
+        //If no color was provided, the block will be black
         this.shape = new Rectangle(shape);
+        this.color = Color.BLACK;
+    }
+
+    /**
+     * Constructor of the Block class.
+     * @param shape The shape of the block
+     * @param color The color of the block
+     */
+    public Block(Rectangle shape, Color color) {
+        this.shape = new Rectangle(shape);
+        this.color = new Color(color.getRGB());
     }
 
     @Override
@@ -23,25 +36,29 @@ public class Block implements Collidable, Sprite {
         return new Rectangle(shape);
     }
 
-    @Override
+    /**
+     * The function checks whether the hitting Point is horizontal.
+     * @param collisionPoint The collision point we check
+     * @return True if the collision point is horizontal, false otherwise
+     */
     public boolean isHittingPointHorizontally(Point collisionPoint) {
         /*
          * We know that if the object is hitting horizontally, its x value should be equals to one of the vertexes
-         * and the y value should be between the top and bottom edges
+         * and the y value should be equal to the top or bottom edges
          */
         boolean isYInRange =
                 Threshold.isDoubleGreaterEqual(
                         this.shape.getBottomLeft().getY(),
                         collisionPoint.getY()
                 )
-                && Threshold.isDoubleGreaterEqual(
+                        && Threshold.isDoubleGreaterEqual(
                         collisionPoint.getY(),
                         this.shape.getUpperLeft().getY()
                 );
 
         boolean hittingLeftEdge =
                 Threshold.isDoublesEqual(collisionPoint.getX(), this.shape.getUpperLeft().getX())
-                && isYInRange;
+                        && isYInRange;
 
 
         boolean hittingRightEdge =
@@ -49,16 +66,20 @@ public class Block implements Collidable, Sprite {
                         this.shape.getUpperRight().getX(),
                         collisionPoint.getX()
                 )
-                && isYInRange;
+                        && isYInRange;
 
         return hittingLeftEdge || hittingRightEdge;
     }
 
-    @Override
+    /**
+     * The function checks whether the hitting Point is Vertical.
+     * @param collisionPoint The collision point we check
+     * @return true if the collision point is vertical, false otherwise
+     */
     public boolean isHittingPointVertically(Point collisionPoint) {
         /*
          * We know that if the object is hitting vertically, its y value should be equals to one of the vertexes
-         * and the x value should be between the left and right edges
+         * and the x value should be equal to the left or right edges
          */
 
         boolean isXInRange =
@@ -66,33 +87,31 @@ public class Block implements Collidable, Sprite {
                         this.shape.getUpperRight().getX(),
                         collisionPoint.getX()
                 )
-                && Threshold.isDoubleGreaterEqual(
+                        && Threshold.isDoubleGreaterEqual(
                         collisionPoint.getX(),
                         this.shape.getUpperLeft().getX()
                 );
 
         boolean hittingTopEdge =
                 Threshold.isDoublesEqual(collisionPoint.getY(), this.shape.getUpperLeft().getY())
-                && isXInRange;
+                        && isXInRange;
 
         boolean hittingBottomEdge =
                 Threshold.isDoublesEqual(
                         this.shape.getBottomLeft().getY(),
                         collisionPoint.getY()
                 )
-                && isXInRange;
+                        && isXInRange;
 
         return hittingTopEdge || hittingBottomEdge;
     }
 
-    /**
-     * The function will be used whenever an object hits this block.
-     * It will do the necessary changes and will return the new velocity of the hitting object
-     * @param collisionPoint The collision point between the hitting object and the collidable one
-     * @param currentVelocity The current velocity of the hitting object
-     * @return The new Velocity that needs to be applied on the hitting object
-     */
+    @Override
     public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
+        /*
+         * If the collision point was on the top or bottom edges, we will change the dy value of the velocity,
+         * and if it was on the right or left edges, we will change the dx
+         */
         Velocity newVelocity = new Velocity(currentVelocity);
         if (isHittingPointHorizontally(collisionPoint)) {
             newVelocity.setDx(-currentVelocity.getDx());
@@ -101,17 +120,21 @@ public class Block implements Collidable, Sprite {
         if (isHittingPointVertically(collisionPoint)) {
             newVelocity.setDy(-currentVelocity.getDy());
         }
-
         return new Velocity(newVelocity);
     }
 
-    /**
-     * This method draws this block on the provided DrawSurface.
-     * @param surface The drawSurface we draw the ball on
-     */
+    @Override
     public void drawOn(DrawSurface surface) {
-        surface.setColor(Color.BLACK);
+        //We want to fill the rectangle with its color, and give it a black outline
+        surface.setColor(this.color);
         surface.fillRectangle(
+                (int) this.shape.getUpperLeft().getX(),
+                (int) this.shape.getUpperLeft().getY(),
+                (int) this.shape.getWidth(),
+                (int) this.shape.getHeight()
+        );
+        surface.setColor(Color.BLACK);
+        surface.drawRectangle(
                 (int) this.shape.getUpperLeft().getX(),
                 (int) this.shape.getUpperLeft().getY(),
                 (int) this.shape.getWidth(),
@@ -119,12 +142,8 @@ public class Block implements Collidable, Sprite {
         );
     }
 
-    /**
-     * This function notifies the Block that a certain period of tim has passed.
-     * For now, it does not do anything
-     */
+    @Override
     public void timePassed() {
-        return;
     }
 
     /**

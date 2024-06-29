@@ -1,11 +1,8 @@
 //Nadav Menirav 330845678
 
 import biuoop.GUI;
-
 import biuoop.DrawSurface;
-
 import biuoop.Sleeper;
-
 import java.awt.Color;
 
 /**
@@ -16,6 +13,7 @@ public class Game {
     private final SpriteCollection sprites;
     private final GameEnvironment environment;
     private final GUI gui;
+    private Paddle paddle;
 
     /**
      * Empty constructor of the Game class.
@@ -23,7 +21,31 @@ public class Game {
     public Game() {
         sprites = new SpriteCollection();
         environment = new GameEnvironment();
-        gui = new GUI("Nice", 800, 600);
+        gui = new GUI("Arkanoid", 800, 600);
+    }
+
+    /**
+     * Getter of the environment field.
+     * @return The GameEnvironment of this Game
+     */
+    public GameEnvironment getEnvironment() {
+        return environment;
+    }
+
+    /**
+     * Getter of the gui field.
+     * @return The GUI of this Game
+     */
+    public GUI getGui() {
+        return gui;
+    }
+
+    /**
+     * Getter of the paddle field.
+     * @return The Paddle of this game
+     */
+    public Paddle getPaddle() {
+        return paddle;
     }
 
     /**
@@ -43,35 +65,82 @@ public class Game {
     }
 
     /**
-     * This method initializes the game: creates new blocks and a ball, and adds them to this game.
+     * This method initializes the game: creates new blocks, a ball and a paddle, and adds them to this game.
      */
     public void initialize() {
-        Ball ball = new Ball(new Point(500, 100), 30, Color.BLACK);
-        ball.setVelocity(1, 1);
-        ball.addToGame(this);
-        Rectangle rectangle = new Rectangle(new Point(0, 0), 800, 50);
-        Rectangle rectangle2 = new Rectangle(new Point(0, 550), 800, 50);
-        Rectangle rectangle3 = new Rectangle(new Point(0, 0), 50, 600);
-        Rectangle rectangle4 = new Rectangle(new Point(750, 0), 50, 600);
-        Rectangle rectangle5 = new Rectangle(new Point(100, 100), 200, 150);
-        Rectangle rectangle6 = new Rectangle(new Point(350, 200), 200, 150);
-        Rectangle rectangle7 = new Rectangle(new Point(600, 300), 150, 200);
-        Block block = new Block(rectangle);
-        Block block2 = new Block(rectangle2);
-        Block block3 = new Block(rectangle3);
-        Block block4 = new Block(rectangle4);
-        Block block5 = new Block(rectangle5);
-        Block block6 = new Block(rectangle6);
-        Block block7 = new Block(rectangle7);
+        //Create the two balls
+        Ball firstBall = new Ball(new Point(700, 500), 6, Color.WHITE);
+        firstBall.setVelocity(3, 2);
+        Ball secondBall = new Ball(new Point(600, 400), 6, Color.WHITE);
+        secondBall.setVelocity(2, 3);
+
+        //Create the Paddle
+        Paddle pad = new Paddle(Color.YELLOW);
+        this.paddle = pad;
+
+        //Add the background block
+        this.addBackgroundBlock();
+        //Add paddle and balls
+        pad.addToGame(this);
+        firstBall.addToGame(this);
+        secondBall.addToGame(this);
+        //Add rest of blocks
+        this.addAllBlocks();
+    }
+
+    /**
+     * Adds the background Block to this game.
+     */
+    public void addBackgroundBlock() {
+        Rectangle rectangle = new Rectangle(new Point(25, 25), 750, 550);
+        Block block = new Block(rectangle, new Color(1, 1, 122));
+        block.addToGame(this);
+    }
+
+    /**
+     * Adds all the blocks to this game.
+     */
+    public void addAllBlocks() {
+        //Add edge blocks and the background block
+        Rectangle rectangle = new Rectangle(new Point(0, 0), 800, 25);
+        Rectangle rectangle2 = new Rectangle(new Point(0, 575), 800, 25);
+        Rectangle rectangle3 = new Rectangle(new Point(0, 0), 25, 600);
+        Rectangle rectangle4 = new Rectangle(new Point(775, 0), 25, 800);
+
+        Block block = new Block(rectangle, Color.GRAY);
+        Block block2 = new Block(rectangle2, Color.GRAY);
+        Block block3 = new Block(rectangle3, Color.GRAY);
+        Block block4 = new Block(rectangle4, Color.GRAY);
+
         block.addToGame(this);
         block2.addToGame(this);
         block3.addToGame(this);
         block4.addToGame(this);
-        block5.addToGame(this);
-        block6.addToGame(this);
-        block7.addToGame(this);
-        ball.addToGame(this);
-        ball.setGameEnvironment(environment);
+
+        //We want to add the color blocks on the rows
+        addRowBlocks(12, 80, Color.GRAY);
+        addRowBlocks(11, 110, Color.RED);
+        addRowBlocks(10, 140, Color.YELLOW);
+        addRowBlocks(9, 170, Color.BLUE);
+        addRowBlocks(8, 200, Color.PINK);
+        addRowBlocks(7, 230, Color.GREEN);
+    }
+
+    /**
+     * This method adds to the game a row of blocks to this Game.
+     * @param numberOfBlocks The number of blocks we want to add
+     * @param yValueOfBlocks The y value of all the blocks we want to add
+     * @param color The Color of the row blocks
+     */
+    public void addRowBlocks(int numberOfBlocks, double yValueOfBlocks, Color color) {
+        /*The loop create a certain amount of the blocks, it does so by moving the x value to the left the value of the
+         * width in each iteration
+         */
+        for (int i = 0; i < numberOfBlocks; i++) {
+            Rectangle rectangle = new Rectangle(new Point(725 - 50 * i, yValueOfBlocks), 50, 30);
+            Block block = new Block(rectangle, color);
+            block.addToGame(this);
+        }
     }
 
     /**
@@ -81,10 +150,13 @@ public class Game {
         final int framesPerSecond = 60;
         final int millisecondsPerFrame = 1000 / framesPerSecond;
         Sleeper sleeper = new Sleeper();
+
+        //This loop runs the game
         while (true) {
             long startTime = System.currentTimeMillis(); //Timing
 
             DrawSurface d = gui.getDrawSurface();
+            //Now we draw the Sprites
             this.sprites.drawAllOn(d);
             gui.show(d);
             this.sprites.notifyAllTimePassed();

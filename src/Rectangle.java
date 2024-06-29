@@ -1,6 +1,8 @@
 //Nadav Menirav 330845678
+
 import java.util.List;
 import java.util.ArrayList;
+
 /**
  * Rectangle class.
  */
@@ -36,26 +38,19 @@ public class Rectangle {
      * @return List of intersection point if intersecting finite times, null otherwise
      */
     public List<Point> intersectionPoints(Line line) {
-        List<Point> list = new ArrayList<>();
-        Point upperRight = new Point(this.upperLeft.getX() + this.width, this.upperLeft.getY());
-        Point bottomLeft = new Point(this.upperLeft.getX(), this.upperLeft.getY() + this.height);
-        Point bottomRight = new Point(this.upperLeft.getX() + this.width, this.upperLeft.getY() + this.height);
-        Line topEdge = new Line(this.upperLeft, upperRight);
-        Line bottomEdge = new Line(bottomLeft, bottomRight);
-        Line leftEdge = new Line(this.upperLeft, bottomLeft);
-        Line rightEdge = new Line(upperRight, bottomRight);
         Point p1, p2, p3, p4;
-        p1 = line.intersectionWith(leftEdge);
-        p2 = line.intersectionWith(rightEdge);
-        p3 = line.intersectionWith(topEdge);
-        p4 = line.intersectionWith(bottomEdge);
+        p1 = line.intersectionWith(this.getLeftEdge());
+        p2 = line.intersectionWith(this.getRightEdge());
+        p3 = line.intersectionWith(this.getTopEdge());
+        p4 = line.intersectionWith(this.getBottomEdge());
+        List<Point> list = new ArrayList<>();
 
         //If they have infinite intersection points, we shall return null
         if (
-                line.isCoincident(topEdge)
-                || line.isCoincident(bottomEdge)
-                || line.isCoincident(leftEdge)
-                || line.isCoincident(rightEdge)
+                line.isCoincident(this.getTopEdge())
+                        || line.isCoincident(this.getBottomEdge())
+                        || line.isCoincident(this.getLeftEdge())
+                        || line.isCoincident(this.getRightEdge())
         ) {
             return null;
         }
@@ -68,13 +63,15 @@ public class Rectangle {
             list.add(p2);
         }
         if (p3 != null) {
+            //We need to check if the point already exists
             if (!p3.equals(p1) && !p3.equals(p2)) {
                 list.add(p3);
             }
         }
         if (p4 != null) {
+            //We need to check if the point already exists
             if (!p4.equals(p1) && !p4.equals(p2)) {
-                list.add(line.intersectionWith(rightEdge));
+                list.add(p4);
             }
         }
         return list;
@@ -160,5 +157,11 @@ public class Rectangle {
         return new Line(this.getUpperRight(), this.getBottomRight());
     }
 
-
+    /**
+     * Change the upperLeft field x value.
+     * @param x The new X value of the upperLeft field
+     */
+    public void setUpperLeftXValue(double x) {
+        this.upperLeft.setX(x);
+    }
 }
