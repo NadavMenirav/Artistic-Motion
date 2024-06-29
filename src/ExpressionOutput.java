@@ -8,8 +8,18 @@ public class ExpressionOutput {
      * @param args relevant
      */
     public static void main(String[] args) throws Exception {
-        Expression ex = new Not(new And(new Val(false), new Val(true)));
+    Expression e = new Not(
+        new Xor(new And(new Val(true),
+        new Or(
+            new Var("x", new Val(false)),
+            new Var("y", new Val(true))
+        )
+    ),
+        new Var("x", new Val(true))
+    )
+    );
 
-        System.out.println(ex.toString());
+        System.out.println(e.toString());
+        System.out.println(e.evaluate());
     }
 }
