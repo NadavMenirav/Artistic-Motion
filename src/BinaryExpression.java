@@ -56,9 +56,6 @@ public abstract class BinaryExpression implements Expression {
     }
 
     @Override
-    public Expression assign(String var, Expression expression) {
-        return new And(this.firstExpression.assign(var, expression), this.secondExpression.assign(var, expression));
-    }
-
+    public abstract Expression assign(String var, Expression expression);
 
 }
