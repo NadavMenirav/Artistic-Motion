@@ -55,4 +55,10 @@ public interface Expression {
      * @return The new Expression
      */
     Expression norify();
+
+    /**
+     * Simplifies this Expression.
+     * @return Simplified expression.
+     */
+    Expression simplify();
 }
