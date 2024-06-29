@@ -44,4 +44,9 @@ public class Var implements Expression {
         List<String> variables = new ArrayList<String>();
         variables.add(new String(name));
     }
+
+    @Override
+    public String toString() {
+        return new String(name);
+    }
 }
