@@ -1,4 +1,4 @@
-//330845678
+//Nadav Menirav 330845678
 
 import java.util.Map;
 import java.util.ArrayList;
@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Var class.
  */
-public class Var implements Expression {
+public final class Var implements Expression {
     private final String name;
     private final Expression expression;
 
@@ -81,4 +81,5 @@ public class Var implements Expression {
         }
         return new Var(this);
     }
+
 }

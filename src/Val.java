@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Val class.
  */
-public class Val implements Expression {
+public final class Val implements Expression {
     private Boolean value;
 
     /**
