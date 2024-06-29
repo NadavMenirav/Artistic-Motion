@@ -41,4 +41,14 @@ public class And implements Expression {
 
         return new ArrayList<String>(mySet);
     }
+
+    @Override
+    public String toString() {
+        return this.firstExpression.toString() + "&" + this.secondExpression.toString();
+    }
+
+    @Override
+    public Expression assign(String var, Expression expression) {
+        return new And(this.firstExpression.assign(var, expression), this.secondExpression.assign(var, expression));
+    }
 }
