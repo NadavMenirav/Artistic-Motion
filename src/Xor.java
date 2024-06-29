@@ -36,7 +36,7 @@ public class Xor extends BinaryExpression {
                 this.getSecondExpression().nandify()
             ).nandify(),
             new And(
-                this.getSecondExpression().nandify(),
+                this.getFirstExpression().nandify(),
                 new Not(
                     this.getSecondExpression().nandify()
                 ).nandify()
