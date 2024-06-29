@@ -41,4 +41,9 @@ public final class Not implements Expression {
     public Expression assign(String var, Expression expression) {
         return new Not(this.expression.assign(var, expression));
     }
+
+    @Override
+    public Expression nandify() {
+        return new Nand(this.expression, this.expression);
+    }
 }

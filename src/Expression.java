@@ -43,4 +43,10 @@ public interface Expression {
      * @return The new expression
      */
     Expression assign(String var, Expression expression);
+
+    /**
+     * Converts all the operations to the logical Nand operation.
+     * @return The new Expression
+     */
+    Expression nandify();
 }
