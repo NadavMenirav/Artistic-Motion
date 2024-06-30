@@ -8,7 +8,7 @@ public final class Not extends UnaryExpression {
      * Constructor.
      * @param expression The expression
      */
-    public Not(Expression expression) {
+    protected Not(Expression expression) {
         super(expression, "~");
     }
 

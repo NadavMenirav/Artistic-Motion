@@ -14,7 +14,7 @@ public final class Var implements Expression {
      * Constructor.
      * @param name The name of the var
      */
-    public Var(String name) {
+    protected Var(String name) {
         this.name = new String(name);
     }
 
@@ -30,7 +30,7 @@ public final class Var implements Expression {
      * Getter of the Name field.
      * @return The Name of this Var
      */
-    public String getName() {
+    protected String getName() {
         return new String(name);
     }
 

@@ -9,7 +9,7 @@ public class Nor extends BinaryExpression {
      * @param firstExpression First Expression
      * @param secondExpression Second Expression
      */
-    public Nor(Expression firstExpression, Expression secondExpression) {
+    protected Nor(Expression firstExpression, Expression secondExpression) {
         super(firstExpression, secondExpression, "V");
     }
 

@@ -9,7 +9,7 @@ public class And extends BinaryExpression {
      * @param firstExpression First Expression
      * @param secondExpression Second Expression
      */
-    public And(Expression firstExpression, Expression secondExpression) {
+    protected And(Expression firstExpression, Expression secondExpression) {
         super(firstExpression, secondExpression, "&");
     }
 
