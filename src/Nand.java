@@ -22,42 +22,24 @@ public class Nand extends BinaryExpression {
     public Expression assign(String var, Expression expression) {
         return new Nand(
             this.getFirstExpression().assign(var, expression),
-             this.getSecondExpression().assign(var, expression)
+            this.getSecondExpression().assign(var, expression)
         );
     }
 
     @Override
     public Expression nandify() {
-        return new Nand(
-            this.getFirstExpression().nandify(),
-             this.getSecondExpression().nandify()
-        );
+        //We just need to nandify the inner expressions.
+        return new Nand(this.getFirstExpression().nandify(), this.getSecondExpression().nandify());
     }
 
     @Override
     public Expression norify() {
+        //A Nand B = [ ( A NOR A ) NOR ( B NOR B ) ] NOR [ ( A NOR A ) NOR ( B NOR B ) ]
 
-        return new Nor(
-            new Nor(
-                new Nor(
-                    this.getFirstExpression().norify(),
-                    this.getFirstExpression().norify()
-                ),
-                new Nor(
-                    this.getSecondExpression().norify(),
-                    this.getSecondExpression().norify()
-                )
-            ),
-            new Nor(
-                new Nor(
-                    this.getFirstExpression().norify(),
-                    this.getFirstExpression().norify()
-                ),
-                new Nor(
-                    this.getSecondExpression().norify(),
-                    this.getSecondExpression().norify()
-                )
-            )
-        );
+        Expression firstNorified = this.getFirstExpression().norify();
+        Expression secondNorified = this.getSecondExpression().norify();
+        Expression norFirst = new Nor(firstNorified, firstNorified);
+        Expression norSecond = new Nor(secondNorified, secondNorified);
+        return new Nor(new Nor(norFirst, norSecond), new Nor(norFirst, norSecond));
     }
 }
