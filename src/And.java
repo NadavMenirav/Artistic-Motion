@@ -22,41 +22,51 @@ public class And extends BinaryExpression {
     public Expression assign(String var, Expression expression) {
         return new And(
             this.getFirstExpression().assign(var, expression),
-             this.getSecondExpression().assign(var, expression)
+            this.getSecondExpression().assign(var, expression)
         );
     }
 
     @Override
     public Expression nandify() {
-        return new Not(new Nand(this.getFirstExpression().nandify(), this.getSecondExpression().nandify())).nandify();
+        return new Nand(
+            new Nand(this.getFirstExpression().nandify(), this.getSecondExpression().nandify()),
+            new Nand(this.getFirstExpression().nandify(), this.getSecondExpression().nandify())
+        );
     }
 
     @Override
     public Expression norify() {
-        return this.nandify().norify();
+        Expression firstNorified = this.getFirstExpression().norify();
+        Expression secondNorified = this.getSecondExpression().norify();
+        return new Nor(new Nor(firstNorified, firstNorified), new Nor(secondNorified, secondNorified));
     }
 
     @Override
     public Expression simplify() {
-        try {
-            //1&x case
-            if (this.getFirstExpression().evaluate()) {
-                return this.getSecondExpression().simplify();
-            }
-            //0&x case
-            return new Val(false);
-        } catch (Exception error) {
-            System.err.println(error);
+        Expression simpleFirst = this.getFirstExpression().simplify();
+        Expression simpleSecond = this.getSecondExpression().simplify();
+
+        // Handles the case where and is used on two identical expressions.
+        if (simpleFirst.toString().equals(simpleSecond.toString())) {
+            return simpleFirst;
         }
-        try {
-            //x&1 case
-            if (this.getSecondExpression().evaluate()) {
-                return this.getFirstExpression().simplify();
-            }
-            //x&0 case
+
+        // One of the expression is false
+        if (simpleFirst.toString().equals("F") || simpleSecond.toString().equals("F")) {
             return new Val(false);
-        } catch (Exception error) {
-            System.err.println(error);
         }
+
+        // First expression is true
+        if (simpleFirst.toString().equals("T")) {
+            return simpleSecond;
+        }
+
+        // Second expression is false
+        if (simpleSecond.toString().equals("T")) {
+            return simpleFirst;
+        }
+
+        // No further simplification was found
+        return new And(simpleFirst, simpleSecond);
     }
 }
