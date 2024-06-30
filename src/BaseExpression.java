@@ -10,7 +10,7 @@ public abstract class BaseExpression implements Expression {
      * Constructor.
      * @param expressionSymbol The symbol of the expression
      */
-    public BaseExpression(String expressionSymbol) {
+    protected BaseExpression(String expressionSymbol) {
         this.expressionSymbol = new String(expressionSymbol);
     }
 
@@ -18,7 +18,7 @@ public abstract class BaseExpression implements Expression {
      * Getter of the expressionSymbol field.
      * @return The expression symbol of this expression
      */
-    public String getExpressionSymbol() {
+    protected String getExpressionSymbol() {
         return new String(expressionSymbol);
     }
 
