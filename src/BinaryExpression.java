@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * BinaryExpression class.
  */
-public abstract class BinaryExpression implements Expression {
+public abstract class BinaryExpression extends BaseExpression {
     private final Expression firstExpression;
     private final Expression secondExpression;
     private String expressionSymbol;
@@ -75,5 +75,10 @@ public abstract class BinaryExpression implements Expression {
 
     @Override
     public abstract Expression assign(String var, Expression expression);
+
+    @Override
+    public Boolean equals(Expression other) {
+        return this.toString().equals(other.toString());
+    }
 
 }
