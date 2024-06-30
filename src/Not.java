@@ -37,7 +37,15 @@ public final class Not extends UnaryExpression {
 
     @Override
     public Expression simplify() {
-        // No simplification was provided to the Not operandor
-        return new Not(this);
+        Expression simpleExpression = this.getExpression().simplify();
+        // Expression is false
+        if (simpleExpression.toString().equals("F")) {
+            return new Val(true);
+        }
+        // Expression is true
+        if (simpleExpression.toString().equals("T")) {
+            return new Val(false);
+        }
+        return new Not(simpleExpression);
     }
 }

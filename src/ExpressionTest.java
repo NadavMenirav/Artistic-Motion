@@ -1,52 +1,48 @@
 //Nadav Menirav
+import java.util.HashMap;
 
 /**
  * Class with main to test the Expression classes.
  */
 public class ExpressionTest {
-
     /**
-     * Main method.
-     * @param args Command-Line-Arguments
+     * Main which runs code.
+     * @param args relevant
      */
     public static void main(String[] args) throws Exception {
-        // Creates an expression with at least three variables
-        Expression x = new Var("x");
-        Expression y = new Var("y");
-        Expression z = new Var("z");
+        // Creates an Expression:
 
-        Expression ex = new And(
-            new Or(
-                x,
-                new And(
-                    y,
-                    new Val(true)
-                )
-            ),
+        Expression ex = new Not(
             new And(
-                z,
-                z
+                new Var("x"),
+                new Xnor(
+                    new Var("y"),
+                    new Nand(
+                        new And(
+                            new Val(true),
+                            new Var("z")
+                        ),
+                    new Val(false))
+                )
             )
         );
-        // Prints the expression
+        // Prints the Expression
         System.out.println(ex);
 
+        // Populates the Expression
+        HashMap<String, Boolean> map = new HashMap<>();
+        map.put("x", true);
+        map.put("y", false);
+        map.put("z", false);
 
-        // Assigns the three variables: x, y, z with boolean values
-        Expression ex2 = ex.assign("x", new Val(true));
-        Expression ex3 = ex2.assign("y", new Val(false));
-        Expression ex4 = ex3.assign("z", new Val(false));
+        // Prints the value of the Expression after the population
+        System.out.println(ex.evaluate(map));
 
-        // Prints the expression after assignment
-        System.out.println(ex4);
-
-        // Prints the nandified version of the expression:
+        // Nandifies and prints the Expression
         System.out.println(ex.nandify());
-
-        // Prints the norified version of the expression:
+        // Norifies and prints the Expression
         System.out.println(ex.norify());
-
-        // Prints the simplified version of the expression:
+        // Simplifies and prints the Expression
         System.out.println(ex.simplify());
     }
 }
