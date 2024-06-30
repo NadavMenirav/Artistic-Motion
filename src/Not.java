@@ -6,15 +6,18 @@ import java.util.List;
 /**
  * Not class.
  */
-public final class Not implements Expression {
-    private final Expression expression;
-
+public final class Not extends UnaryExpression {
     /**
      * Constructor.
      * @param expression The expression
      */
     public Not(Expression expression) {
-        this.expression = expression;
+        super(expression, "~");
+    }
+
+    @Override
+    public Boolean operate(Boolean bool) {
+        return !bool;
     }
 
     @Override

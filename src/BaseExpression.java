@@ -7,7 +7,7 @@ import java.util.Map;
  * BaseExpression class.
  */
 public abstract class BaseExpression implements Expression {
-    private String expressionSymbol;
+    private final String expressionSymbol;
 
     /**
      * Constructor.
