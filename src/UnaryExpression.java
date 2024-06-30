@@ -14,7 +14,7 @@ public abstract class UnaryExpression extends BaseExpression {
      * @param expression
      * @param expressionSymbol
      */
-    public UnaryExpression(Expression expression, String expressionSymbol) {
+    protected UnaryExpression(Expression expression, String expressionSymbol) {
         super(expressionSymbol);
         this.expression = expression;
     }
@@ -24,13 +24,13 @@ public abstract class UnaryExpression extends BaseExpression {
      * @param bool The operand
      * @return Boolean result of the operation
      */
-    public abstract Boolean operate(Boolean bool);
+    protected abstract Boolean operate(Boolean bool);
 
     /**
      * Getter of the expression field.
      * @return The expression
      */
-    public Expression getExpression() {
+    protected Expression getExpression() {
         return this.expression;
     }
 
