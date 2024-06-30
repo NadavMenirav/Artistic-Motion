@@ -24,11 +24,20 @@ public final class Not extends UnaryExpression {
 
     @Override
     public Expression nandify() {
+        // NOT( A ) = A Nand A
         return new Nand(this.getExpression().nandify(), this.getExpression().nandify());
     }
 
     @Override
     public Expression norify() {
-        return this.nandify().norify();
+        // NOT( A ) = A Nor A
+        Expression expression = this.getExpression().norify(); // Norifies inner expression
+        return new Nor(expression, expression);
+    }
+
+    @Override
+    public Expression simplify() {
+        // No simplification was provided to the Not operandor
+        return new Not(this);
     }
 }
