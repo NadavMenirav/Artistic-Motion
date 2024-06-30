@@ -7,7 +7,7 @@ import java.util.List;
  * Val class.
  */
 public final class Val implements Expression {
-    private Boolean value;
+    private final Boolean value;
 
     /**
      * Constructor of the Val class.
@@ -39,7 +39,7 @@ public final class Val implements Expression {
 
     @Override
     public Expression assign(String var, Expression expression) {
-        return expression;
+        return new Val(this.value);
     }
 
     @Override
@@ -49,6 +49,11 @@ public final class Val implements Expression {
 
     @Override
     public Expression norify() {
+        return new Val(this.value);
+    }
+
+    @Override
+    public Expression simplify() {
         return new Val(this.value);
     }
 }
