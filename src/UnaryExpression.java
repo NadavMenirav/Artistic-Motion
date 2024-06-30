@@ -26,11 +26,6 @@ public abstract class UnaryExpression extends BaseExpression {
      */
     public abstract Boolean operate(Boolean bool);
 
-    @Override
-    public Boolean equals(Expression other) {
-        return this.toString().equals(other.toString());
-    }
-
     /**
      * Getter of the expression field.
      * @return The expression

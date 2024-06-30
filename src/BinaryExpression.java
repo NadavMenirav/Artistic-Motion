@@ -67,11 +67,6 @@ public abstract class BinaryExpression extends BaseExpression {
     @Override
     public abstract Expression assign(String var, Expression expression);
 
-    @Override
-    public Boolean equals(Expression other) {
-        return this.toString().equals(other.toString());
-    }
-
     /**
      * Make the logical operation.
      * @return The Boolean result of the operation
