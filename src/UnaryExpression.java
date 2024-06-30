@@ -7,14 +7,14 @@ import java.util.Map;
  * UnaryExpression class.
  */
 public abstract class UnaryExpression extends BaseExpression {
-    private final Expression expression;
+    private final BaseExpression expression;
 
     /**
      * Constructor.
      * @param expression
      * @param expressionSymbol
      */
-    public UnaryExpression(Expression expression, String expressionSymbol) {
+    public UnaryExpression(BaseExpression expression, String expressionSymbol) {
         super(expressionSymbol);
         this.expression = expression;
     }
@@ -26,16 +26,11 @@ public abstract class UnaryExpression extends BaseExpression {
      */
     public abstract Boolean operate(Boolean bool);
 
-    @Override
-    public Boolean equals(Expression other) {
-        return this.toString().equals(other.toString());
-    }
-
     /**
      * Getter of the expression field.
      * @return The expression
      */
-    public Expression getExpression() {
+    public BaseExpression getExpression() {
         return this.expression;
     }
 
@@ -59,6 +54,6 @@ public abstract class UnaryExpression extends BaseExpression {
         return this.getExpressionSymbol() + "(" + this.expression.toString() + ")";
     }
     @Override
-    public abstract Expression assign(String var, Expression expression);
+    public abstract BaseExpression assign(String var, Expression expression);
 
 }

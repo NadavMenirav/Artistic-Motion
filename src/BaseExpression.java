@@ -38,21 +38,23 @@ public abstract class BaseExpression implements Expression {
     public abstract String toString();
 
     @Override
-    public abstract Expression assign(String var, Expression expression);
+    public abstract BaseExpression assign(String var, Expression expression);
 
     @Override
-    public abstract Expression nandify();
+    public abstract BaseExpression nandify();
 
     @Override
-    public abstract Expression norify();
+    public abstract BaseExpression norify();
 
     @Override
-    public abstract Expression simplify();
+    public abstract BaseExpression simplify();
 
     /**
      * The method checks if two Base expression are the same visually.
      * @param other The other expression
      * @return True if they are the same visually, false otherwise
      */
-    public abstract Boolean equals(Expression other);
+    public Boolean isEquals(Expression other) {
+        return this.toString().equals(other.toString());
+    }
 }

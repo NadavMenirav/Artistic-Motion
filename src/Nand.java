@@ -9,7 +9,7 @@ public class Nand extends BinaryExpression {
      * @param firstExpression First Expression
      * @param secondExpression Second Expression
      */
-    public Nand(Expression firstExpression, Expression secondExpression) {
+    public Nand(BaseExpression firstExpression, BaseExpression secondExpression) {
         super(firstExpression, secondExpression, "A");
     }
 
@@ -19,7 +19,7 @@ public class Nand extends BinaryExpression {
     }
 
     @Override
-    public Expression assign(String var, Expression expression) {
+    public BaseExpression assign(String var, Expression expression) {
         return new Nand(
             this.getFirstExpression().assign(var, expression),
              this.getSecondExpression().assign(var, expression)
@@ -27,7 +27,7 @@ public class Nand extends BinaryExpression {
     }
 
     @Override
-    public Expression nandify() {
+    public BaseExpression nandify() {
         return new Nand(
             this.getFirstExpression().nandify(),
              this.getSecondExpression().nandify()
@@ -35,7 +35,7 @@ public class Nand extends BinaryExpression {
     }
 
     @Override
-    public Expression norify() {
+    public BaseExpression norify() {
 
         return new Nor(
             new Nor(

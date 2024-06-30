@@ -9,7 +9,7 @@ public class Nor extends BinaryExpression {
      * @param firstExpression First Expression
      * @param secondExpression Second Expression
      */
-    public Nor(Expression firstExpression, Expression secondExpression) {
+    public Nor(BaseExpression firstExpression, BaseExpression secondExpression) {
         super(firstExpression, secondExpression, "V");
     }
 
@@ -19,7 +19,7 @@ public class Nor extends BinaryExpression {
     }
 
     @Override
-    public Expression assign(String var, Expression expression) {
+    public BaseExpression assign(String var, Expression expression) {
         return new Nor(
             this.getFirstExpression().assign(var, expression),
              this.getSecondExpression().assign(var, expression)
@@ -27,7 +27,7 @@ public class Nor extends BinaryExpression {
     }
 
     @Override
-    public Expression nandify() {
+    public BaseExpression nandify() {
         return new Not(
             new Or(
                 this.getFirstExpression().nandify(),
@@ -37,7 +37,7 @@ public class Nor extends BinaryExpression {
     }
 
     @Override
-    public Expression norify() {
+    public BaseExpression norify() {
         return this.nandify().norify();
     }
 }

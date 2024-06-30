@@ -9,7 +9,7 @@ public class Xor extends BinaryExpression {
      * @param firstExpression First Expression
      * @param secondExpression Second Expression
      */
-    public Xor(Expression firstExpression, Expression secondExpression) {
+    public Xor(BaseExpression firstExpression, BaseExpression secondExpression) {
         super(firstExpression, secondExpression, "^");
     }
 
@@ -19,7 +19,7 @@ public class Xor extends BinaryExpression {
     }
 
     @Override
-    public Expression assign(String var, Expression expression) {
+    public BaseExpression assign(String var, Expression expression) {
         return new Xor(
             this.getFirstExpression().assign(var, expression),
              this.getSecondExpression().assign(var, expression)
@@ -27,7 +27,7 @@ public class Xor extends BinaryExpression {
     }
 
     @Override
-    public Expression nandify() {
+    public BaseExpression nandify() {
         return new Or(
             new And(
                 new Not(
@@ -45,7 +45,7 @@ public class Xor extends BinaryExpression {
     }
 
     @Override
-    public Expression norify() {
+    public BaseExpression norify() {
         return this.nandify().norify();
     }
 }

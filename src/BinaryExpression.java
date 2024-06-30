@@ -10,8 +10,8 @@ import java.util.Set;
  * BinaryExpression class.
  */
 public abstract class BinaryExpression extends BaseExpression {
-    private final Expression firstExpression;
-    private final Expression secondExpression;
+    private final BaseExpression firstExpression;
+    private final BaseExpression secondExpression;
 
     /**
      * Constructor.
@@ -19,7 +19,7 @@ public abstract class BinaryExpression extends BaseExpression {
      * @param secondExpression The second Expression
      * @param expressionSymbol The symbol of the operation
      */
-    public BinaryExpression(Expression firstExpression, Expression secondExpression, String expressionSymbol) {
+    public BinaryExpression(BaseExpression firstExpression, BaseExpression secondExpression, String expressionSymbol) {
         super(expressionSymbol);
         this.firstExpression = firstExpression;
         this.secondExpression = secondExpression;
@@ -29,7 +29,7 @@ public abstract class BinaryExpression extends BaseExpression {
      * Getter of the firstExpression field.
      * @return The first Expression
      */
-    public Expression getFirstExpression() {
+    public BaseExpression getFirstExpression() {
         return this.firstExpression;
     }
 
@@ -37,7 +37,7 @@ public abstract class BinaryExpression extends BaseExpression {
      * Getter of the secondExpression field.
      * @return The second Expression
      */
-    public Expression getSecondExpression() {
+    public BaseExpression getSecondExpression() {
         return this.secondExpression;
     }
 
@@ -65,12 +65,7 @@ public abstract class BinaryExpression extends BaseExpression {
     }
 
     @Override
-    public abstract Expression assign(String var, Expression expression);
-
-    @Override
-    public Boolean equals(Expression other) {
-        return this.toString().equals(other.toString());
-    }
+    public abstract BaseExpression assign(String var, Expression expression);
 
     /**
      * Make the logical operation.

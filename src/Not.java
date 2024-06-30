@@ -8,7 +8,7 @@ public final class Not extends UnaryExpression {
      * Constructor.
      * @param expression The expression
      */
-    public Not(Expression expression) {
+    public Not(BaseExpression expression) {
         super(expression, "~");
     }
 
@@ -18,7 +18,7 @@ public final class Not extends UnaryExpression {
     }
 
     @Override
-    public Expression assign(String var, Expression expression) {
+    public BaseExpression assign(String var, BaseExpression expression) {
         return new Not(this.getExpression().assign(var, expression));
     }
 

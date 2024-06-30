@@ -9,7 +9,7 @@ public class Or extends BinaryExpression {
      * @param firstExpression First Expression
      * @param secondExpression Second Expression
      */
-    public Or(Expression firstExpression, Expression secondExpression) {
+    public Or(BaseExpression firstExpression, BaseExpression secondExpression) {
         super(firstExpression, secondExpression, "|");
     }
 
@@ -19,7 +19,7 @@ public class Or extends BinaryExpression {
     }
 
     @Override
-    public Expression assign(String var, Expression expression) {
+    public BaseExpression assign(String var, Expression expression) {
         return new Or(
             this.getFirstExpression().assign(var, expression),
              this.getSecondExpression().assign(var, expression)
@@ -27,7 +27,7 @@ public class Or extends BinaryExpression {
     }
 
     @Override
-    public Expression nandify() {
+    public BaseExpression nandify() {
         return new Nand(
             new Not(this.getFirstExpression()).nandify(),
             new Not(this.getSecondExpression()).nandify()
@@ -35,7 +35,7 @@ public class Or extends BinaryExpression {
     }
 
     @Override
-    public Expression norify() {
+    public BaseExpression norify() {
         return this.nandify().norify();
     }
 }
