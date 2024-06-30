@@ -14,7 +14,7 @@ public class Xnor extends BinaryExpression {
     }
 
     @Override
-    public Boolean operate(Boolean first, Boolean second) {
+    protected Boolean operate(Boolean first, Boolean second) {
         return !(first ^ second);
     }
 
