@@ -12,23 +12,23 @@ public final class Var implements Expression {
 
     /**
      * Constructor.
-     * @param name
+     * @param name The name of the var
      */
     public Var(String name) {
         this.name = new String(name);
     }
 
     /**
-     * Constructor.
-     * @param var
+     * Copy constructor.
+     * @param var The var to be copied
      */
     public Var(Var var) {
         this(var.getName());
     }
 
     /**
-     * Getter of the name field.
-     * @return The name of this Var
+     * Getter of the Name field.
+     * @return The Name of this Var
      */
     public String getName() {
         return new String(name);
@@ -69,11 +69,17 @@ public final class Var implements Expression {
 
     @Override
     public Expression nandify() {
-        return new Var(this.name);
+        return new Var(this);
     }
 
     @Override
     public Expression norify() {
-        return new Var(this.name);
+        return new Var(this);
     }
+
+    @Override
+    public Expression simplify() {
+        return new Var(this);
+    }
+
 }
