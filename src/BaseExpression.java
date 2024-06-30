@@ -7,6 +7,24 @@ import java.util.Map;
  * BaseExpression class.
  */
 public abstract class BaseExpression implements Expression {
+    private String expressionSymbol;
+
+    /**
+     * Constructor.
+     * @param expressionSymbol The symbol of the expression
+     */
+    public BaseExpression(String expressionSymbol) {
+        this.expressionSymbol = new String(expressionSymbol);
+    }
+
+    /**
+     * Getter of the expressionSymbol field.
+     * @return The expression symbol of this expression
+     */
+    public String getExpressionSymbol() {
+        return new String(expressionSymbol);
+    }
+
     @Override
     public abstract Boolean evaluate(Map<String, Boolean> assignment) throws Exception;
 

@@ -4,12 +4,16 @@
  * UnaryExpression class.
  */
 public abstract class UnaryExpression extends BaseExpression {
-    private final Expression firstExpression;
-    private final Expression expressionSymbol;
+    private final Expression expression;
 
+    /**
+     * Constructor.
+     * @param expression
+     * @param expressionSymbol
+     */
     public UnaryExpression(Expression expression, String expressionSymbol) {
-        this.firstExpression = firstExpression
-        this.expressionSymbol = expressionSymbol;
+        super(expressionSymbol);
+        this.expression = expression;
     }
 
     @Override

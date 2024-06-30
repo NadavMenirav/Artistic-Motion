@@ -12,7 +12,6 @@ import java.util.Set;
 public abstract class BinaryExpression extends BaseExpression {
     private final Expression firstExpression;
     private final Expression secondExpression;
-    private String expressionSymbol;
 
     /**
      * Constructor.
@@ -21,9 +20,9 @@ public abstract class BinaryExpression extends BaseExpression {
      * @param expressionSymbol The symbol of the operation
      */
     public BinaryExpression(Expression firstExpression, Expression secondExpression, String expressionSymbol) {
+        super(expressionSymbol);
         this.firstExpression = firstExpression;
         this.secondExpression = secondExpression;
-        this.expressionSymbol = new String(expressionSymbol);
     }
 
     /**
@@ -41,14 +40,6 @@ public abstract class BinaryExpression extends BaseExpression {
     public Expression getSecondExpression() {
         return this.secondExpression;
     }
-
-    /**
-     * Make the logical operation.
-     * @return The Boolean result of the operation
-     * @param first The first Boolean we operate on
-     * @param second The second Boolean we operate on
-     */
-    public abstract Boolean operate(Boolean first, Boolean second);
 
     @Override
     public Boolean evaluate(Map<String, Boolean> assignment) throws Exception {
@@ -70,7 +61,7 @@ public abstract class BinaryExpression extends BaseExpression {
 
     @Override
     public String toString() {
-        return "(" + this.firstExpression.toString() + this.expressionSymbol + this.secondExpression + ")";
+        return "(" + this.firstExpression.toString() + this.getExpressionSymbol() + this.secondExpression + ")";
     }
 
     @Override
@@ -80,5 +71,13 @@ public abstract class BinaryExpression extends BaseExpression {
     public Boolean equals(Expression other) {
         return this.toString().equals(other.toString());
     }
+
+    /**
+     * Make the logical operation.
+     * @return The Boolean result of the operation
+     * @param first The first Boolean we operate on
+     * @param second The second Boolean we operate on
+     */
+    public abstract Boolean operate(Boolean first, Boolean second);
 
 }
