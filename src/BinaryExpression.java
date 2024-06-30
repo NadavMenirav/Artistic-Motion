@@ -19,7 +19,7 @@ public abstract class BinaryExpression extends BaseExpression {
      * @param secondExpression The second Expression
      * @param expressionSymbol The symbol of the operation
      */
-    public BinaryExpression(Expression firstExpression, Expression secondExpression, String expressionSymbol) {
+    protected BinaryExpression(Expression firstExpression, Expression secondExpression, String expressionSymbol) {
         super(expressionSymbol);
         this.firstExpression = firstExpression;
         this.secondExpression = secondExpression;
@@ -29,7 +29,7 @@ public abstract class BinaryExpression extends BaseExpression {
      * Getter of the firstExpression field.
      * @return The first Expression
      */
-    public Expression getFirstExpression() {
+    protected Expression getFirstExpression() {
         return this.firstExpression;
     }
 
@@ -37,7 +37,7 @@ public abstract class BinaryExpression extends BaseExpression {
      * Getter of the secondExpression field.
      * @return The second Expression
      */
-    public Expression getSecondExpression() {
+    protected Expression getSecondExpression() {
         return this.secondExpression;
     }
 
@@ -79,6 +79,6 @@ public abstract class BinaryExpression extends BaseExpression {
      * @param first The first Boolean we operate on
      * @param second The second Boolean we operate on
      */
-    public abstract Boolean operate(Boolean first, Boolean second);
+    protected abstract Boolean operate(Boolean first, Boolean second);
 
 }
