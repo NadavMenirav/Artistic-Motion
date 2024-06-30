@@ -30,4 +30,11 @@ public abstract class BaseExpression implements Expression {
 
     @Override
     public abstract Expression simplify();
+
+    /**
+     * The method checks if two Base expression are the same visually.
+     * @param other The other expression
+     * @return True if they are the same visually, false otherwise
+     */
+    public abstract Boolean equals(Expression other);
 }
