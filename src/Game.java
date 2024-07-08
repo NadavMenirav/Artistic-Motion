@@ -73,6 +73,14 @@ public class Game {
     }
 
     /**
+     * This method removes a Sprite.
+     * @param s The sprite to be removed
+     */
+    public void removeSprite(Sprite s) {
+        this.sprites.removeSprite(s);;
+    }
+
+    /**
      * This method initializes the game: creates new blocks, a ball and a paddle, and adds them to this game.
      */
     public void initialize() {
