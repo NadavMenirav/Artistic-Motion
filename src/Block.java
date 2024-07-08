@@ -136,6 +136,11 @@ public class Block implements Collidable, Sprite, HitNotifier {
     }
 
     @Override
+    public void removeHitListener(HitListener hl) {
+        this.hitListeners.remove(hl);
+    }
+
+    @Override
     public Velocity hit(Point collisionPoint, Velocity currentVelocity, Ball hitter) {
         /*
          * If the collision point was on the top or bottom edges, we will change the dy value of the velocity,
