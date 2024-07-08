@@ -3,8 +3,7 @@
 /**
  * HitListener interface.
  */
-public interface HitListener {
-
+public interface HitNotifier {
     /**
      * Add hl as a listener to hit events.
      * @param hl The listener we add
