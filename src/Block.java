@@ -1,15 +1,19 @@
 //Nadav Menirav 330845678
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+
 import biuoop.DrawSurface;
 
 /**
  * Block class.
  */
-public class Block implements Collidable, Sprite {
+public class Block implements Collidable, Sprite, HitNotifier {
     //Fields of the Block class
     private final Rectangle shape;
     private final Color color;
+    private final List<HitListener> hitListeners;
 
     /**
      * Constructor of the Block class.
@@ -173,5 +177,18 @@ public class Block implements Collidable, Sprite {
     public void addToGame(Game g) {
         g.addSprite(this);
         g.addCollidable(this);
+    }
+
+    /**
+     * Notifies after being hit.
+     * @param hitter The ball that hits
+     */
+    private void notifyHit(Ball hitter) {
+        // Make a copy of the hitListeners before iterating over them.
+        List<HitListener> listeners = new ArrayList<HitListener>(this.hitListeners);
+        // Notify all listeners about a hit event:
+        for (HitListener hl : listeners) {
+        hl.hitEvent(this, hitter);
+        }
     }
 }
