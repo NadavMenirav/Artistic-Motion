@@ -26,6 +26,14 @@ public class GameEnvironment {
     }
 
     /**
+     * The method removes a collidable from this Environment.
+     * @param c The collidable to remove
+     */
+    public void removeCollidable(Collidable c) {
+        this.collidables.remove(c);
+    }
+
+    /**
      * This function finds the closest collision between the object moving on the trajectory and the Collidables
      * in this environment.
      * @param trajectory The trajectory of the moving object

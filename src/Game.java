@@ -65,6 +65,14 @@ public class Game {
     }
 
     /**
+     * The method removes a collidable.
+     * @param c The collidable to be removed
+     */
+    public void removeCollidable(Collidable c) {
+
+    }
+
+    /**
      * This method initializes the game: creates new blocks, a ball and a paddle, and adds them to this game.
      */
     public void initialize() {
