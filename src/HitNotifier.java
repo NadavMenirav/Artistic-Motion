@@ -1,7 +1,7 @@
 //Nadav Menirav 330845678
 
 /**
- * HitListener interface.
+ * HitNotifier interface.
  */
 public interface HitNotifier {
     /**
