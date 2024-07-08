@@ -77,7 +77,7 @@ public class Game {
      * @param s The sprite to be removed
      */
     public void removeSprite(Sprite s) {
-        this.sprites.removeSprite(s);;
+        this.sprites.removeSprite(s);
     }
 
     /**
