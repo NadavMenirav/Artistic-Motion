@@ -23,6 +23,9 @@ public class BlockRemover implements HitListener {
      * @param hitter The Ball hitting
      */
     public void hitEvent(Block beingHit, Ball hitter) {
+        if (beingHit.ballColorMatch(hitter)) {
+            return;
+        }
         beingHit.removeHitListener(this);
         beingHit.removeFromGame(game);
         this.remainingBlocks.decrease(1);
