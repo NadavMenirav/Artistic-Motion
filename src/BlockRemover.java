@@ -4,7 +4,7 @@ import org.w3c.dom.css.Counter;
  * A BlockRemover is in charge of removing blocks from the game, as well as keeping count.
  * of the number of blocks that remain.
  */
-public class BlockRemover {
+public class BlockRemover implements HitListener {
     private Game game;
     private Counter remainingBlocks;
 
@@ -27,6 +27,6 @@ public class BlockRemover {
     public void hitEvent(Block beingHit, Ball hitter) {
         beingHit.removeHitListener(this);
         beingHit.removeFromGame(game);
-        remainingBlocks.decrease(1);
+        this.remainingBlocks.decrease(1);
     }
 }
