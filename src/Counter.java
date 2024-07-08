@@ -6,15 +6,22 @@ public class Counter {
 
     /**
      * Constructor of the Counter class.
-     * @param number
+     * @param number The number
      */
     public Counter(int number) {
         count = number;
     }
 
     /**
+     * Empty Constructor.
+     */
+    public Counter() {
+        count = 0;
+    }
+
+    /**
      * Add number to current count.
-     * @param number
+     * @param number The number
      */
     public void increase(int number) {
         this.count += number;
@@ -22,7 +29,7 @@ public class Counter {
 
     /**
      * Subtract number from current count.
-     * @param number
+     * @param number The number
      */
     public void decrease(int number) {
         this.count -= number;

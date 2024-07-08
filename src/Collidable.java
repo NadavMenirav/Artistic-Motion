@@ -20,6 +20,6 @@ public interface Collidable {
      * @param hitter The Ball that hits this Collidable.
      * @return The new Velocity that needs to be applied on the hitting object
      */
-    Velocity hit(Point collisionPoint, Velocity currentVelocity, Ball hitter);
+    Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity);
 
 }

@@ -143,7 +143,7 @@ public class Block implements Collidable, Sprite, HitNotifier {
     }
 
     @Override
-    public Velocity hit(Point collisionPoint, Velocity currentVelocity, Ball hitter) {
+    public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity) {
         /*
          * If the collision point was on the top or bottom edges, we will change the dy value of the velocity,
          * and if it was on the right or left edges, we will change the dx

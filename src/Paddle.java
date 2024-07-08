@@ -96,7 +96,7 @@ public class Paddle implements Sprite, Collidable {
     }
 
     @Override
-    public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
+    public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity) {
         //Fun paddle part, we need to change the velocity based on the collision region
         final double currentSpeed = Math.sqrt(
                 Math.pow(currentVelocity.getDx(), 2) + Math.pow(currentVelocity.getDy(), 2)
@@ -111,7 +111,7 @@ public class Paddle implements Sprite, Collidable {
 
         //If the collision point is horizontally, the collision is no different from the block collision.
         if (block.isHittingPointHorizontally(collisionPoint)) {
-            return block.hit(collisionPoint, currentVelocity);
+            return block.hit(hitter, collisionPoint, currentVelocity);
         }
 
         //We know now that the collision is vertical and the new Velocity will be determined by the fun paddle part

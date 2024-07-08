@@ -14,6 +14,8 @@ public class Game {
     private final GameEnvironment environment;
     private final GUI gui;
     private Paddle paddle;
+    private Counter blockCounter;
+    private final BlockRemover blockRemover;
 
     /**
      * Empty constructor of the Game class.
@@ -22,6 +24,9 @@ public class Game {
         sprites = new SpriteCollection();
         environment = new GameEnvironment();
         gui = new GUI("Arkanoid", 800, 600);
+        this.paddle = null;
+        this.blockCounter = new Counter();
+        this.blockRemover = new BlockRemover(this, this.blockCounter);
     }
 
     /**

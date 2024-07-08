@@ -182,7 +182,7 @@ public class Ball implements Sprite {
         Point collisionPoint = collisionInfo.collisionPoint();
         this.center = this.velocity.moveCloseToIntersection(this.center, collisionPoint, changeParam);
 
-        this.velocity = collisionObject.hit(collisionPoint, this.velocity, this);
+        this.velocity = collisionObject.hit(this, collisionPoint, this.velocity);
     }
 
     /**
