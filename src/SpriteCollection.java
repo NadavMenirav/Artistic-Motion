@@ -22,7 +22,15 @@ public class SpriteCollection {
      * @param s The sprite we add
      */
     public void addSprite(Sprite s) {
-        this.sprites.add(s); //Encapsulation?
+        this.sprites.add(s);
+    }
+
+    /**
+     * This method removes a Sprite from this Collection.
+     * @param s The sprite to be removed
+     */
+    public void removeSprite(Sprite s) {
+        this.sprites.remove(s);
     }
 
     /**
