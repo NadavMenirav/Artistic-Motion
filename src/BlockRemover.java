@@ -3,7 +3,7 @@
  * of the number of blocks that remain.
  */
 public class BlockRemover implements HitListener {
-    private Game game;
+    private final Game game;
     private Counter remainingBlocks;
 
     /**
