@@ -117,6 +117,15 @@ public class Block implements Collidable, Sprite {
         && this.color.getBlue() == ball.getColor().getBlue();
     }
 
+    /**
+     * This method removes a block from the given Game.
+     * @param game The game we remove this ball from
+     */
+    public void removeFromGame(Game game) {
+        game.removeCollidable(this);
+        game.removeSprite(this);
+    }
+
     @Override
     public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
         /*
