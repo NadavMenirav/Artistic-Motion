@@ -23,6 +23,7 @@ public class Block implements Collidable, Sprite, HitNotifier {
         //If no color was provided, the block will be black
         this.shape = new Rectangle(shape);
         this.color = Color.BLACK;
+        hitListeners = new ArrayList<HitListener>();
     }
 
     /**
@@ -33,6 +34,7 @@ public class Block implements Collidable, Sprite, HitNotifier {
     public Block(Rectangle shape, Color color) {
         this.shape = new Rectangle(shape);
         this.color = new Color(color.getRGB());
+        hitListeners = new ArrayList<HitListener>();
     }
 
     @Override
