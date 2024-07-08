@@ -160,7 +160,9 @@ public class Game {
         for (int i = 0; i < numberOfBlocks; i++) {
             Rectangle rectangle = new Rectangle(new Point(725 - 50 * i, yValueOfBlocks), 50, 30);
             Block block = new Block(rectangle, color);
+            block.addHitListener(this.blockRemover);
             block.addToGame(this);
+            blockCounter.increase(1);
         }
     }
 
@@ -175,6 +177,11 @@ public class Game {
         //This loop runs the game
         while (true) {
             long startTime = System.currentTimeMillis(); //Timing
+
+            if (this.blockCounter.getValue() == 0) {
+                gui.close();
+                return;
+            }
 
             DrawSurface d = gui.getDrawSurface();
             //Now we draw the Sprites
