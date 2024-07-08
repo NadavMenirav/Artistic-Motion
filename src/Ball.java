@@ -105,6 +105,14 @@ public class Ball implements Sprite {
     }
 
     /**
+     * Getter of the Color field.
+     * @return The color of this Ball.
+     */
+    public Color getColor() {
+        return new Color(this.color.getRGB());
+    }
+
+    /**
      * Changes Velocity of ball.
      * @param v new velocity of ball
      */
