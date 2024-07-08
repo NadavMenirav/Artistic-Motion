@@ -215,6 +215,14 @@ public class Ball implements Sprite {
     }
 
     /**
+     * Removes this ball from the given Game.
+     * @param game The game we remove this ball from
+     */
+    public void removeFromGame(Game game) {
+        game.removeSprite(this);
+    }
+
+    /**
      * This method is used to get this Ball out of its Paddle.
      */
     public void getOutOfPaddle() {
