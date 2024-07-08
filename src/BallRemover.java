@@ -1,7 +1,7 @@
 /**
  * BallRemover class.
  */
-public class BallRemover {
+public class BallRemover implements HitListener {
     private final Game game;
     private Counter remainingBalls;
 
@@ -14,4 +14,11 @@ public class BallRemover {
         this.game = game;
         this.remainingBalls = remainingBalls;
     }
+
+    @Override
+    public void hitEvent(Block beingHit, Ball hitter) {
+        hitter.removeFromGame(this.game);
+        remainingBalls.decrease(1);
+    }
+
 }
