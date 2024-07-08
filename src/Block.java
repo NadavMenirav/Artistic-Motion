@@ -106,6 +106,17 @@ public class Block implements Collidable, Sprite {
         return hittingTopEdge || hittingBottomEdge;
     }
 
+    /**
+     * This method checks whether a Ball has the same color as this Block.
+     * @param ball The ball we check its color
+     * @return True of they have the same color, false otherwise
+     */
+    public boolean ballColorMatch(Ball ball) {
+        return this.color.getRed() == ball.getColor().getRed()
+        && this.color.getGreen() == ball.getColor().getGreen()
+        && this.color.getBlue() == ball.getColor().getBlue();
+    }
+
     @Override
     public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
         /*
