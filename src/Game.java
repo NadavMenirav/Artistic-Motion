@@ -69,7 +69,7 @@ public class Game {
      * @param c The collidable to be removed
      */
     public void removeCollidable(Collidable c) {
-
+        this.environment.removeCollidable(c);
     }
 
     /**
