@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 /**
  * A BlockRemover is in charge of removing blocks from the game, as well as keeping count.
  * of the number of blocks that remain.
@@ -16,18 +18,14 @@ public class BlockRemover implements HitListener {
         this.remainingBlocks = remainingBlocks;
     }
 
-    /**
-     * Blocks that are hit should be removed.
-     * Remember to remove this listener from the block that is being removed from the game.
-     * @param beingHit The block being hit
-     * @param hitter The Ball hitting
-     */
+    @Override
     public void hitEvent(Block beingHit, Ball hitter) {
         if (beingHit.ballColorMatch(hitter)) {
             return;
         }
         beingHit.removeHitListener(this);
         beingHit.removeFromGame(game);
+        hitter.setColor(new Color(beingHit.getColor().getRGB()));
         this.remainingBlocks.decrease(1);
     }
 }
