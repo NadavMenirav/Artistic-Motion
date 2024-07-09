@@ -27,6 +27,14 @@ public class Block implements Collidable, Sprite, HitNotifier {
     }
 
     /**
+     * Getter of the Color field.
+     * @return Color of this Block.
+     */
+    public Color getColor() {
+        return new Color(this.color.getRGB());
+    }
+
+    /**
      * Constructor of the Block class.
      * @param shape The shape of the block
      * @param color The color of the block
