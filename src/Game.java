@@ -16,6 +16,8 @@ public class Game {
     private Paddle paddle;
     private Counter blockCounter;
     private final BlockRemover blockRemover;
+    private final BallRemover ballRemover;
+    private final Counter ballCounter;
 
     /**
      * Empty constructor of the Game class.
@@ -27,6 +29,9 @@ public class Game {
         this.paddle = null;
         this.blockCounter = new Counter();
         this.blockRemover = new BlockRemover(this, this.blockCounter);
+
+        this.ballCounter = new Counter();
+        this.ballRemover = new BallRemover(this, this.ballCounter);
     }
 
     /**
@@ -113,8 +118,9 @@ public class Game {
      * Adds the background Block to this game.
      */
     public void addBackgroundBlock() {
-        Rectangle rectangle = new Rectangle(new Point(25, 25), 750, 550);
+        Rectangle rectangle = new Rectangle(new Point(0, 0), 800, 600);
         Block block = new Block(rectangle, new Color(1, 1, 122));
+        block.addHitListener(this.ballRemover);
         block.addToGame(this);
     }
 
@@ -124,17 +130,14 @@ public class Game {
     public void addAllBlocks() {
         //Add edge blocks and the background block
         Rectangle rectangle = new Rectangle(new Point(0, 0), 800, 25);
-        Rectangle rectangle2 = new Rectangle(new Point(0, 575), 800, 25);
         Rectangle rectangle3 = new Rectangle(new Point(0, 0), 25, 600);
         Rectangle rectangle4 = new Rectangle(new Point(775, 0), 25, 800);
 
         Block block = new Block(rectangle, Color.GRAY);
-        Block block2 = new Block(rectangle2, Color.GRAY);
         Block block3 = new Block(rectangle3, Color.GRAY);
         Block block4 = new Block(rectangle4, Color.GRAY);
 
         block.addToGame(this);
-        block2.addToGame(this);
         block3.addToGame(this);
         block4.addToGame(this);
 
