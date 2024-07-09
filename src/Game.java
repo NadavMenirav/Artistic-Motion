@@ -99,6 +99,7 @@ public class Game {
         firstBall.setVelocity(3, 2);
         Ball secondBall = new Ball(new Point(600, 400), 6, Color.WHITE);
         secondBall.setVelocity(2, 3);
+        this.ballCounter.increase(2);
 
         //Create the Paddle
         Paddle pad = new Paddle(Color.YELLOW);
@@ -182,6 +183,11 @@ public class Game {
             long startTime = System.currentTimeMillis(); //Timing
 
             if (this.blockCounter.getValue() == 0) {
+                gui.close();
+                return;
+            }
+
+            if (this.ballCounter.getValue() == 0) {
                 gui.close();
                 return;
             }
