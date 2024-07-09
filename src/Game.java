@@ -99,7 +99,9 @@ public class Game {
         firstBall.setVelocity(3, 2);
         Ball secondBall = new Ball(new Point(600, 400), 6, Color.WHITE);
         secondBall.setVelocity(2, 3);
-        this.ballCounter.increase(2);
+        Ball thirdBall = new Ball(new Point(500, 500), 6, Color.WHITE);
+        thirdBall.setVelocity(3, 2);
+        this.ballCounter.increase(3);
 
         //Create the Paddle
         Paddle pad = new Paddle(Color.YELLOW);
@@ -111,6 +113,7 @@ public class Game {
         pad.addToGame(this);
         firstBall.addToGame(this);
         secondBall.addToGame(this);
+        thirdBall.addToGame(this);
         //Add rest of blocks
         this.addAllBlocks();
     }
