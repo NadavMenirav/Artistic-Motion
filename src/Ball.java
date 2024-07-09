@@ -12,7 +12,7 @@ public class Ball implements Sprite {
     private int radius;
     private Color color;
     private Velocity velocity;
-    private final GameEnvironment gameEnvironment;
+    private GameEnvironment gameEnvironment;
     private Paddle paddle;
 
     /**
