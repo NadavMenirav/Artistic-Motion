@@ -17,7 +17,8 @@ public class Game {
     private final Counter blockCounter;
     private final BlockRemover blockRemover;
     private final BallRemover ballRemover;
-    private final Counter ballCounter;
+    private final Counter ballCounter;]
+    private final Counter score;
 
     /**
      * Empty constructor of the Game class.
@@ -32,6 +33,8 @@ public class Game {
 
         this.ballCounter = new Counter();
         this.ballRemover = new BallRemover(this, this.ballCounter);
+
+        this.score = new Counter();
     }
 
     /**

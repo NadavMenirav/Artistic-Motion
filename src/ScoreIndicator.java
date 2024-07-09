@@ -21,7 +21,7 @@ public class ScoreIndicator implements Sprite {
     @Override
     public void drawOn(DrawSurface d) {
         final int textXPosition = (int) (0.45 * (this.rectangle.getUpperLeft().getX() + this.rectangle.getWidth()));
-        final int textYPosition = (int) ((0.45) * (this.rectangle.getUpperLeft().getY() + this.rectangle.getHeight()));
+        final int textYPosition = (int) (0.45 * (this.rectangle.getUpperLeft().getY() + this.rectangle.getHeight()));
         d.setColor(Color.LIGHT_GRAY);
         d.fillRectangle(
             (int) this.rectangle.getUpperLeft().getX(),
