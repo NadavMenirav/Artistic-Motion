@@ -17,8 +17,9 @@ public class Game {
     private final Counter blockCounter;
     private final BlockRemover blockRemover;
     private final BallRemover ballRemover;
-    private final Counter ballCounter;]
+    private final Counter ballCounter;
     private final Counter score;
+    private final ScoreTrackingListener scoreTrackingListener;
 
     /**
      * Empty constructor of the Game class.
@@ -35,6 +36,7 @@ public class Game {
         this.ballRemover = new BallRemover(this, this.ballCounter);
 
         this.score = new Counter();
+        this.scoreTrackingListener = new ScoreTrackingListener(this.score);
     }
 
     /**
@@ -136,7 +138,7 @@ public class Game {
      */
     public void addAllBlocks() {
         //Add edge blocks and the background block
-        Rectangle rectangle = new Rectangle(new Point(0, 0), 800, 25);
+        Rectangle rectangle = new Rectangle(new Point(0, 20), 800, 25);
         Rectangle rectangle3 = new Rectangle(new Point(0, 0), 25, 600);
         Rectangle rectangle4 = new Rectangle(new Point(775, 0), 25, 800);
 
@@ -147,6 +149,11 @@ public class Game {
         block.addToGame(this);
         block3.addToGame(this);
         block4.addToGame(this);
+
+        //Add score block
+        Rectangle rectangle2 = new Rectangle(new Point(0, 0), 800, 20);
+        ScoreIndicator scoreIndicator = new ScoreIndicator(score, rectangle2);
+        this.addSprite(scoreIndicator);
 
         //We want to add the color blocks on the rows
         addRowBlocks(12, 80, Color.GRAY);
@@ -170,6 +177,7 @@ public class Game {
         for (int i = 0; i < numberOfBlocks; i++) {
             Rectangle rectangle = new Rectangle(new Point(725 - 50 * i, yValueOfBlocks), 50, 30);
             Block block = new Block(rectangle, color);
+            block.addHitListener(this.scoreTrackingListener);
             block.addHitListener(this.blockRemover);
             block.addToGame(this);
             blockCounter.increase(1);
@@ -189,6 +197,7 @@ public class Game {
             long startTime = System.currentTimeMillis(); //Timing
 
             if (this.blockCounter.getValue() == 0) {
+                this.score.increase(100);
                 gui.close();
                 return;
             }
