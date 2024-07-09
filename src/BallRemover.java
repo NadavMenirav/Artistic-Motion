@@ -3,7 +3,7 @@
  */
 public class BallRemover implements HitListener {
     private final Game game;
-    private Counter remainingBalls;
+    private final Counter remainingBalls;
 
     /**
      * Constructor of the BallRemover class.

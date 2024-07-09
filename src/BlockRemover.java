@@ -6,7 +6,7 @@ import java.awt.Color;
  */
 public class BlockRemover implements HitListener {
     private final Game game;
-    private Counter remainingBlocks;
+    private final Counter remainingBlocks;
 
     /**
      * Constructor of the BlockRemover class.

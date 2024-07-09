@@ -14,7 +14,7 @@ public class Game {
     private final GameEnvironment environment;
     private final GUI gui;
     private Paddle paddle;
-    private Counter blockCounter;
+    private final Counter blockCounter;
     private final BlockRemover blockRemover;
     private final BallRemover ballRemover;
     private final Counter ballCounter;
