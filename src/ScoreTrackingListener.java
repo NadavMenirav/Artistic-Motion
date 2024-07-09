@@ -2,7 +2,7 @@
 /**
  * ScoreTrackingListener class.
  */
-public class ScoreTrackingListener {
+public class ScoreTrackingListener implements HitListener {
     private final Counter currentScore;
 
     /**
@@ -12,4 +12,10 @@ public class ScoreTrackingListener {
     public ScoreTrackingListener(Counter scoreCounter) {
         this.currentScore = scoreCounter;
     }
+
+    @Override
+    public void hitEvent(Block beingHit, Ball hitter) {
+        this.currentScore.increase(5);
+    }
+
 }
