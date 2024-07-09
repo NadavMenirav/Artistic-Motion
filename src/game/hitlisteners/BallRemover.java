@@ -1,3 +1,10 @@
+package game.hitlisteners;
+
+import game.Game;
+import game.miscellaneous.Counter;
+import game.objects.Ball;
+import game.objects.Block;
+
 /**
  * BallRemover class.
  */

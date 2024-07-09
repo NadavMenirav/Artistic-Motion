@@ -1,10 +1,19 @@
 //Nadav Menirav 330845678
 
+package game.objects;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
 import biuoop.DrawSurface;
+
+import game.Game;
+import game.hitlisteners.HitListener;
+import game.hitlisteners.HitNotifier;
+import geometry.Point;
+import geometry.Rectangle;
+import utils.Threshold;
 
 /**
  * Block class.

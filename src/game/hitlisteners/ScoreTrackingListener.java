@@ -1,3 +1,8 @@
+package game.hitlisteners;
+
+import game.miscellaneous.Counter;
+import game.objects.Ball;
+import game.objects.Block;
 
 /**
  * ScoreTrackingListener class.

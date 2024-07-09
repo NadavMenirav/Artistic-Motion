@@ -1,5 +1,8 @@
 import biuoop.GUI;
 import biuoop.Sleeper;
+import game.objects.Ball;
+import game.objects.Velocity;
+import geometry.Point;
 import biuoop.DrawSurface;
 /**
  * Forced to create this JDOC due to checkstyles.

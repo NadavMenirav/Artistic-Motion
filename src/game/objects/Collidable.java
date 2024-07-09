@@ -1,5 +1,10 @@
 //Nadav Menirav 330845678
 
+package game.objects;
+
+import geometry.Point;
+import geometry.Rectangle;
+
 /**
  * Collidable interface, has the methods that will be implemented in other classes.
  */

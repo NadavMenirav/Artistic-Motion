@@ -1,5 +1,10 @@
+package game.miscellaneous;
+
 import java.awt.Color;
+
 import biuoop.DrawSurface;
+import game.objects.Sprite;
+import geometry.Rectangle;
 
 /**
  * ScoreIndicator class.

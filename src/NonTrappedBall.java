@@ -1,6 +1,7 @@
 import java.util.Random;
 import java.awt.Color;
 import biuoop.DrawSurface;
+import game.objects.Velocity;
 /**
  * NonTrappedBall class.
  */

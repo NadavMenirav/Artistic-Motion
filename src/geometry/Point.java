@@ -1,5 +1,9 @@
 //Nadav Menirav 330845678
 
+package geometry;
+
+import utils.Threshold;
+
 /**
  * Point class.
  */

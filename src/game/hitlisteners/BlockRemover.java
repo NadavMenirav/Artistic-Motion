@@ -1,4 +1,11 @@
+package game.hitlisteners;
+
 import java.awt.Color;
+
+import game.Game;
+import game.miscellaneous.Counter;
+import game.objects.Ball;
+import game.objects.Block;
 
 /**
  * A BlockRemover is in charge of removing blocks from the game, as well as keeping count.

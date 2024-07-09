@@ -1,6 +1,7 @@
 import java.util.Random;
 import java.awt.Color;
 import biuoop.GUI;
+import geometry.Line;
 import biuoop.DrawSurface;
 /**
  * AbstractArtDrawing class.

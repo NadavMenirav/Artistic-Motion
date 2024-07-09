@@ -1,3 +1,5 @@
+import geometry.Line;
+
 /**
  * This class does some simple tessting of the Point and Line classes.
  */

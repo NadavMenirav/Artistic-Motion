@@ -1,5 +1,7 @@
 //Nadav Menirav 330845678
 
+package game.objects;
+
 import biuoop.DrawSurface;
 
 /**

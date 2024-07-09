@@ -2,6 +2,7 @@ import java.util.Random;
 import java.awt.Color;
 import biuoop.GUI;
 import biuoop.Sleeper;
+import game.objects.Velocity;
 import biuoop.DrawSurface;
 /**
  * MultipleFramesBouncingBallsAnimation class.

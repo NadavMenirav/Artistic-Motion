@@ -1,6 +1,9 @@
 //Nadav Menirav 330845678
+package game.miscellaneous;
 
 import biuoop.DrawSurface;
+import game.objects.Sprite;
+
 import java.util.ArrayList;
 
 /**

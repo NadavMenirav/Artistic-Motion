@@ -1,8 +1,25 @@
 //Nadav Menirav 330845678
 
+package game;
+
 import biuoop.GUI;
 import biuoop.DrawSurface;
 import biuoop.Sleeper;
+import game.hitlisteners.BallRemover;
+import game.hitlisteners.BlockRemover;
+import game.hitlisteners.ScoreTrackingListener;
+import game.miscellaneous.Counter;
+import game.miscellaneous.GameEnvironment;
+import game.miscellaneous.ScoreIndicator;
+import game.miscellaneous.SpriteCollection;
+import game.objects.Ball;
+import game.objects.Block;
+import game.objects.Collidable;
+import game.objects.Paddle;
+import game.objects.Sprite;
+import geometry.Point;
+import geometry.Rectangle;
+
 import java.awt.Color;
 
 /**
@@ -103,13 +120,13 @@ public class Game {
         Ball firstBall = new Ball(new Point(700, 500), 6, Color.WHITE);
         firstBall.setVelocity(3, 2);
         Ball secondBall = new Ball(new Point(600, 400), 6, Color.WHITE);
-        secondBall.setVelocity(2, 3);
+        secondBall.setVelocity(2, -3);
         Ball thirdBall = new Ball(new Point(500, 500), 6, Color.WHITE);
         thirdBall.setVelocity(3, 2);
         this.ballCounter.increase(3);
 
         //Create the Paddle
-        Paddle pad = new Paddle(Color.YELLOW);
+        Paddle pad = new Paddle(new Color(255, 200, 0, 255));
         this.paddle = pad;
 
         //Add the background block
@@ -128,7 +145,7 @@ public class Game {
      */
     public void addBackgroundBlock() {
         Rectangle rectangle = new Rectangle(new Point(0, 0), 800, 600);
-        Block block = new Block(rectangle, new Color(1, 1, 122));
+        Block block = new Block(rectangle, new Color(48, 132, 20));
         block.addHitListener(this.ballRemover);
         block.addToGame(this);
     }
@@ -137,7 +154,7 @@ public class Game {
      * Adds all the blocks to this game.
      */
     public void addAllBlocks() {
-        //Add edge blocks and the background block
+        //Add edge blocks and the score rectangle
         Rectangle rectangle = new Rectangle(new Point(0, 20), 800, 25);
         Rectangle rectangle3 = new Rectangle(new Point(0, 0), 25, 600);
         Rectangle rectangle4 = new Rectangle(new Point(775, 0), 25, 800);
@@ -156,12 +173,11 @@ public class Game {
         this.addSprite(scoreIndicator);
 
         //We want to add the color blocks on the rows
-        addRowBlocks(12, 80, Color.GRAY);
-        addRowBlocks(11, 110, Color.RED);
-        addRowBlocks(10, 140, Color.YELLOW);
-        addRowBlocks(9, 170, Color.BLUE);
-        addRowBlocks(8, 200, Color.PINK);
-        addRowBlocks(7, 230, Color.GREEN);
+        addRowBlocks(11, 130, Color.GRAY);
+        addRowBlocks(10, 160, Color.RED);
+        addRowBlocks(9, 190, Color.YELLOW);
+        addRowBlocks(8, 220, Color.BLUE);
+        addRowBlocks(7, 250, Color.WHITE);
     }
 
     /**

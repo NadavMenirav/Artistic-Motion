@@ -1,3 +1,5 @@
+package game.miscellaneous;
+
 /**
  * Counter class.
  */

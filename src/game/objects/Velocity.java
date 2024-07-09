@@ -1,5 +1,9 @@
 //Nadav Menirav 330845678
 
+package game.objects;
+
+import geometry.Point;
+
 /**
  * Velocity class.
  */

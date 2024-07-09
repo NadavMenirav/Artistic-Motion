@@ -1,8 +1,18 @@
 //Nadav Menirav 330845678
 
+package game.objects;
+
 import java.util.Random;
 import java.awt.Color;
+
 import biuoop.DrawSurface;
+
+import game.Game;
+import game.miscellaneous.CollisionInfo;
+import game.miscellaneous.GameEnvironment;
+import geometry.Line;
+import geometry.Point;
+import utils.Threshold;
 
 /**
  * Ball class.

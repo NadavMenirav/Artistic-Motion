@@ -1,8 +1,15 @@
 //Nadav Menirav 330845678
 
+package game.objects;
+
 import java.awt.Color;
+
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
+import game.Game;
+import geometry.Point;
+import geometry.Rectangle;
+import utils.Threshold;
 
 /**
  * Paddle class.

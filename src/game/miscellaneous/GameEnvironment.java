@@ -1,7 +1,14 @@
 //Nadav Menirav 330845678
 
+package game.miscellaneous;
+
 import java.util.List;
 import java.util.ArrayList;
+
+import game.objects.Collidable;
+import geometry.Line;
+import geometry.Point;
+
 
 /**
  * GameEnvironment class.
