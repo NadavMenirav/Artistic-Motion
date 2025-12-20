@@ -1,5 +1,3 @@
-//Nadav Menirav 330845678
-
 package game.hitlisteners;
 
 import game.objects.Ball;

@@ -1,5 +1,3 @@
-//Nadav Menirav 330845678
-
 import game.Game;
 
 /**

@@ -1,5 +1,3 @@
-//Nadav Menirav 330845678
-
 package game.miscellaneous;
 
 import game.objects.Collidable;
